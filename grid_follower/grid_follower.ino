@@ -6,6 +6,10 @@
 
 #include <Servo.h>
 
+#include "debounce.h"
+#include "debounce.c" //whaaaaaat
+
+
 // Pin Definitions
 #define P_LINE_SENSOR_1        A1
 #define P_LINE_SENSOR_2        A0
@@ -15,7 +19,7 @@
 #define P_SERVO_RIGHT          11
 
 // Light Level Parameters
-#define WHITE_VALUE            538
+#define WHITE_VALUE            700  // 538
 #define BLACK_VALUE            976
 #define LIGHT_TOLERANCE        5
 
@@ -36,6 +40,9 @@
 
 char figure_8[] = { RIGHT, LEFT, LEFT, LEFT, LEFT, RIGHT, RIGHT, RIGHT };
 char figure_8_index = 0;
+
+unsigned long last_turn_start = 0;
+
 
 Servo servo_left, servo_right;
 int line_left_value = 0, line_right_value = 0;
@@ -66,7 +73,29 @@ void loop() {
   line_left_value = analogRead(P_LINE_SENSOR_1);  // 0-1023
   line_right_value = analogRead(P_LINE_SENSOR_2); // 0-1023
 
-  if (state == FOLLOW_LINE){
+
+  // Sense intersections
+   if ( analogRead(P_INTERSECT_SENSOR_1) > BLACK_VALUE - 40 )
+     signal_condition(D_INTERSECT_1);
+   else
+     clear_condition(D_INTERSECT_1);
+     
+   if ( analogRead(P_INTERSECT_SENSOR_2) > BLACK_VALUE - 40 )
+     signal_condition(D_INTERSECT_2);
+   else
+     clear_condition(D_INTERSECT_2_W);
+     
+   if ( analogRead(P_INTERSECT_SENSOR_1) < WHITE_VALUE + 30 )
+     signal_condition(D_INTERSECT_1_W);
+   else
+     clear_condition(D_INTERSECT_1_W);
+     
+   if ( analogRead(P_INTERSECT_SENSOR_2) < WHITE_VALUE + 30 )
+     signal_condition(D_INTERSECT_2_W);
+   else
+     clear_condition(D_INTERSECT_2_W);
+  if (state == FOLLOW_LINE){ 
+   
 
     // Line following adjustments
     if ( abs(line_left_value - line_right_value) < LIGHT_TOLERANCE ){
@@ -81,20 +110,30 @@ void loop() {
       slowdown_left = 0;
       slowdown_right = map(line_right_value-line_left_value, 0, BLACK_VALUE-WHITE_VALUE, 0, 20);
     }
-    
-   if ( analogRead(P_INTERSECT_SENSOR_1) > BLACK_VALUE - 40
-          || analogRead(P_INTERSECT_SENSOR_2) > BLACK_VALUE - 40 ){
-      // intersection reached
-      if (figure_8[figure_8_index++] == LEFT){
-        Serial.println("I reached! Turning left");
-        state = TURN_LEFT;
-      }else{
-        Serial.println("I reached! Turning right");
-        state = TURN_RIGHT;
-      }
 
-      if (figure_8_index > 7)
-        figure_8_index = 0;
+   
+   if ( poll_condition(D_INTERSECT_1, DEBOUNCE_MAXVAL)
+          && poll_condition(D_INTERSECT_2, DEBOUNCE_MAXVAL) ){
+      // intersection reached
+
+      if ( millis() - last_turn_start > 2000 ){
+        last_turn_start = millis();
+  
+        if (figure_8[figure_8_index] == LEFT){
+          //Serial.println("I reached! Turning left");
+          //Serial.println(analogRead(P_INTERSECT_SENSOR_2));
+          state = TURN_LEFT;
+        }else if (figure_8[figure_8_index] == RIGHT) {
+          //Serial.println("I reached! Turning right");
+          state = TURN_RIGHT;
+        }
+
+        figure_8_index++;
+        if (figure_8_index > 7)
+          figure_8_index = 0;
+        Serial.print("NEW INDEX: ");
+        Serial.println((int)figure_8_index);
+      }
     }
     
     
@@ -103,15 +142,16 @@ void loop() {
     slowdown_left = 0;
     slowdown_right = 7;
 
-    if ( analogRead(P_INTERSECT_SENSOR_2) < WHITE_VALUE + 30)
+    if ( millis() - last_turn_start > 1100 )
       state = FOLLOW_LINE;
          
   } else if (state == TURN_LEFT){
+    
     // Turn right until right intersection sensor sees white
     slowdown_left = 7;
     slowdown_right = 0;
 
-    if ( analogRead(P_INTERSECT_SENSOR_1) < WHITE_VALUE + 30)
+    if ( millis() - last_turn_start > 1100 )
       state = FOLLOW_LINE;
   }
   
@@ -120,9 +160,9 @@ void loop() {
   
   // Print out readings
   /*Serial.print("L: ");
-  Serial.print(line_left_value);
+  Serial.print(analogRead(P_INTERSECT_SENSOR_1));
   Serial.print("  R: ");
-  Serial.print(line_right_value);
+  Serial.print(analogRead(P_INTERSECT_SENSOR_2));
   Serial.print("  D: ");
   Serial.println(abs(line_left_value - line_right_value));*/
 }
