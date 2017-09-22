@@ -7,8 +7,9 @@
 #include <Servo.h>
 
 #include "debounce.h"
-#include "debounce.c" //whaaaaaat
+#include "debounce.c" // i hate you arduino ide trash
 
+#include "amux.h"
 
 // Pin Definitions
 #define P_LINE_SENSOR_1        A1
@@ -58,6 +59,9 @@ void setup() {
   pinMode(INPUT, P_LINE_SENSOR_2);
   pinMode(INPUT, P_INTERSECT_SENSOR_1);
   pinMode(INPUT, P_INTERSECT_SENSOR_2);
+
+  // Initialize the analog mux
+  amux_init();
 
   drive(LEFT_ZERO, RIGHT_ZERO);
 

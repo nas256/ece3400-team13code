@@ -11,9 +11,7 @@
 #define D_INTERSECT_2_W     3
 #define D_WALL_FRONT        4 
 
-
-
-extern char deb_array[DEBOUNCE_VARIABLES];
+//extern char deb_array[DEBOUNCE_VARIABLES];
 
 void signal_condition(char debounce_var);
 void clear_condition(char debounce_var);
