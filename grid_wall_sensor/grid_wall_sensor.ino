@@ -12,10 +12,10 @@
 #include "amux.h"
 
 // Pin Definitions
-#define P_LINE_SENSOR_1        A1
-#define P_LINE_SENSOR_2        A0
-#define P_INTERSECT_SENSOR_1   A2
-#define P_INTERSECT_SENSOR_2   A3
+#define P_LINE_SENSOR_1        A1 // Left
+#define P_LINE_SENSOR_2        A0 // Right
+#define P_INTERSECT_SENSOR_1   A2 // Left
+#define P_INTERSECT_SENSOR_2   A3 // Right
 #define P_WALL_FRONT           A4
 #define P_SERVO_LEFT           10
 #define P_SERVO_RIGHT          11
@@ -104,8 +104,6 @@ void loop() {
     clear_condition(D_WALL_FRONT);
      
   if (state == FOLLOW_LINE){ 
-   
-
     // Line following adjustments
     if ( abs(line_left_value - line_right_value) < LIGHT_TOLERANCE ){
       // drive straight
