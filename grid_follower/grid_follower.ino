@@ -19,8 +19,8 @@
 #define P_SERVO_RIGHT          11
 
 // Light Level Parameters
-#define WHITE_VALUE            700  // 538
-#define BLACK_VALUE            976
+#define WHITE_VALUE            538  // 538
+#define BLACK_VALUE            850
 #define LIGHT_TOLERANCE        5
 
 // Define servo tuning parameters
@@ -142,7 +142,7 @@ void loop() {
     slowdown_left = 0;
     slowdown_right = 7;
 
-    if ( millis() - last_turn_start > 1100 )
+    if ( millis() - last_turn_start > 1250 )
       state = FOLLOW_LINE;
          
   } else if (state == TURN_LEFT){
@@ -151,7 +151,7 @@ void loop() {
     slowdown_left = 7;
     slowdown_right = 0;
 
-    if ( millis() - last_turn_start > 1100 )
+    if ( millis() - last_turn_start > 1250 )
       state = FOLLOW_LINE;
   }
   
@@ -159,12 +159,12 @@ void loop() {
   drive(LEFT_ZERO+7-slowdown_left, RIGHT_ZERO+7-slowdown_right);
   
   // Print out readings
-  /*Serial.print("L: ");
+  Serial.print("L: ");
   Serial.print(analogRead(P_INTERSECT_SENSOR_1));
   Serial.print("  R: ");
   Serial.print(analogRead(P_INTERSECT_SENSOR_2));
   Serial.print("  D: ");
-  Serial.println(abs(line_left_value - line_right_value));*/
+  Serial.println(abs(line_left_value - line_right_value));
 }
 
 void drive(int left, int right){

@@ -1,6 +1,6 @@
 Analysis & Synthesis report for DE0_NANO
-Mon Jun 19 20:10:05 2017
-Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
+Thu Sep 28 22:27:23 2017
+Quartus II 64-Bit Version 15.0.0 Build 145 04/22/2015 SJ Web Edition
 
 
 ---------------------
@@ -15,10 +15,11 @@ Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. General Register Statistics
   9. Multiplexer Restructuring Statistics (Restructuring Performed)
- 10. Port Connectivity Checks: "VGA_DRIVER:driver"
- 11. Post-Synthesis Netlist Statistics for Top Partition
- 12. Elapsed Time Per Partition
- 13. Analysis & Synthesis Messages
+ 10. Parameter Settings for Inferred Entity Instance: MAZE_MAPPER:comb_3|lpm_divide:Div1
+ 11. Parameter Settings for Inferred Entity Instance: MAZE_MAPPER:comb_3|lpm_divide:Div0
+ 12. Post-Synthesis Netlist Statistics for Top Partition
+ 13. Elapsed Time Per Partition
+ 14. Analysis & Synthesis Messages
 
 
 
@@ -32,7 +33,7 @@ functions, and any output files from any of the foregoing
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
 to the terms and conditions of the Altera Program License 
-Subscription Agreement, the Altera Quartus Prime License Agreement,
+Subscription Agreement, the Altera Quartus II License Agreement,
 the Altera MegaCore Function License Agreement, or other 
 applicable license agreement, including, without limitation, 
 that your use is for the sole purpose of programming logic 
@@ -42,24 +43,24 @@ agreement for further details.
 
 
 
-+----------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                     ;
-+------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Jun 19 20:10:05 2017       ;
-; Quartus Prime Version              ; 15.1.0 Build 185 10/21/2015 SJ Lite Edition ;
-; Revision Name                      ; DE0_NANO                                    ;
-; Top-level Entity Name              ; DE0_NANO                                    ;
-; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 82                                          ;
-;     Total combinational functions  ; 82                                          ;
-;     Dedicated logic registers      ; 47                                          ;
-; Total registers                    ; 47                                          ;
-; Total pins                         ; 87                                          ;
-; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 0                                           ;
-; Embedded Multiplier 9-bit elements ; 0                                           ;
-; Total PLLs                         ; 0                                           ;
-+------------------------------------+---------------------------------------------+
++---------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                    ;
++------------------------------------+--------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Thu Sep 28 22:27:23 2017      ;
+; Quartus II 64-Bit Version          ; 15.0.0 Build 145 04/22/2015 SJ Web Edition ;
+; Revision Name                      ; DE0_NANO                                   ;
+; Top-level Entity Name              ; DE0_NANO                                   ;
+; Family                             ; Cyclone IV E                               ;
+; Total logic elements               ; 225                                        ;
+;     Total combinational functions  ; 225                                        ;
+;     Dedicated logic registers      ; 47                                         ;
+; Total registers                    ; 47                                         ;
+; Total pins                         ; 87                                         ;
+; Total virtual pins                 ; 0                                          ;
+; Total memory bits                  ; 0                                          ;
+; Embedded Multiplier 9-bit elements ; 0                                          ;
+; Total PLLs                         ; 0                                          ;
++------------------------------------+--------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------+
@@ -149,25 +150,41 @@ agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 
 
-Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
-+-------------------------------------+
-; Parallel Compilation                ;
-+----------------------------+--------+
-; Processors                 ; Number ;
-+----------------------------+--------+
-; Number detected on machine ; 8      ;
-; Maximum allowed            ; 1      ;
-+----------------------------+--------+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-4         ;   0.0%      ;
++----------------------------+-------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                        ;
-+----------------------------------+-----------------+------------------------+-----------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                          ; Library ;
-+----------------------------------+-----------------+------------------------+-----------------------------------------------------------------------+---------+
-; VGA_DRIVER.v                     ; yes             ; User Verilog HDL File  ; C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/VGA_DRIVER.v ;         ;
-; DE0_NANO.v                       ; yes             ; User Verilog HDL File  ; C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v   ;         ;
-+----------------------------------+-----------------+------------------------+-----------------------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                            ; Library ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
+; VGA_DRIVER.v                     ; yes             ; User Verilog HDL File        ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/Lab3_template/VGA_DRIVER.v               ;         ;
+; DE0_NANO.v                       ; yes             ; User Verilog HDL File        ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/Lab3_template/DE0_NANO.v                 ;         ;
+; MAZE_MAPPER.v                    ; yes             ; User Verilog HDL File        ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/Lab3_template/MAZE_MAPPER.v              ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/lpm_divide.tdf                           ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/abs_divider.inc                          ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/sign_div_unsign.inc                      ;         ;
+; aglobal150.inc                   ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/aglobal150.inc                           ;         ;
+; db/lpm_divide_vim.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/Lab3_template/db/lpm_divide_vim.tdf      ;         ;
+; db/sign_div_unsign_nlh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/Lab3_template/db/sign_div_unsign_nlh.tdf ;         ;
+; db/alt_u_div_27f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/Lab3_template/db/alt_u_div_27f.tdf       ;         ;
+; db/add_sub_7pc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/Lab3_template/db/add_sub_7pc.tdf         ;         ;
+; db/add_sub_8pc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/Lab3_template/db/add_sub_8pc.tdf         ;         ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
 
 
 +--------------------------------------------------------+
@@ -175,17 +192,17 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+----------+
 ; Resource                                    ; Usage    ;
 +---------------------------------------------+----------+
-; Estimated Total logic elements              ; 82       ;
+; Estimated Total logic elements              ; 225      ;
 ;                                             ;          ;
-; Total combinational functions               ; 82       ;
+; Total combinational functions               ; 225      ;
 ; Logic element usage by number of LUT inputs ;          ;
-;     -- 4 input functions                    ; 17       ;
-;     -- 3 input functions                    ; 3        ;
-;     -- <=2 input functions                  ; 62       ;
+;     -- 4 input functions                    ; 38       ;
+;     -- 3 input functions                    ; 42       ;
+;     -- <=2 input functions                  ; 145      ;
 ;                                             ;          ;
 ; Logic elements by mode                      ;          ;
-;     -- normal mode                          ; 40       ;
-;     -- arithmetic mode                      ; 42       ;
+;     -- normal mode                          ; 137      ;
+;     -- arithmetic mode                      ; 88       ;
 ;                                             ;          ;
 ; Total registers                             ; 47       ;
 ;     -- Dedicated logic registers            ; 47       ;
@@ -197,19 +214,28 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;                                             ;          ;
 ; Maximum fan-out node                        ; CLOCK_25 ;
 ; Maximum fan-out                             ; 47       ;
-; Total fan-out                               ; 482      ;
-; Average fan-out                             ; 1.30     ;
+; Total fan-out                               ; 838      ;
+; Average fan-out                             ; 1.63     ;
 +---------------------------------------------+----------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                 ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------+--------------+
-; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name         ; Library Name ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------+--------------+
-; |DE0_NANO                  ; 82 (48)           ; 47 (27)      ; 0           ; 0            ; 0       ; 0         ; 87   ; 0            ; |DE0_NANO                   ; work         ;
-;    |VGA_DRIVER:driver|     ; 34 (34)           ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|VGA_DRIVER:driver ; work         ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                 ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                          ; Library Name ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------+--------------+
+; |DE0_NANO                                 ; 225 (48)          ; 47 (27)      ; 0           ; 0            ; 0       ; 0         ; 87   ; 0            ; |DE0_NANO                                                                                                                    ; work         ;
+;    |MAZE_MAPPER:comb_3|                   ; 140 (2)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3                                                                                                 ; work         ;
+;       |lpm_divide:Div0|                   ; 69 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div0                                                                                 ; work         ;
+;          |lpm_divide_vim:auto_generated|  ; 69 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div0|lpm_divide_vim:auto_generated                                                   ; work         ;
+;             |sign_div_unsign_nlh:divider| ; 69 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div0|lpm_divide_vim:auto_generated|sign_div_unsign_nlh:divider                       ; work         ;
+;                |alt_u_div_27f:divider|    ; 69 (69)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div0|lpm_divide_vim:auto_generated|sign_div_unsign_nlh:divider|alt_u_div_27f:divider ; work         ;
+;       |lpm_divide:Div1|                   ; 69 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div1                                                                                 ; work         ;
+;          |lpm_divide_vim:auto_generated|  ; 69 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div1|lpm_divide_vim:auto_generated                                                   ; work         ;
+;             |sign_div_unsign_nlh:divider| ; 69 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div1|lpm_divide_vim:auto_generated|sign_div_unsign_nlh:divider                       ; work         ;
+;                |alt_u_div_27f:divider|    ; 69 (69)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div1|lpm_divide_vim:auto_generated|sign_div_unsign_nlh:divider|alt_u_div_27f:divider ; work         ;
+;    |VGA_DRIVER:driver|                    ; 37 (37)           ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|VGA_DRIVER:driver                                                                                                  ; work         ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -238,17 +264,50 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "VGA_DRIVER:driver"                                                                                  ;
-+----------------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port                 ; Type   ; Severity ; Details                                                                             ;
-+----------------------+--------+----------+-------------------------------------------------------------------------------------+
-; PIXEL_COLOR_IN[4..2] ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; PIXEL_COLOR_IN[7..5] ; Input  ; Info     ; Stuck at GND                                                                        ;
-; PIXEL_COLOR_IN[1..0] ; Input  ; Info     ; Stuck at GND                                                                        ;
-; PIXEL_X              ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; PIXEL_Y              ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+----------------------+--------+----------+-------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: MAZE_MAPPER:comb_3|lpm_divide:Div1 ;
++------------------------+----------------+-------------------------------------------+
+; Parameter Name         ; Value          ; Type                                      ;
++------------------------+----------------+-------------------------------------------+
+; LPM_WIDTHN             ; 10             ; Untyped                                   ;
+; LPM_WIDTHD             ; 7              ; Untyped                                   ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                   ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                   ;
+; LPM_PIPELINE           ; 0              ; Untyped                                   ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                   ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                   ;
+; CBXI_PARAMETER         ; lpm_divide_vim ; Untyped                                   ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                   ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                   ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                              ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                              ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                            ;
++------------------------+----------------+-------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: MAZE_MAPPER:comb_3|lpm_divide:Div0 ;
++------------------------+----------------+-------------------------------------------+
+; Parameter Name         ; Value          ; Type                                      ;
++------------------------+----------------+-------------------------------------------+
+; LPM_WIDTHN             ; 10             ; Untyped                                   ;
+; LPM_WIDTHD             ; 7              ; Untyped                                   ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                   ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                   ;
+; LPM_PIPELINE           ; 0              ; Untyped                                   ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                   ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                   ;
+; CBXI_PARAMETER         ; lpm_divide_vim ; Untyped                                   ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                   ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                   ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                              ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                              ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                            ;
++------------------------+----------------+-------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +-----------------------------------------------------+
@@ -262,18 +321,19 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;     SCLR              ; 10                          ;
 ;     plain             ; 27                          ;
 ; cycloneiii_io_obuf    ; 68                          ;
-; cycloneiii_lcell_comb ; 83                          ;
-;     arith             ; 42                          ;
-;         2 data inputs ; 42                          ;
-;     normal            ; 41                          ;
-;         0 data inputs ; 1                           ;
+; cycloneiii_lcell_comb ; 226                         ;
+;     arith             ; 88                          ;
+;         2 data inputs ; 52                          ;
+;         3 data inputs ; 36                          ;
+;     normal            ; 138                         ;
+;         0 data inputs ; 9                           ;
 ;         1 data inputs ; 4                           ;
-;         2 data inputs ; 16                          ;
-;         3 data inputs ; 3                           ;
-;         4 data inputs ; 17                          ;
+;         2 data inputs ; 81                          ;
+;         3 data inputs ; 6                           ;
+;         4 data inputs ; 38                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 4.40                        ;
-; Average LUT depth     ; 2.04                        ;
+; Max LUT depth         ; 11.30                       ;
+; Average LUT depth     ; 6.07                        ;
 +-----------------------+-----------------------------+
 
 
@@ -282,7 +342,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -290,130 +350,165 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
-Info: Running Quartus Prime Analysis & Synthesis
-    Info: Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
-    Info: Processing started: Mon Jun 19 20:09:56 2017
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 15.0.0 Build 145 04/22/2015 SJ Web Edition
+    Info: Processing started: Thu Sep 28 22:27:09 2017
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE0_NANO -c DE0_NANO
 Warning (125092): Tcl Script File DE_NANO_SOPC.qip not found
     Info (125063): set_global_assignment -name QIP_FILE DE_NANO_SOPC.qip
-Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
 Info (12021): Found 1 design units, including 1 entities, in source file vga_driver.v
-    Info (12023): Found entity 1: VGA_DRIVER File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/VGA_DRIVER.v Line: 14
-Warning (10238): Verilog Module Declaration warning at DE0_NANO.v(32): ignored anonymous port(s) indicated by duplicate or dangling comma(s) in the port list for module "DE0_NANO" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 32
+    Info (12023): Found entity 1: VGA_DRIVER
+Warning (10238): Verilog Module Declaration warning at DE0_NANO.v(32): ignored anonymous port(s) indicated by duplicate or dangling comma(s) in the port list for module "DE0_NANO"
 Info (12021): Found 1 design units, including 1 entities, in source file de0_nano.v
-    Info (12023): Found entity 1: DE0_NANO File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 11
+    Info (12023): Found entity 1: DE0_NANO
+Info (12021): Found 1 design units, including 1 entities, in source file maze_mapper.v
+    Info (12023): Found entity 1: MAZE_MAPPER
+Critical Warning (10846): Verilog HDL Instantiation warning at DE0_NANO.v(93): instance has no name
 Info (12127): Elaborating entity "DE0_NANO" for the top level hierarchy
-Warning (10034): Output port "LED[7..1]" at DE0_NANO.v(48) has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 48
-Info (12128): Elaborating entity "VGA_DRIVER" for hierarchy "VGA_DRIVER:driver" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 87
-Warning (10230): Verilog HDL assignment warning at VGA_DRIVER.v(71): truncated value with size 32 to match size of target (10) File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/VGA_DRIVER.v Line: 71
-Warning (10230): Verilog HDL assignment warning at VGA_DRIVER.v(75): truncated value with size 32 to match size of target (10) File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/VGA_DRIVER.v Line: 75
+Warning (10034): Output port "LED[7..1]" at DE0_NANO.v(48) has no driver
+Info (12128): Elaborating entity "VGA_DRIVER" for hierarchy "VGA_DRIVER:driver"
+Warning (10230): Verilog HDL assignment warning at VGA_DRIVER.v(71): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at VGA_DRIVER.v(75): truncated value with size 32 to match size of target (10)
+Info (12128): Elaborating entity "MAZE_MAPPER" for hierarchy "MAZE_MAPPER:comb_3"
+Warning (10030): Net "grid_array[4][3]" at MAZE_MAPPER.v(8) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "grid_array[4][1..0]" at MAZE_MAPPER.v(8) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "grid_array[3][2..1]" at MAZE_MAPPER.v(8) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "grid_array[2][2..0]" at MAZE_MAPPER.v(8) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "grid_array[1][2..1]" at MAZE_MAPPER.v(8) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "grid_array[0][3]" at MAZE_MAPPER.v(8) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "grid_array[0][1..0]" at MAZE_MAPPER.v(8) has no driver or initial value, using a default initial value '0'
+Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "grid_array" into its bus
+Info (278001): Inferred 2 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "MAZE_MAPPER:comb_3|Div1"
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "MAZE_MAPPER:comb_3|Div0"
+Info (12130): Elaborated megafunction instantiation "MAZE_MAPPER:comb_3|lpm_divide:Div1"
+Info (12133): Instantiated megafunction "MAZE_MAPPER:comb_3|lpm_divide:Div1" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHN" = "10"
+    Info (12134): Parameter "LPM_WIDTHD" = "7"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_vim.tdf
+    Info (12023): Found entity 1: lpm_divide_vim
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_nlh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_nlh
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_27f.tdf
+    Info (12023): Found entity 1: alt_u_div_27f
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_7pc.tdf
+    Info (12023): Found entity 1: add_sub_7pc
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_8pc.tdf
+    Info (12023): Found entity 1: add_sub_8pc
 Warning (13034): The following nodes have both tri-state and non-tri-state drivers
-    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[5]" and its non-tri-state driver. File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[7]" and its non-tri-state driver. File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[15]" and its non-tri-state driver. File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[17]" and its non-tri-state driver. File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[19]" and its non-tri-state driver. File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[5]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[7]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[9]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[11]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[13]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[15]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[17]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[19]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[21]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[23]" and its non-tri-state driver.
 Warning (13039): The following bidirectional pins have no drivers
-    Warning (13040): bidirectional pin "GPIO_0_D[0]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[1]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[2]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[3]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[4]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[6]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[8]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[10]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[12]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[14]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[16]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[18]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[20]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[22]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[24]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[25]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[26]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[27]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[28]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[29]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[30]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[31]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[32]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_0_D[33]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13040): bidirectional pin "GPIO_1_D[0]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[1]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[2]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[3]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[4]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[5]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[6]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[7]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[8]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[9]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[10]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[11]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[12]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[13]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[14]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[15]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[16]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[17]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[18]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[19]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[20]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[21]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[22]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[23]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[24]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[25]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[26]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[27]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[28]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[29]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[30]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[31]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[32]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-    Warning (13040): bidirectional pin "GPIO_1_D[33]" has no driver File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 61
-Warning (13032): The following tri-state nodes are fed by constants
-    Warning (13033): The pin "GPIO_0_D[9]" is fed by GND File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13033): The pin "GPIO_0_D[11]" is fed by GND File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13033): The pin "GPIO_0_D[13]" is fed by GND File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13033): The pin "GPIO_0_D[21]" is fed by GND File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13033): The pin "GPIO_0_D[23]" is fed by GND File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
+    Warning (13040): bidirectional pin "GPIO_0_D[0]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[1]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[2]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[3]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[4]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[6]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[8]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[10]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[12]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[14]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[16]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[18]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[20]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[22]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[24]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[25]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[26]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[27]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[28]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[29]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[30]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[31]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[32]" has no driver
+    Warning (13040): bidirectional pin "GPIO_0_D[33]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[0]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[1]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[2]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[3]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[4]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[5]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[6]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[7]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[8]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[9]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[10]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[11]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[12]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[13]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[14]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[15]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[16]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[17]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[18]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[19]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[20]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[21]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[22]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[23]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[24]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[25]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[26]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[27]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[28]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[29]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[30]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[31]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[32]" has no driver
+    Warning (13040): bidirectional pin "GPIO_1_D[33]" has no driver
 Warning (13009): TRI or OPNDRN buffers permanently enabled
-    Warning (13010): Node "GPIO_0_D[5]~synth" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13010): Node "GPIO_0_D[7]~synth" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13010): Node "GPIO_0_D[15]~synth" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13010): Node "GPIO_0_D[17]~synth" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
-    Warning (13010): Node "GPIO_0_D[19]~synth" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 57
+    Warning (13010): Node "GPIO_0_D[5]~synth"
+    Warning (13010): Node "GPIO_0_D[7]~synth"
+    Warning (13010): Node "GPIO_0_D[9]~synth"
+    Warning (13010): Node "GPIO_0_D[11]~synth"
+    Warning (13010): Node "GPIO_0_D[13]~synth"
+    Warning (13010): Node "GPIO_0_D[15]~synth"
+    Warning (13010): Node "GPIO_0_D[17]~synth"
+    Warning (13010): Node "GPIO_0_D[19]~synth"
+    Warning (13010): Node "GPIO_0_D[21]~synth"
+    Warning (13010): Node "GPIO_0_D[23]~synth"
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "LED[1]" is stuck at GND File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 48
-    Warning (13410): Pin "LED[2]" is stuck at GND File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 48
-    Warning (13410): Pin "LED[3]" is stuck at GND File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 48
-    Warning (13410): Pin "LED[4]" is stuck at GND File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 48
-    Warning (13410): Pin "LED[5]" is stuck at GND File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 48
-    Warning (13410): Pin "LED[6]" is stuck at GND File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 48
-    Warning (13410): Pin "LED[7]" is stuck at GND File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 48
+    Warning (13410): Pin "LED[1]" is stuck at GND
+    Warning (13410): Pin "LED[2]" is stuck at GND
+    Warning (13410): Pin "LED[3]" is stuck at GND
+    Warning (13410): Pin "LED[4]" is stuck at GND
+    Warning (13410): Pin "LED[5]" is stuck at GND
+    Warning (13410): Pin "LED[6]" is stuck at GND
+    Warning (13410): Pin "LED[7]" is stuck at GND
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 9 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "KEY[1]" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 51
-    Warning (15610): No output dependent on input pin "SW[0]" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 54
-    Warning (15610): No output dependent on input pin "SW[1]" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 54
-    Warning (15610): No output dependent on input pin "SW[2]" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 54
-    Warning (15610): No output dependent on input pin "SW[3]" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 54
-    Warning (15610): No output dependent on input pin "GPIO_0_IN[0]" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 58
-    Warning (15610): No output dependent on input pin "GPIO_0_IN[1]" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 58
-    Warning (15610): No output dependent on input pin "GPIO_1_IN[0]" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 62
-    Warning (15610): No output dependent on input pin "GPIO_1_IN[1]" File: C:/Users/lab user/Desktop/ECE3400_Fall2017/Lab3_template/DE0_NANO.v Line: 62
-Info (21057): Implemented 169 device resources after synthesis - the final resource count might be different
+    Warning (15610): No output dependent on input pin "KEY[1]"
+    Warning (15610): No output dependent on input pin "SW[0]"
+    Warning (15610): No output dependent on input pin "SW[1]"
+    Warning (15610): No output dependent on input pin "SW[2]"
+    Warning (15610): No output dependent on input pin "SW[3]"
+    Warning (15610): No output dependent on input pin "GPIO_0_IN[0]"
+    Warning (15610): No output dependent on input pin "GPIO_0_IN[1]"
+    Warning (15610): No output dependent on input pin "GPIO_1_IN[0]"
+    Warning (15610): No output dependent on input pin "GPIO_1_IN[1]"
+Info (21057): Implemented 312 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 11 input pins
     Info (21059): Implemented 8 output pins
     Info (21060): Implemented 68 bidirectional pins
-    Info (21061): Implemented 82 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 101 warnings
-    Info: Peak virtual memory: 764 megabytes
-    Info: Processing ended: Mon Jun 19 20:10:05 2017
-    Info: Elapsed time: 00:00:09
-    Info: Total CPU time (on all processors): 00:00:21
+    Info (21061): Implemented 225 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 112 warnings
+    Info: Peak virtual memory: 698 megabytes
+    Info: Processing ended: Thu Sep 28 22:27:24 2017
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:33
 
 

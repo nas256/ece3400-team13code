@@ -1,6 +1,6 @@
 TimeQuest Timing Analyzer report for DE0_NANO
-Mon Jun 19 20:10:23 2017
-Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
+Thu Sep 28 22:27:44 2017
+Quartus II 64-Bit Version 15.0.0 Build 145 04/22/2015 SJ Web Edition
 
 
 ---------------------
@@ -20,41 +20,42 @@ Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
  12. Slow 1200mV 85C Model Minimum Pulse Width Summary
  13. Slow 1200mV 85C Model Setup: 'CLOCK_50'
  14. Slow 1200mV 85C Model Hold: 'CLOCK_50'
- 15. Slow 1200mV 85C Model Metastability Summary
- 16. Slow 1200mV 0C Model Fmax Summary
- 17. Slow 1200mV 0C Model Setup Summary
- 18. Slow 1200mV 0C Model Hold Summary
- 19. Slow 1200mV 0C Model Recovery Summary
- 20. Slow 1200mV 0C Model Removal Summary
- 21. Slow 1200mV 0C Model Minimum Pulse Width Summary
- 22. Slow 1200mV 0C Model Setup: 'CLOCK_50'
- 23. Slow 1200mV 0C Model Hold: 'CLOCK_50'
- 24. Slow 1200mV 0C Model Metastability Summary
- 25. Fast 1200mV 0C Model Setup Summary
- 26. Fast 1200mV 0C Model Hold Summary
- 27. Fast 1200mV 0C Model Recovery Summary
- 28. Fast 1200mV 0C Model Removal Summary
- 29. Fast 1200mV 0C Model Minimum Pulse Width Summary
- 30. Fast 1200mV 0C Model Setup: 'CLOCK_50'
- 31. Fast 1200mV 0C Model Hold: 'CLOCK_50'
- 32. Fast 1200mV 0C Model Metastability Summary
- 33. Multicorner Timing Analysis Summary
- 34. Board Trace Model Assignments
- 35. Input Transition Times
- 36. Signal Integrity Metrics (Slow 1200mv 0c Model)
- 37. Signal Integrity Metrics (Slow 1200mv 85c Model)
- 38. Signal Integrity Metrics (Fast 1200mv 0c Model)
- 39. Setup Transfers
- 40. Hold Transfers
- 41. Report TCCS
- 42. Report RSKM
- 43. Unconstrained Paths Summary
- 44. Clock Status Summary
- 45. Unconstrained Input Ports
- 46. Unconstrained Output Ports
- 47. Unconstrained Input Ports
- 48. Unconstrained Output Ports
- 49. TimeQuest Timing Analyzer Messages
+ 15. Slow 1200mV 85C Model Minimum Pulse Width: 'CLOCK_50'
+ 16. Slow 1200mV 85C Model Datasheet Report
+ 17. Slow 1200mV 85C Model Metastability Summary
+ 18. Slow 1200mV 0C Model Fmax Summary
+ 19. Slow 1200mV 0C Model Setup Summary
+ 20. Slow 1200mV 0C Model Hold Summary
+ 21. Slow 1200mV 0C Model Recovery Summary
+ 22. Slow 1200mV 0C Model Removal Summary
+ 23. Slow 1200mV 0C Model Minimum Pulse Width Summary
+ 24. Slow 1200mV 0C Model Setup: 'CLOCK_50'
+ 25. Slow 1200mV 0C Model Hold: 'CLOCK_50'
+ 26. Slow 1200mV 0C Model Minimum Pulse Width: 'CLOCK_50'
+ 27. Slow 1200mV 0C Model Datasheet Report
+ 28. Slow 1200mV 0C Model Metastability Summary
+ 29. Fast 1200mV 0C Model Setup Summary
+ 30. Fast 1200mV 0C Model Hold Summary
+ 31. Fast 1200mV 0C Model Recovery Summary
+ 32. Fast 1200mV 0C Model Removal Summary
+ 33. Fast 1200mV 0C Model Minimum Pulse Width Summary
+ 34. Fast 1200mV 0C Model Setup: 'CLOCK_50'
+ 35. Fast 1200mV 0C Model Hold: 'CLOCK_50'
+ 36. Fast 1200mV 0C Model Minimum Pulse Width: 'CLOCK_50'
+ 37. Fast 1200mV 0C Model Datasheet Report
+ 38. Fast 1200mV 0C Model Metastability Summary
+ 39. Multicorner Timing Analysis Summary
+ 40. Board Trace Model Assignments
+ 41. Input Transition Times
+ 42. Signal Integrity Metrics (Slow 1200mv 0c Model)
+ 43. Signal Integrity Metrics (Slow 1200mv 85c Model)
+ 44. Signal Integrity Metrics (Fast 1200mv 0c Model)
+ 45. Setup Transfers
+ 46. Hold Transfers
+ 47. Report TCCS
+ 48. Report RSKM
+ 49. Unconstrained Paths
+ 50. TimeQuest Timing Analyzer Messages
 
 
 
@@ -68,7 +69,7 @@ functions, and any output files from any of the foregoing
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
 to the terms and conditions of the Altera Program License 
-Subscription Agreement, the Altera Quartus Prime License Agreement,
+Subscription Agreement, the Altera Quartus II License Agreement,
 the Altera MegaCore Function License Agreement, or other 
 applicable license agreement, including, without limitation, 
 that your use is for the sole purpose of programming logic 
@@ -78,29 +79,35 @@ agreement for further details.
 
 
 
-+-----------------------------------------------------------------------------+
-; TimeQuest Timing Analyzer Summary                                           ;
-+-----------------------+-----------------------------------------------------+
-; Quartus Prime Version ; Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition ;
-; Timing Analyzer       ; TimeQuest                                           ;
-; Revision Name         ; DE0_NANO                                            ;
-; Device Family         ; Cyclone IV E                                        ;
-; Device Name           ; EP4CE22F17C6                                        ;
-; Timing Models         ; Final                                               ;
-; Delay Model           ; Combined                                            ;
-; Rise/Fall Delays      ; Enabled                                             ;
-+-----------------------+-----------------------------------------------------+
++-------------------------------------------------------------------------+
+; TimeQuest Timing Analyzer Summary                                       ;
++--------------------+----------------------------------------------------+
+; Quartus II Version ; Version 15.0.0 Build 145 04/22/2015 SJ Web Edition ;
+; Revision Name      ; DE0_NANO                                           ;
+; Device Family      ; Cyclone IV E                                       ;
+; Device Name        ; EP4CE22F17C6                                       ;
+; Timing Models      ; Final                                              ;
+; Delay Model        ; Combined                                           ;
+; Rise/Fall Delays   ; Enabled                                            ;
++--------------------+----------------------------------------------------+
 
 
-Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
-+-------------------------------------+
-; Parallel Compilation                ;
-+----------------------------+--------+
-; Processors                 ; Number ;
-+----------------------------+--------+
-; Number detected on machine ; 8      ;
-; Maximum allowed            ; 1      ;
-+----------------------------+--------+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 2           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ; < 0.1%      ;
+;     Processors 3-4         ;   0.0%      ;
++----------------------------+-------------+
 
 
 +---------------------------------------------------+
@@ -108,7 +115,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------+--------+--------------------------+
 ; SDC File Path ; Status ; Read at                  ;
 +---------------+--------+--------------------------+
-; DE0_NANO.SDC  ; OK     ; Mon Jun 19 20:10:22 2017 ;
+; DE0_NANO.SDC  ; OK     ; Thu Sep 28 22:27:42 2017 ;
 +---------------+--------+--------------------------+
 
 
@@ -194,6 +201,30 @@ No paths to report.
 +-------+-----------+----------+--------------+-------------+--------------+------------+------------+
 
 
++------------------------------------------------------------------------------------------------------+
+; Slow 1200mV 85C Model Minimum Pulse Width: 'CLOCK_50'                                                ;
++--------+--------------+----------------+------------------+----------+------------+------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock    ; Clock Edge ; Target           ;
++--------+--------------+----------------+------------------+----------+------------+------------------+
+; 9.569  ; 9.753        ; 0.184          ; Low Pulse Width  ; CLOCK_50 ; Rise       ; CLOCK_25         ;
+; 9.731  ; 9.731        ; 0.000          ; Low Pulse Width  ; CLOCK_50 ; Rise       ; CLOCK_25|clk     ;
+; 9.747  ; 9.747        ; 0.000          ; Low Pulse Width  ; CLOCK_50 ; Rise       ; CLOCK_50~input|o ;
+; 10.000 ; 10.000       ; 0.000          ; High Pulse Width ; CLOCK_50 ; Rise       ; CLOCK_50~input|i ;
+; 10.000 ; 10.000       ; 0.000          ; Low Pulse Width  ; CLOCK_50 ; Rise       ; CLOCK_50~input|i ;
+; 10.028 ; 10.244       ; 0.216          ; High Pulse Width ; CLOCK_50 ; Rise       ; CLOCK_25         ;
+; 10.253 ; 10.253       ; 0.000          ; High Pulse Width ; CLOCK_50 ; Rise       ; CLOCK_50~input|o ;
+; 10.268 ; 10.268       ; 0.000          ; High Pulse Width ; CLOCK_50 ; Rise       ; CLOCK_25|clk     ;
+; 16.000 ; 20.000       ; 4.000          ; Port Rate        ; CLOCK_50 ; Rise       ; CLOCK_50         ;
+; 18.000 ; 20.000       ; 2.000          ; Min Period       ; CLOCK_50 ; Rise       ; CLOCK_25         ;
++--------+--------------+----------------+------------------+----------+------------+------------------+
+
+
+------------------------------------------
+; Slow 1200mV 85C Model Datasheet Report ;
+------------------------------------------
+Nothing to report.
+
+
 -----------------------------------------------
 ; Slow 1200mV 85C Model Metastability Summary ;
 -----------------------------------------------
@@ -267,6 +298,30 @@ No paths to report.
 +-------+-----------+----------+--------------+-------------+--------------+------------+------------+
 
 
++------------------------------------------------------------------------------------------------------+
+; Slow 1200mV 0C Model Minimum Pulse Width: 'CLOCK_50'                                                 ;
++--------+--------------+----------------+------------------+----------+------------+------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock    ; Clock Edge ; Target           ;
++--------+--------------+----------------+------------------+----------+------------+------------------+
+; 9.563  ; 9.747        ; 0.184          ; Low Pulse Width  ; CLOCK_50 ; Rise       ; CLOCK_25         ;
+; 9.723  ; 9.723        ; 0.000          ; Low Pulse Width  ; CLOCK_50 ; Rise       ; CLOCK_25|clk     ;
+; 9.751  ; 9.751        ; 0.000          ; Low Pulse Width  ; CLOCK_50 ; Rise       ; CLOCK_50~input|o ;
+; 10.000 ; 10.000       ; 0.000          ; High Pulse Width ; CLOCK_50 ; Rise       ; CLOCK_50~input|i ;
+; 10.000 ; 10.000       ; 0.000          ; Low Pulse Width  ; CLOCK_50 ; Rise       ; CLOCK_50~input|i ;
+; 10.036 ; 10.252       ; 0.216          ; High Pulse Width ; CLOCK_50 ; Rise       ; CLOCK_25         ;
+; 10.249 ; 10.249       ; 0.000          ; High Pulse Width ; CLOCK_50 ; Rise       ; CLOCK_50~input|o ;
+; 10.276 ; 10.276       ; 0.000          ; High Pulse Width ; CLOCK_50 ; Rise       ; CLOCK_25|clk     ;
+; 16.000 ; 20.000       ; 4.000          ; Port Rate        ; CLOCK_50 ; Rise       ; CLOCK_50         ;
+; 18.000 ; 20.000       ; 2.000          ; Min Period       ; CLOCK_50 ; Rise       ; CLOCK_25         ;
++--------+--------------+----------------+------------------+----------+------------+------------------+
+
+
+-----------------------------------------
+; Slow 1200mV 0C Model Datasheet Report ;
+-----------------------------------------
+Nothing to report.
+
+
 ----------------------------------------------
 ; Slow 1200mV 0C Model Metastability Summary ;
 ----------------------------------------------
@@ -328,6 +383,30 @@ No paths to report.
 +-------+-----------+----------+--------------+-------------+--------------+------------+------------+
 ; 0.208 ; CLOCK_25  ; CLOCK_25 ; CLOCK_50     ; CLOCK_50    ; 0.000        ; 0.022      ; 0.314      ;
 +-------+-----------+----------+--------------+-------------+--------------+------------+------------+
+
+
++------------------------------------------------------------------------------------------------------+
+; Fast 1200mV 0C Model Minimum Pulse Width: 'CLOCK_50'                                                 ;
++--------+--------------+----------------+------------------+----------+------------+------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock    ; Clock Edge ; Target           ;
++--------+--------------+----------------+------------------+----------+------------+------------------+
+; 9.297  ; 9.481        ; 0.184          ; Low Pulse Width  ; CLOCK_50 ; Rise       ; CLOCK_25         ;
+; 9.449  ; 9.449        ; 0.000          ; Low Pulse Width  ; CLOCK_50 ; Rise       ; CLOCK_50~input|o ;
+; 9.477  ; 9.477        ; 0.000          ; Low Pulse Width  ; CLOCK_50 ; Rise       ; CLOCK_25|clk     ;
+; 10.000 ; 10.000       ; 0.000          ; High Pulse Width ; CLOCK_50 ; Rise       ; CLOCK_50~input|i ;
+; 10.000 ; 10.000       ; 0.000          ; Low Pulse Width  ; CLOCK_50 ; Rise       ; CLOCK_50~input|i ;
+; 10.301 ; 10.517       ; 0.216          ; High Pulse Width ; CLOCK_50 ; Rise       ; CLOCK_25         ;
+; 10.523 ; 10.523       ; 0.000          ; High Pulse Width ; CLOCK_50 ; Rise       ; CLOCK_25|clk     ;
+; 10.551 ; 10.551       ; 0.000          ; High Pulse Width ; CLOCK_50 ; Rise       ; CLOCK_50~input|o ;
+; 16.000 ; 20.000       ; 4.000          ; Port Rate        ; CLOCK_50 ; Rise       ; CLOCK_50         ;
+; 18.000 ; 20.000       ; 2.000          ; Min Period       ; CLOCK_50 ; Rise       ; CLOCK_25         ;
++--------+--------------+----------------+------------------+----------+------------+------------------+
+
+
+-----------------------------------------
+; Fast 1200mV 0C Model Datasheet Report ;
+-----------------------------------------
+Nothing to report.
 
 
 ----------------------------------------------
@@ -804,7 +883,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 
 
 +------------------------------------------------+
-; Unconstrained Paths Summary                    ;
+; Unconstrained Paths                            ;
 +---------------------------------+-------+------+
 ; Property                        ; Setup ; Hold ;
 +---------------------------------+-------+------+
@@ -812,65 +891,9 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; Unconstrained Clocks            ; 1     ; 1    ;
 ; Unconstrained Input Ports       ; 1     ; 1    ;
 ; Unconstrained Input Port Paths  ; 20    ; 20   ;
-; Unconstrained Output Ports      ; 6     ; 6    ;
-; Unconstrained Output Port Paths ; 25    ; 25   ;
+; Unconstrained Output Ports      ; 11    ; 11   ;
+; Unconstrained Output Port Paths ; 144   ; 144  ;
 +---------------------------------+-------+------+
-
-
-+--------------------------------------------+
-; Clock Status Summary                       ;
-+----------+----------+------+---------------+
-; Target   ; Clock    ; Type ; Status        ;
-+----------+----------+------+---------------+
-; CLOCK_25 ;          ; Base ; Unconstrained ;
-; CLOCK_50 ; CLOCK_50 ; Base ; Constrained   ;
-+----------+----------+------+---------------+
-
-
-+---------------------------------------------------------------------------------------------------+
-; Unconstrained Input Ports                                                                         ;
-+------------+--------------------------------------------------------------------------------------+
-; Input Port ; Comment                                                                              ;
-+------------+--------------------------------------------------------------------------------------+
-; KEY[0]     ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+------------+--------------------------------------------------------------------------------------+
-
-
-+------------------------------------------------------------------------------------------------------+
-; Unconstrained Output Ports                                                                           ;
-+--------------+---------------------------------------------------------------------------------------+
-; Output Port  ; Comment                                                                               ;
-+--------------+---------------------------------------------------------------------------------------+
-; GPIO_0_D[5]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; GPIO_0_D[7]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; GPIO_0_D[15] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; GPIO_0_D[17] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; GPIO_0_D[19] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LED[0]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+--------------+---------------------------------------------------------------------------------------+
-
-
-+---------------------------------------------------------------------------------------------------+
-; Unconstrained Input Ports                                                                         ;
-+------------+--------------------------------------------------------------------------------------+
-; Input Port ; Comment                                                                              ;
-+------------+--------------------------------------------------------------------------------------+
-; KEY[0]     ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+------------+--------------------------------------------------------------------------------------+
-
-
-+------------------------------------------------------------------------------------------------------+
-; Unconstrained Output Ports                                                                           ;
-+--------------+---------------------------------------------------------------------------------------+
-; Output Port  ; Comment                                                                               ;
-+--------------+---------------------------------------------------------------------------------------+
-; GPIO_0_D[5]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; GPIO_0_D[7]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; GPIO_0_D[15] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; GPIO_0_D[17] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; GPIO_0_D[19] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LED[0]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+--------------+---------------------------------------------------------------------------------------+
 
 
 +------------------------------------+
@@ -879,12 +902,12 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Warning (125092): Tcl Script File DE_NANO_SOPC.qip not found
     Info (125063): set_global_assignment -name QIP_FILE DE_NANO_SOPC.qip
 Info: *******************************************************************
-Info: Running Quartus Prime TimeQuest Timing Analyzer
-    Info: Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
-    Info: Processing started: Mon Jun 19 20:10:22 2017
+Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
+    Info: Version 15.0.0 Build 145 04/22/2015 SJ Web Edition
+    Info: Processing started: Thu Sep 28 22:27:41 2017
 Info: Command: quartus_sta DE0_NANO -c DE0_NANO
-Info: qsta_default_script.tcl version: #1
-Warning (20028): Parallel compilation is not licensed and has been disabled
+Info: qsta_default_script.tcl version: #11
+Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
 Info (332104): Reading SDC File: 'DE0_NANO.SDC'
@@ -908,7 +931,6 @@ Info (332146): Worst-case minimum pulse width slack is 9.569
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     9.569               0.000 CLOCK_50 
-Warning (18330): Ignoring Synchronizer Identification setting Off, and using Auto instead.
 Info: Analyzing Slow 1200mV 0C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
@@ -929,7 +951,6 @@ Info (332146): Worst-case minimum pulse width slack is 9.563
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     9.563               0.000 CLOCK_50 
-Warning (18330): Ignoring Synchronizer Identification setting Off, and using Auto instead.
 Info: Analyzing Fast 1200mV 0C Model
 Warning (332060): Node: CLOCK_25 was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register led_counter[0] is being clocked by CLOCK_25
@@ -948,13 +969,12 @@ Info (332146): Worst-case minimum pulse width slack is 9.297
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     9.297               0.000 CLOCK_50 
-Warning (18330): Ignoring Synchronizer Identification setting Off, and using Auto instead.
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
-Info: Quartus Prime TimeQuest Timing Analyzer was successful. 0 errors, 8 warnings
-    Info: Peak virtual memory: 783 megabytes
-    Info: Processing ended: Mon Jun 19 20:10:23 2017
-    Info: Elapsed time: 00:00:01
-    Info: Total CPU time (on all processors): 00:00:01
+Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 4 warnings
+    Info: Peak virtual memory: 756 megabytes
+    Info: Processing ended: Thu Sep 28 22:27:44 2017
+    Info: Elapsed time: 00:00:03
+    Info: Total CPU time (on all processors): 00:00:03
 
 

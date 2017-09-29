@@ -21,8 +21,8 @@
 #define P_SERVO_RIGHT          11
 
 // Light Level Parameters
-#define WHITE_VALUE            700  // 538
-#define BLACK_VALUE            976
+#define WHITE_VALUE            538  // 700
+#define BLACK_VALUE            850
 #define LIGHT_TOLERANCE        5
 
 // Define servo tuning parameters

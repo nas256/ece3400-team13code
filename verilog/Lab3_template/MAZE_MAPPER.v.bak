@@ -1,0 +1,9 @@
+module MAZE_MAPPER(PIXEL_X, PIXEL_Y, COLOR_OUT);
+
+input PIXEL_X;
+input PIXEL_Y;
+
+output COLOR_OUT;
+
+
+endmodule

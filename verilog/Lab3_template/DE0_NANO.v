@@ -86,9 +86,15 @@ module DE0_NANO(
         .V_SYNC_NEG(GPIO_0_D[5])
     );
 	 
+	 MAZE_MAPPER(
+		.PIXEL_X(PIXEL_COORD_X),
+		.PIXEL_Y(PIXEL_COORD_Y),
+		.COLOR_OUT(PIXEL_COLOR)
+	 );
+	 
 	 assign reset = ~KEY[0]; // reset when KEY0 is pressed
 	 
-	 assign PIXEL_COLOR = 8'b000_111_00; // Green
+	 //assign PIXEL_COLOR = 8'b111_111_11; // Green
 	 assign LED[0] = led_state;
 	 
     //=======================================================
