@@ -86,10 +86,29 @@ module DE0_NANO(
         .V_SYNC_NEG(GPIO_0_D[5])
     );
 	 
+	 wire [15:0] input_shiftreg;
+	 wire        done;
+	 
 	 MAZE_MAPPER(
-		.PIXEL_X(PIXEL_COORD_X),
-		.PIXEL_Y(PIXEL_COORD_Y),
-		.COLOR_OUT(PIXEL_COLOR)
+		.CLK         (CLOCK_25),
+		
+		.PIXEL_X    (PIXEL_COORD_X),
+		.PIXEL_Y    (PIXEL_COORD_Y),
+		.COLOR_OUT  (PIXEL_COLOR),
+		
+		// SPI data input
+		.DATA_IN    (input_shiftreg),
+		.DATA_VAL   (done)
+	 );
+	 
+	 SPI_SLAVE(
+		.clk             (CLOCK_25),
+		.reset           (reset),
+		.sck             (GPIO_1_IN[1]),
+		.mosi            (GPIO_1_IN[0]),
+		.cs              (GPIO_0_IN[0]),
+		.input_shiftreg  (input_shiftreg),
+		.done            (done)
 	 );
 	 
 	 assign reset = ~KEY[0]; // reset when KEY0 is pressed

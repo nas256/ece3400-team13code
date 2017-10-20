@@ -1,0 +1,4 @@
+module SPI_SLAVE(CLOCK, RESET, SCLK, MOSI, CS)
+
+
+endmodule

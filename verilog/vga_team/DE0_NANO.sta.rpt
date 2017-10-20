@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for DE0_NANO
-Thu Sep 28 22:27:44 2017
+Thu Oct 19 21:18:54 2017
 Quartus II 64-Bit Version 15.0.0 Build 145 04/22/2015 SJ Web Edition
 
 
@@ -115,7 +115,7 @@ agreement for further details.
 +---------------+--------+--------------------------+
 ; SDC File Path ; Status ; Read at                  ;
 +---------------+--------+--------------------------+
-; DE0_NANO.SDC  ; OK     ; Thu Sep 28 22:27:42 2017 ;
+; DE0_NANO.SDC  ; OK     ; Thu Oct 19 21:18:52 2017 ;
 +---------------+--------+--------------------------+
 
 
@@ -521,10 +521,7 @@ No synchronizer chains to report.
 ; SW[1]        ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
 ; SW[2]        ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
 ; SW[3]        ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
-; GPIO_0_IN[0] ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
 ; GPIO_0_IN[1] ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
-; GPIO_1_IN[0] ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
-; GPIO_1_IN[1] ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
 ; GPIO_0_D[0]  ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
 ; GPIO_0_D[1]  ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
 ; GPIO_0_D[2]  ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
@@ -595,6 +592,9 @@ No synchronizer chains to report.
 ; GPIO_0_D[23] ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
 ; CLOCK_50     ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
 ; KEY[0]       ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
+; GPIO_1_IN[0] ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
+; GPIO_1_IN[1] ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
+; GPIO_0_IN[0] ; 3.3-V LVTTL  ; 2640 ps         ; 2640 ps         ;
 +--------------+--------------+-----------------+-----------------+
 
 
@@ -889,10 +889,10 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------------------------+-------+------+
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 1     ; 1    ;
-; Unconstrained Input Ports       ; 1     ; 1    ;
-; Unconstrained Input Port Paths  ; 20    ; 20   ;
+; Unconstrained Input Ports       ; 4     ; 4    ;
+; Unconstrained Input Port Paths  ; 23    ; 23   ;
 ; Unconstrained Output Ports      ; 11    ; 11   ;
-; Unconstrained Output Port Paths ; 144   ; 144  ;
+; Unconstrained Output Port Paths ; 382   ; 382  ;
 +---------------------------------+-------+------+
 
 
@@ -904,7 +904,7 @@ Warning (125092): Tcl Script File DE_NANO_SOPC.qip not found
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
     Info: Version 15.0.0 Build 145 04/22/2015 SJ Web Edition
-    Info: Processing started: Thu Sep 28 22:27:41 2017
+    Info: Processing started: Thu Oct 19 21:18:51 2017
 Info: Command: quartus_sta DE0_NANO -c DE0_NANO
 Info: qsta_default_script.tcl version: #11
 Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
@@ -972,9 +972,9 @@ Info (332146): Worst-case minimum pulse width slack is 9.297
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 756 megabytes
-    Info: Processing ended: Thu Sep 28 22:27:44 2017
+    Info: Peak virtual memory: 757 megabytes
+    Info: Processing ended: Thu Oct 19 21:18:54 2017
     Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Total CPU time (on all processors): 00:00:02
 
 

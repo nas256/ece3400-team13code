@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE22F17) Path("C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/Lab3_template/") File("DE0_NANO.sof") MfrSpec(OpMask(1));
+		Device PartName(EP4CE22F17) Path("C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/vga_team/") File("DE0_NANO.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 
