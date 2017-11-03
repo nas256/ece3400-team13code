@@ -42,12 +42,10 @@
 #define LEFT                   0
 #define RIGHT                  1
 
-#define WALL_THRESHOLD_SIDE    350
-#define WALL_THRESHOLD_FRONT   180
-
+#define WALL_THRESHOLD_SIDE    235
+#define WALL_THRESHOLD_FRONT   170
 
 unsigned long last_turn_start = 0;
-
 
 Servo servo_left, servo_right;
 int line_left_value = 0, line_right_value = 0;
@@ -76,24 +74,21 @@ void setup() {
 
 int slowdown_left = 0, slowdown_right = 0;
 
-void test_amux(){
-  
-}
-
 void sense_walls(){
   amux_select(WALL_SENSOR_RIGHT);
-  delayMicroseconds(3);
+  delayMicroseconds(10);
   if ( analogRead(P_AMUX) > WALL_THRESHOLD_SIDE)
      signal_condition(D_WALL_RIGHT);
   else
      clear_condition(D_WALL_RIGHT);
 
   amux_select(WALL_SENSOR_LEFT);
-  delayMicroseconds(3);
+  delayMicroseconds(10);
   if ( analogRead(P_AMUX) > WALL_THRESHOLD_SIDE)
      signal_condition(D_WALL_LEFT);
   else
      clear_condition(D_WALL_LEFT);
+  Serial.println(analogRead(P_AMUX));
 
   if ( analogRead(P_WALL_FRONT) > WALL_THRESHOLD_FRONT)
      signal_condition(D_WALL_FRONT);
@@ -117,7 +112,7 @@ void loop() {
    if ( analogRead(P_INTERSECT_SENSOR_2) > BLACK_VALUE - 40 )
      signal_condition(D_INTERSECT_2);
    else
-     clear_condition(D_INTERSECT_2_W);
+     clear_condition(D_INTERSECT_2);
      
    if ( analogRead(P_INTERSECT_SENSOR_1) < WHITE_VALUE + 30 )
      signal_condition(D_INTERSECT_1_W);
@@ -131,13 +126,7 @@ void loop() {
 
   // Read wall values
   sense_walls();
-    
-  /*float volts = analogRead(P_WALL_FRONT)*0.0048828125;  // value from sensor * (5/1024)
-  if ( 13*pow(volts, -1) < 29) // worked out from datasheet graph
-    signal_condition(D_WALL_FRONT);
-  else
-    clear_condition(D_WALL_FRONT);*/
-     
+  
   if (state == FOLLOW_LINE){ 
     // Line following adjustments
     if ( abs(line_left_value - line_right_value) < LIGHT_TOLERANCE ){
@@ -158,11 +147,12 @@ void loop() {
       // intersection reached
 
       if ( millis() - last_turn_start > 2000 ){
-        if ( poll_condition(D_WALL_FRONT, 20) ){
+         
+        if ( poll_condition(D_WALL_FRONT, 10)){
             last_turn_start = millis();
-            
-            state = TURN_RIGHT;
-          }
+            if (poll_condition(D_WALL_RIGHT, 10)) state = TURN_LEFT;
+            else state = TURN_RIGHT;
+        }
       }
     }
  
@@ -171,12 +161,12 @@ void loop() {
     slowdown_left = 0;
     slowdown_right = 7;
 
-    if ( millis() - last_turn_start > 1100 )
+    if ( millis() - last_turn_start > 1400 )
       state = FOLLOW_LINE;
          
   } else if (state == TURN_LEFT){
     
-    // Turn right until right intersection sensor sees white
+    // Turn left until right intersection sensor sees white
     slowdown_left = 7;
     slowdown_right = 0;
 
@@ -192,7 +182,7 @@ void loop() {
 
   //Serial.print(poll_condition(D_WALL_FRONT, 10)? "Y " : "N ");
   //Serial.print(poll_condition(D_WALL_RIGHT, 10)? "Y " : "N ");
-  //Serial.println(poll_condition(D_WALL_LEFT, 10)? "Y " : "N ");
+  //Serial.print(poll_condition(D_WALL_LEFT, 10)? "Y " : "N ");
   /*Serial.print("L: ");
   Serial.print(analogRead(P_INTERSECT_SENSOR_1));
   Serial.print("  R: ");
