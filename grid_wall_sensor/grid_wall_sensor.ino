@@ -16,9 +16,11 @@
 #define P_LINE_SENSOR_2        A0 // Right
 #define P_INTERSECT_SENSOR_1   A2 // Left
 #define P_INTERSECT_SENSOR_2   A3 // Right
-#define P_WALL_FRONT           A4
-#define P_SERVO_LEFT           10
-#define P_SERVO_RIGHT          11
+#define P_AMUX                 A4
+#define P_WALL_FRONT           A5
+
+#define P_SERVO_LEFT           5
+#define P_SERVO_RIGHT          6
 
 // Light Level Parameters
 #define WHITE_VALUE            538  // 700
@@ -39,6 +41,10 @@
 // Turns
 #define LEFT                   0
 #define RIGHT                  1
+
+#define WALL_THRESHOLD_SIDE    350
+#define WALL_THRESHOLD_FRONT   180
+
 
 unsigned long last_turn_start = 0;
 
@@ -70,7 +76,33 @@ void setup() {
 
 int slowdown_left = 0, slowdown_right = 0;
 
-void loop() {  
+void test_amux(){
+  
+}
+
+void sense_walls(){
+  amux_select(WALL_SENSOR_RIGHT);
+  delayMicroseconds(3);
+  if ( analogRead(P_AMUX) > WALL_THRESHOLD_SIDE)
+     signal_condition(D_WALL_RIGHT);
+  else
+     clear_condition(D_WALL_RIGHT);
+
+  amux_select(WALL_SENSOR_LEFT);
+  delayMicroseconds(3);
+  if ( analogRead(P_AMUX) > WALL_THRESHOLD_SIDE)
+     signal_condition(D_WALL_LEFT);
+  else
+     clear_condition(D_WALL_LEFT);
+
+  if ( analogRead(P_WALL_FRONT) > WALL_THRESHOLD_FRONT)
+     signal_condition(D_WALL_FRONT);
+  else
+     clear_condition(D_WALL_FRONT); 
+}
+
+void loop() { 
+  
   // Update readings from line sensors
   line_left_value = analogRead(P_LINE_SENSOR_1);  // 0-1023
   line_right_value = analogRead(P_LINE_SENSOR_2); // 0-1023
@@ -97,11 +129,14 @@ void loop() {
    else
      clear_condition(D_INTERSECT_2_W);
 
-  float volts = analogRead(P_WALL_FRONT)*0.0048828125;  // value from sensor * (5/1024)
+  // Read wall values
+  sense_walls();
+    
+  /*float volts = analogRead(P_WALL_FRONT)*0.0048828125;  // value from sensor * (5/1024)
   if ( 13*pow(volts, -1) < 29) // worked out from datasheet graph
     signal_condition(D_WALL_FRONT);
   else
-    clear_condition(D_WALL_FRONT);
+    clear_condition(D_WALL_FRONT);*/
      
   if (state == FOLLOW_LINE){ 
     // Line following adjustments
@@ -118,7 +153,6 @@ void loop() {
       slowdown_right = map(line_right_value-line_left_value, 0, BLACK_VALUE-WHITE_VALUE, 0, 20);
     }
 
-   
    if ( poll_condition(D_INTERSECT_1, DEBOUNCE_MAXVAL)
           && poll_condition(D_INTERSECT_2, DEBOUNCE_MAXVAL) ){
       // intersection reached
@@ -131,9 +165,7 @@ void loop() {
           }
       }
     }
-    
-    
-    
+ 
   } else if (state == TURN_RIGHT){
     // Turn right until right intersection sensor sees white
     slowdown_left = 0;
@@ -156,6 +188,11 @@ void loop() {
   drive(LEFT_ZERO+7-slowdown_left, RIGHT_ZERO+7-slowdown_right);
   
   // Print out readings
+  uint8_t walls = 0;
+
+  //Serial.print(poll_condition(D_WALL_FRONT, 10)? "Y " : "N ");
+  //Serial.print(poll_condition(D_WALL_RIGHT, 10)? "Y " : "N ");
+  //Serial.println(poll_condition(D_WALL_LEFT, 10)? "Y " : "N ");
   /*Serial.print("L: ");
   Serial.print(analogRead(P_INTERSECT_SENSOR_1));
   Serial.print("  R: ");

@@ -1,7 +1,7 @@
 #ifndef DEBOUNCE_H
 #define DEBOUNCE_H
 
-#define DEBOUNCE_VARIABLES 5
+#define DEBOUNCE_VARIABLES 7
 #define DEBOUNCE_MAXVAL    40
 
 // Debounce variables
@@ -10,6 +10,8 @@
 #define D_INTERSECT_1_W     2
 #define D_INTERSECT_2_W     3
 #define D_WALL_FRONT        4 
+#define D_WALL_RIGHT        5 
+#define D_WALL_LEFT         6 
 
 //extern char deb_array[DEBOUNCE_VARIABLES];
 
