@@ -37,6 +37,7 @@
 #define FOLLOW_LINE            0
 #define TURN_LEFT              1
 #define TURN_RIGHT             2
+#define TURN_180               3
 
 // Turns
 #define LEFT                   0
@@ -150,12 +151,23 @@ void loop() {
          
         if ( poll_condition(D_WALL_FRONT, 10)){
             last_turn_start = millis();
-            if (poll_condition(D_WALL_RIGHT, 10)) state = TURN_LEFT;
+            if (poll_condition(D_WALL_RIGHT, 10)){ 
+              state = TURN_LEFT; 
+              if (poll_condition(D_WALL_LEFT, 10)) state = TURN_180;
+            }
             else state = TURN_RIGHT;
         }
       }
     }
- 
+  } else if (state == TURN_180){
+    // Turn right until right intersection sensor sees white
+    slowdown_left = 0;
+    slowdown_right = 14;
+
+    if ( millis() - last_turn_start > 1500 )
+      state = FOLLOW_LINE;
+         
+  
   } else if (state == TURN_RIGHT){
     // Turn right until right intersection sensor sees white
     slowdown_left = 0;
@@ -180,7 +192,8 @@ void loop() {
   // Print out readings
   uint8_t walls = 0;
 
-  //Serial.print(poll_condition(D_WALL_FRONT, 10)? "Y " : "N ");
+  Serial.print(poll_condition(D_WALL_FRONT, 10)? "Y " : "N ");
+  Serial.print(state);
   //Serial.print(poll_condition(D_WALL_RIGHT, 10)? "Y " : "N ");
   //Serial.print(poll_condition(D_WALL_LEFT, 10)? "Y " : "N ");
   /*Serial.print("L: ");
