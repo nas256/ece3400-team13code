@@ -44,7 +44,14 @@
 #define RIGHT                  1
 
 #define WALL_THRESHOLD_SIDE    235
-#define WALL_THRESHOLD_FRONT   170
+#define WALL_THRESHOLD_FRONT   190 //170
+
+#define LEFT_LED 1
+#define RIGHT_LED 0
+#define FRONT_LED 7
+
+#define FRONT_WALL_POLL_THRESHOLD 20
+#define SIDE_WALL_POLL_THRESHOLD  20
 
 unsigned long last_turn_start = 0;
 
@@ -53,7 +60,7 @@ int line_left_value = 0, line_right_value = 0;
 char state = FOLLOW_LINE;
 
 void setup() {
-  Serial.begin(115200); // Begin UART Communication
+  //Serial.begin(115200); // Begin UART Communication
 
   // Initialize servo variables
   servo_left.attach(P_SERVO_LEFT);
@@ -64,6 +71,13 @@ void setup() {
   pinMode(INPUT, P_LINE_SENSOR_2);
   pinMode(INPUT, P_INTERSECT_SENSOR_1);
   pinMode(INPUT, P_INTERSECT_SENSOR_2);
+  pinMode(OUTPUT, LEFT_LED);
+  pinMode(OUTPUT, RIGHT_LED);
+  pinMode(OUTPUT, FRONT_LED);
+  digitalWrite(LEFT_LED,LOW);
+  digitalWrite(RIGHT_LED,LOW);
+  digitalWrite(FRONT_LED,LOW);
+
 
   // Initialize the analog mux
   amux_init();
@@ -149,11 +163,11 @@ void loop() {
 
       if ( millis() - last_turn_start > 2000 ){
          
-        if ( poll_condition(D_WALL_FRONT, 10)){
+        if ( poll_condition(D_WALL_FRONT, FRONT_WALL_POLL_THRESHOLD)){
             last_turn_start = millis();
-            if (poll_condition(D_WALL_RIGHT, 10)){ 
+            if (poll_condition(D_WALL_RIGHT, SIDE_WALL_POLL_THRESHOLD)){ 
               state = TURN_LEFT; 
-              if (poll_condition(D_WALL_LEFT, 10)) state = TURN_180;
+              if (poll_condition(D_WALL_LEFT, SIDE_WALL_POLL_THRESHOLD)) state = TURN_180;
             }
             else state = TURN_RIGHT;
         }
@@ -173,7 +187,7 @@ void loop() {
     slowdown_left = 0;
     slowdown_right = 7;
 
-    if ( millis() - last_turn_start > 1400 )
+    if ( millis() - last_turn_start > 1450 )
       state = FOLLOW_LINE;
          
   } else if (state == TURN_LEFT){
@@ -182,7 +196,7 @@ void loop() {
     slowdown_left = 7;
     slowdown_right = 0;
 
-    if ( millis() - last_turn_start > 1100 )
+    if ( millis() - last_turn_start > 1150 )
       state = FOLLOW_LINE;
   }
   
@@ -192,8 +206,17 @@ void loop() {
   // Print out readings
   uint8_t walls = 0;
 
-  Serial.print(poll_condition(D_WALL_FRONT, 10)? "Y " : "N ");
-  Serial.print(state);
+  if (poll_condition(D_WALL_FRONT, 10)) digitalWrite(FRONT_LED, HIGH);
+  else digitalWrite(FRONT_LED, LOW);
+
+  if (poll_condition(D_WALL_LEFT, 10)) digitalWrite(LEFT_LED, HIGH);
+  else digitalWrite(LEFT_LED, LOW);
+
+  if (poll_condition(D_WALL_RIGHT, 10)) digitalWrite(RIGHT_LED, HIGH);
+  else digitalWrite(RIGHT_LED, LOW);
+  
+  //Serial.print(poll_condition(D_WALL_FRONT, 10)? "Y " : "N ");
+  //Serial.print(state);
   //Serial.print(poll_condition(D_WALL_RIGHT, 10)? "Y " : "N ");
   //Serial.print(poll_condition(D_WALL_LEFT, 10)? "Y " : "N ");
   /*Serial.print("L: ");
