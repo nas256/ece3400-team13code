@@ -45,9 +45,12 @@ struct xy_pair s_pop (struct stack* s)
 }
 
 uint8_t s_contains(struct stack* s, xy_pair xy_pair){
-  for (uint8_t i = s->top; i > -1; i--)
+  if ( s->top == -1) return 0;
+  for (int8_t i = s->top; i > -1; i--){
+    //Serial.print("Comparing "); Serial.print(s->top); Serial.print("  "); Serial.println(i);
     if ( s->stk[i].x == xy_pair.x && s->stk[i].y == xy_pair.y)
       return 1;
+  }
   return 0; 
 }
 

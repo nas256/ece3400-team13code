@@ -8,6 +8,7 @@
 
 #include "debounce.h"
 #include "debounce.c" // i hate you arduino ide trash
+#include "mapper.h"
 
 #include "amux.h"
 
@@ -43,8 +44,8 @@
 #define LEFT                   0
 #define RIGHT                  1
 
-#define WALL_THRESHOLD_SIDE    235
-#define WALL_THRESHOLD_FRONT   190 //170
+#define WALL_THRESHOLD_SIDE    200 //235
+#define WALL_THRESHOLD_FRONT   150 //170
 
 #define LEFT_LED 1
 #define RIGHT_LED 0
@@ -84,6 +85,9 @@ void setup() {
 
   drive(LEFT_ZERO, RIGHT_ZERO);
 
+  for (uint8_t i = 0; i < 50; i++) Serial.println(" ");
+  Serial.println("start");
+
   delay(2000);
 }
 
@@ -103,7 +107,7 @@ void sense_walls(){
      signal_condition(D_WALL_LEFT);
   else
      clear_condition(D_WALL_LEFT);
-  Serial.println(analogRead(P_AMUX));
+  //Serial.println(analogRead(P_AMUX));
 
   if ( analogRead(P_WALL_FRONT) > WALL_THRESHOLD_FRONT)
      signal_condition(D_WALL_FRONT);
@@ -161,7 +165,7 @@ void loop() {
           && poll_condition(D_INTERSECT_2, DEBOUNCE_MAXVAL) ){
       // intersection reached
 
-      if ( millis() - last_turn_start > 2000 ){
+      if ( millis() - last_turn_start > 1000 ){
          
         if ( poll_condition(D_WALL_FRONT, FRONT_WALL_POLL_THRESHOLD)){
             last_turn_start = millis();
@@ -171,6 +175,22 @@ void loop() {
             }
             else state = TURN_RIGHT;
         }
+
+       
+       /*uint8_t to_turn = at_intersection( poll_condition(D_WALL_FRONT, FRONT_WALL_POLL_THRESHOLD), 
+                                          poll_condition(D_WALL_LEFT, SIDE_WALL_POLL_THRESHOLD),
+                                          poll_condition(D_WALL_RIGHT, SIDE_WALL_POLL_THRESHOLD) );
+       switch(to_turn){
+         case NORTH: state = FOLLOW_LINE; break; 
+         case SOUTH: state = TURN_180;    break;
+         case WEST:  state = TURN_LEFT;   break;
+         case EAST:  state = TURN_RIGHT;  break;
+       }
+       last_turn_start = millis();*/
+       //Serial.print("WANT TO TURN "); Serial.println(to_turn);
+       
+       
+        
       }
     }
   } else if (state == TURN_180){
