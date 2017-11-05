@@ -15,8 +15,8 @@
 #define P_LINE_SENSOR_2        A0
 #define P_INTERSECT_SENSOR_1   A2
 #define P_INTERSECT_SENSOR_2   A3
-#define P_SERVO_LEFT           10
-#define P_SERVO_RIGHT          11
+#define P_SERVO_LEFT           5
+#define P_SERVO_RIGHT          6
 
 // Light Level Parameters
 #define WHITE_VALUE            538  // 538

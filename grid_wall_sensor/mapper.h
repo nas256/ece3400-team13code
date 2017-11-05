@@ -1,31 +1,42 @@
+#ifndef MAPPER_H
+#define MAPPER_H
+
 
 // Define cardinal directions
-#define NONE  0
-#define WEST  1
-#define EAST  2
-#define NORTH 3
-#define SOUTH 4
+#define NORTH  0
+#define EAST  1
+#define SOUTH  2
+#define WEST 3
 
 // Define grid sizes
 #define GRID_SIZE_X 5
 #define GRID_SIZE_Y 4
 
-struct grid{
+struct xy_pair{
+  uint8_t x;
+  uint8_t y;
+};
+typedef struct xy_pair xy_pair;
+
+#include "stack.h"
+
+struct tile{
+     xy_pair xy_pair;
      char traversed;
      char walls; // LSB 4 bits (WEST, EAST, NORTH, SOUTH)
 };
-typedef struct grid grid;
-
+typedef struct tile tile;
 
 // Initialize state variables
-grid grid_array[GRID_SIZE_X][GRID_SIZE_Y];
-char cur_orientation;
+tile tile_array[GRID_SIZE_X][GRID_SIZE_Y];
+extern char cur_orientation;
 
-extern char pos_x, pos_y;
+extern xy_pair pos;
 
 // Methods
 void init_mapper();
 void move_to(char x, char y);
-uint16_t serialize_tile(grid& grid);
+uint16_t serialize_tile(tile& tile);
 
+#endif
 
