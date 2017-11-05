@@ -44,12 +44,12 @@
 #define LEFT                   0
 #define RIGHT                  1
 
-#define WALL_THRESHOLD_SIDE    200 //235
+#define WALL_THRESHOLD_SIDE    235
 #define WALL_THRESHOLD_FRONT   150 //170
 
-#define LEFT_LED 1
-#define RIGHT_LED 0
-#define FRONT_LED 7
+#define LEFT_LED 8
+#define RIGHT_LED 10
+#define FRONT_LED 9
 
 #define FRONT_WALL_POLL_THRESHOLD 20
 #define SIDE_WALL_POLL_THRESHOLD  20
@@ -61,7 +61,7 @@ int line_left_value = 0, line_right_value = 0;
 char state = FOLLOW_LINE;
 
 void setup() {
-  //Serial.begin(115200); // Begin UART Communication
+  Serial.begin(115200); // Begin UART Communication
 
   // Initialize servo variables
   servo_left.attach(P_SERVO_LEFT);
@@ -167,17 +167,17 @@ void loop() {
 
       if ( millis() - last_turn_start > 1000 ){
          
-        if ( poll_condition(D_WALL_FRONT, FRONT_WALL_POLL_THRESHOLD)){
+        /* if ( poll_condition(D_WALL_FRONT, FRONT_WALL_POLL_THRESHOLD)){
             last_turn_start = millis();
             if (poll_condition(D_WALL_RIGHT, SIDE_WALL_POLL_THRESHOLD)){ 
               state = TURN_LEFT; 
               if (poll_condition(D_WALL_LEFT, SIDE_WALL_POLL_THRESHOLD)) state = TURN_180;
             }
             else state = TURN_RIGHT;
-        }
+        } */
 
        
-       /*uint8_t to_turn = at_intersection( poll_condition(D_WALL_FRONT, FRONT_WALL_POLL_THRESHOLD), 
+       uint8_t to_turn = at_intersection( poll_condition(D_WALL_FRONT, FRONT_WALL_POLL_THRESHOLD), 
                                           poll_condition(D_WALL_LEFT, SIDE_WALL_POLL_THRESHOLD),
                                           poll_condition(D_WALL_RIGHT, SIDE_WALL_POLL_THRESHOLD) );
        switch(to_turn){
@@ -185,8 +185,9 @@ void loop() {
          case SOUTH: state = TURN_180;    break;
          case WEST:  state = TURN_LEFT;   break;
          case EAST:  state = TURN_RIGHT;  break;
-       }
-       last_turn_start = millis();*/
+         // case STAY:  state = TURN_180;    break;
+       } 
+       last_turn_start = millis();
        //Serial.print("WANT TO TURN "); Serial.println(to_turn);
        
        
@@ -235,10 +236,10 @@ void loop() {
   if (poll_condition(D_WALL_RIGHT, 10)) digitalWrite(RIGHT_LED, HIGH);
   else digitalWrite(RIGHT_LED, LOW);
   
-  //Serial.print(poll_condition(D_WALL_FRONT, 10)? "Y " : "N ");
-  //Serial.print(state);
-  //Serial.print(poll_condition(D_WALL_RIGHT, 10)? "Y " : "N ");
-  //Serial.print(poll_condition(D_WALL_LEFT, 10)? "Y " : "N ");
+  // Serial.print(poll_condition(D_WALL_FRONT, 10)? "F: Y " : "F; N ");
+  // Serial.print(state);
+  // Serial.print(poll_condition(D_WALL_RIGHT, 10)? "R: Y " : "R: N ");
+  // Serial.println(poll_condition(D_WALL_LEFT, 10)? "L: Y " : "L: N ");
   /*Serial.print("L: ");
   Serial.print(analogRead(P_INTERSECT_SENSOR_1));
   Serial.print("  R: ");

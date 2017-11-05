@@ -1,7 +1,7 @@
 #include "mapper.h"
 
 xy_pair pos;
-char cur_orientation;
+uint8_t cur_orientation;
 
 void print_xy(struct xy_pair xy){
   Serial.print(xy.x);
@@ -58,6 +58,8 @@ struct xy_pair translate(char robot_direction, char input_robot, struct xy_pair 
     case WEST:
       output.x -= 1;
       break;
+    /* case STAY:
+      break; */
   }
 
   return output;
@@ -116,7 +118,8 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
   // Find orientation of target relative to pos
   uint8_t orientation = get_orientation(pos, target);
   if (orientation > WEST) {Serial.print("PROBLEM: "); Serial.println(orientation); }
-  uint8_t robot_orientation = (orientation - cur_orientation) % 4;  
+  uint8_t robot_orientation = (orientation - cur_orientation);  
+  if (robot_orientation > 3) robot_orientation += 4;
 
   cur_orientation = orientation;
 
@@ -137,12 +140,16 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
       pos.x = left.x;
       pos.y = left.y;
       break;
+    /*case STAY:
+      break; */
   }
 
   Serial.print("Moving true: ");
   Serial.println(orientation);
 
   Serial.print("Moving robot: ");
+  Serial.print(cur_orientation);
+  Serial.print("; ");
   Serial.println(robot_orientation);
 
   return robot_orientation;

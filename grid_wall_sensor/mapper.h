@@ -5,8 +5,9 @@
 // Define cardinal directions
 #define NORTH  0
 #define EAST  1
-#define SOUTH  2
+#define SOUTH 2
 #define WEST 3
+#define DONE 5
 
 // Define grid sizes
 #define GRID_SIZE_X 5
@@ -29,7 +30,7 @@ typedef struct tile tile;
 
 // Initialize state variables
 tile tile_array[GRID_SIZE_X][GRID_SIZE_Y];
-extern char cur_orientation;
+extern uint8_t cur_orientation;
 
 extern xy_pair pos;
 
