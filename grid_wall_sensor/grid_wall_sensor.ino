@@ -180,6 +180,14 @@ void loop() {
        uint8_t to_turn = at_intersection( poll_condition(D_WALL_FRONT, FRONT_WALL_POLL_THRESHOLD), 
                                           poll_condition(D_WALL_LEFT, SIDE_WALL_POLL_THRESHOLD),
                                           poll_condition(D_WALL_RIGHT, SIDE_WALL_POLL_THRESHOLD) );
+       if (to_turn == 255) {
+        while(1) {
+          digitalWrite(FRONT_LED, HIGH);
+          digitalWrite(LEFT_LED, HIGH);
+          digitalWrite(RIGHT_LED, HIGH);
+          drive(LEFT_ZERO, RIGHT_ZERO);
+        }
+       }
        switch(to_turn){
          case NORTH: state = FOLLOW_LINE; break; 
          case SOUTH: state = TURN_180;    break;

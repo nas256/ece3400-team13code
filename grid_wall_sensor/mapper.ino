@@ -108,6 +108,7 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
   if ( (wall_front || s_contains(&visited, front)) 
     && (wall_left  || s_contains(&visited,left))
     && (wall_right || s_contains(&visited, right)) ){
+      if (s_isEmpty(&missed_op)) return 255;
     target = s_pop(&path);
   }else{
     // Not surrounded
@@ -140,8 +141,8 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
       pos.x = left.x;
       pos.y = left.y;
       break;
-    /*case STAY:
-      break; */
+    case DONE:
+      break;
   }
 
   Serial.print("Moving true: ");
