@@ -9,7 +9,7 @@
 struct stack
 {
     struct xy_pair stk[MAXSIZE];
-    int top;
+    int16_t top;
 };
 typedef struct stack STACK;
 

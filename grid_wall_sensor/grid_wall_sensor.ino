@@ -79,6 +79,7 @@ void setup() {
   digitalWrite(RIGHT_LED,LOW);
   digitalWrite(FRONT_LED,LOW);
 
+  init_mapper();
 
   // Initialize the analog mux
   amux_init();

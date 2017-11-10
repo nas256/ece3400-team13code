@@ -27,8 +27,11 @@ void init_mapper(){
 
   // Init DFS stacks
   s_init(&missed_op);
+  missed_op.top = -1;
+      Serial.print("M S: ");
+    Serial.println(missed_op.top+1);
   s_init(&visited);
-  //s_push(&missed_op, pos);
+  s_push(&visited, pos);
 }
 
 // given robot orientation [robot_direction], will move [start] according to [input_robot]
@@ -89,18 +92,24 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
   xy_pair left = translate(cur_orientation, WEST, pos);
   xy_pair right = translate(cur_orientation, EAST, pos);
   xy_pair behind = translate(cur_orientation, SOUTH, pos);
-  
-  if ( !wall_left  && !s_contains(&visited, left) )
-    s_push( &missed_op, left ); 
 
-  //Serial.print("wall_right: "); Serial.println(wall_right);
-  //Serial.print("visited: "); Serial.println(s_contains(&visited, right));
-  if ( !wall_right && !s_contains(&visited, right) ){
-    //Serial.println("Adding right to missed");
+    Serial.print("M B: ");
+    Serial.println(missed_op.top+1);
+  
+  if ( !wall_left  && !s_contains(&visited, left) && !s_contains(&missed_op, left) ){
+    Serial.println("Add left");
+    s_push( &missed_op, left ); 
+  }
+
+  if ( !wall_right && !s_contains(&visited, right) && !s_contains(&missed_op, right) ){
+    Serial.println("Add right");
     s_push( &missed_op, right ); 
   }
-  if ( !wall_front && !s_contains(&visited, front) )
+  
+  if ( !wall_front && !s_contains(&visited, front) && !s_contains(&missed_op, front) ){
+    Serial.println("Add front");
     s_push( &missed_op, front);  
+  }
   
   xy_pair target;
 
@@ -110,9 +119,15 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
     && (wall_right || s_contains(&visited, right)) ){
       if (s_isEmpty(&missed_op)) return 255;
     target = s_pop(&path);
+    Serial.print("P S: ");
+    Serial.println(path.top+1);
   }else{
     // Not surrounded
+    if (s_isEmpty(&missed_op)) return 255;
     target = s_pop(&missed_op);
+    s_push(&visited, target);
+    Serial.print("M S: ");
+    Serial.println(missed_op.top+1);
     s_push(&path, pos);
   }
 
