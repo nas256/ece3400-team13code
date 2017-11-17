@@ -12,14 +12,17 @@ port at 115.2kb.
 
 #include <FFT.h> // include the library
 
+int currtime = 0;
+int prevtime = 0;
 void setup(){
   Serial.begin(115200); // use the serial port
   TIMSK0 = 0; // turn off timer0 for lower jitter
   ADCSRA = 0xe7; // set the adc to free running mode
   ADMUX = 0x40; // use adc0
   DIDR0 = 0x01; // turn off the digital input for adc0
-  setup_acoustic();
-  acoustic();
+  setup_optical();
+  //setup_acoustic();
+  //acoustic();
 }
 
 void setup_acoustic(){
@@ -37,10 +40,12 @@ void setup_optical() {
 }
 
 void loop(){
+  optical();
 }
 
 void acoustic() {
   while(1) { // reduces jitter
+    
     cli();  // UDRE interrupt slows this way down on arduino1.0
     for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
       while(!(ADCSRA & 0x10)); // wait for adc to be ready
@@ -82,7 +87,9 @@ void acoustic() {
 
 void optical() {
   while(1) { // reduces jitter
-    
+    currtime = millis();
+    Serial.println(currtime-prevtime);
+    prevtime = currtime;
     cli();  // UDRE interrupt slows this way down on arduino1.0
     
     for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
@@ -109,13 +116,16 @@ void optical() {
     }*/
     
     if ( fft_log_out[47] > 100 )
-      Serial.println("7kHz beacon dectected!");
+      Serial.println("7kHz beacon detected!");
     else if ( fft_log_out[81] > 100 )
-      Serial.println("12kHz beacon dectected!");
+      Serial.println("12kHz beacon detected!");
+    else if (fft_log_out[114] > 95 )
+      Serial.println("17kHz beacon detected!");
+    else Serial.println("Nothing");
       
-    if (Serial.available() && (Serial.read()=='a'|Serial.read()=='A')){
+    /*if (Serial.available() && (Serial.read()=='a'|Serial.read()=='A')){
       setup_acoustic();
       acoustic();;
-    }  
+    }  */
   }
 }
