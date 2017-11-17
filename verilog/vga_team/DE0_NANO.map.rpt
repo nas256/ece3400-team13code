@@ -1,5 +1,5 @@
 Analysis & Synthesis report for DE0_NANO
-Thu Oct 19 21:18:35 2017
+Thu Nov 16 22:18:27 2017
 Quartus II 64-Bit Version 15.0.0 Build 145 04/22/2015 SJ Web Edition
 
 
@@ -14,14 +14,19 @@ Quartus II 64-Bit Version 15.0.0 Build 145 04/22/2015 SJ Web Edition
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Registers Removed During Synthesis
-  9. General Register Statistics
- 10. Multiplexer Restructuring Statistics (Restructuring Performed)
- 11. Parameter Settings for Inferred Entity Instance: MAZE_MAPPER:comb_3|lpm_divide:Div1
- 12. Parameter Settings for Inferred Entity Instance: MAZE_MAPPER:comb_3|lpm_divide:Div0
- 13. Post-Synthesis Netlist Statistics for Top Partition
- 14. Elapsed Time Per Partition
- 15. Analysis & Synthesis Messages
- 16. Analysis & Synthesis Suppressed Messages
+  9. Removed Registers Triggering Further Register Optimizations
+ 10. General Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Parameter Settings for Inferred Entity Instance: MAZE_MAPPER:comb_3|lpm_divide:Div1
+ 13. Parameter Settings for Inferred Entity Instance: MAZE_MAPPER:comb_3|lpm_divide:Div0
+ 14. Parameter Settings for Inferred Entity Instance: MAZE_MAPPER:comb_3|lpm_mult:Mult1
+ 15. Parameter Settings for Inferred Entity Instance: MAZE_MAPPER:comb_3|lpm_mult:Mult0
+ 16. lpm_mult Parameter Settings by Entity Instance
+ 17. Port Connectivity Checks: "MAZE_MAPPER:comb_3|AUDIO:audio"
+ 18. Post-Synthesis Netlist Statistics for Top Partition
+ 19. Elapsed Time Per Partition
+ 20. Analysis & Synthesis Messages
+ 21. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -48,15 +53,15 @@ agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Oct 19 21:18:35 2017      ;
+; Analysis & Synthesis Status        ; Successful - Thu Nov 16 22:18:27 2017      ;
 ; Quartus II 64-Bit Version          ; 15.0.0 Build 145 04/22/2015 SJ Web Edition ;
 ; Revision Name                      ; DE0_NANO                                   ;
 ; Top-level Entity Name              ; DE0_NANO                                   ;
 ; Family                             ; Cyclone IV E                               ;
-; Total logic elements               ; 373                                        ;
-;     Total combinational functions  ; 311                                        ;
-;     Dedicated logic registers      ; 115                                        ;
-; Total registers                    ; 115                                        ;
+; Total logic elements               ; 1,054                                      ;
+;     Total combinational functions  ; 912                                        ;
+;     Dedicated logic registers      ; 373                                        ;
+; Total registers                    ; 373                                        ;
 ; Total pins                         ; 87                                         ;
 ; Total virtual pins                 ; 0                                          ;
 ; Total memory bits                  ; 0                                          ;
@@ -161,11 +166,12 @@ agreement for further details.
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-4         ;   0.0%      ;
+;     Processor 2            ; < 0.1%      ;
+;     Processors 3-4         ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -178,6 +184,7 @@ agreement for further details.
 ; DE0_NANO.v                       ; yes             ; User Verilog HDL File        ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/vga_team/DE0_NANO.v                 ;         ;
 ; MAZE_MAPPER.v                    ; yes             ; User Verilog HDL File        ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/vga_team/MAZE_MAPPER.v              ;         ;
 ; SPI_SLAVE.v                      ; yes             ; User Verilog HDL File        ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/vga_team/SPI_SLAVE.v                ;         ;
+; AUDIO.v                          ; yes             ; User Verilog HDL File        ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/vga_team/AUDIO.v                    ;         ;
 ; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/lpm_divide.tdf                      ;         ;
 ; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/abs_divider.inc                     ;         ;
 ; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/sign_div_unsign.inc                 ;         ;
@@ -187,6 +194,27 @@ agreement for further details.
 ; db/alt_u_div_27f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/vga_team/db/alt_u_div_27f.tdf       ;         ;
 ; db/add_sub_7pc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/vga_team/db/add_sub_7pc.tdf         ;         ;
 ; db/add_sub_8pc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/vga_team/db/add_sub_8pc.tdf         ;         ;
+; lpm_mult.tdf                     ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/lpm_mult.tdf                        ;         ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/lpm_add_sub.inc                     ;         ;
+; multcore.inc                     ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/multcore.inc                        ;         ;
+; bypassff.inc                     ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/bypassff.inc                        ;         ;
+; altshift.inc                     ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/altshift.inc                        ;         ;
+; multcore.tdf                     ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/multcore.tdf                        ;         ;
+; csa_add.inc                      ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/csa_add.inc                         ;         ;
+; mpar_add.inc                     ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/mpar_add.inc                        ;         ;
+; muleabz.inc                      ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/muleabz.inc                         ;         ;
+; mul_lfrg.inc                     ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/mul_lfrg.inc                        ;         ;
+; mul_boothc.inc                   ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/mul_boothc.inc                      ;         ;
+; alt_ded_mult.inc                 ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/alt_ded_mult.inc                    ;         ;
+; alt_ded_mult_y.inc               ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/alt_ded_mult_y.inc                  ;         ;
+; dffpipe.inc                      ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/dffpipe.inc                         ;         ;
+; mpar_add.tdf                     ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/mpar_add.tdf                        ;         ;
+; altshift.tdf                     ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/altshift.tdf                        ;         ;
+; lpm_add_sub.tdf                  ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/lpm_add_sub.tdf                     ;         ;
+; addcore.inc                      ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/addcore.inc                         ;         ;
+; look_add.inc                     ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/look_add.inc                        ;         ;
+; alt_stratix_add_sub.inc          ; yes             ; Megafunction                 ; c:/altera/15.0/quartus/libraries/megafunctions/alt_stratix_add_sub.inc             ;         ;
+; db/add_sub_kgh.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/vga_team/db/add_sub_kgh.tdf         ;         ;
 +----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------+---------+
 
 
@@ -195,20 +223,20 @@ agreement for further details.
 +---------------------------------------------+----------+
 ; Resource                                    ; Usage    ;
 +---------------------------------------------+----------+
-; Estimated Total logic elements              ; 373      ;
+; Estimated Total logic elements              ; 1,054    ;
 ;                                             ;          ;
-; Total combinational functions               ; 311      ;
+; Total combinational functions               ; 912      ;
 ; Logic element usage by number of LUT inputs ;          ;
-;     -- 4 input functions                    ; 98       ;
-;     -- 3 input functions                    ; 60       ;
-;     -- <=2 input functions                  ; 153      ;
+;     -- 4 input functions                    ; 429      ;
+;     -- 3 input functions                    ; 125      ;
+;     -- <=2 input functions                  ; 358      ;
 ;                                             ;          ;
 ; Logic elements by mode                      ;          ;
-;     -- normal mode                          ; 209      ;
-;     -- arithmetic mode                      ; 102      ;
+;     -- normal mode                          ; 618      ;
+;     -- arithmetic mode                      ; 294      ;
 ;                                             ;          ;
-; Total registers                             ; 115      ;
-;     -- Dedicated logic registers            ; 115      ;
+; Total registers                             ; 373      ;
+;     -- Dedicated logic registers            ; 373      ;
 ;     -- I/O registers                        ; 0        ;
 ;                                             ;          ;
 ; I/O pins                                    ; 87       ;
@@ -216,9 +244,9 @@ agreement for further details.
 ; Embedded Multiplier 9-bit elements          ; 0        ;
 ;                                             ;          ;
 ; Maximum fan-out node                        ; CLOCK_25 ;
-; Maximum fan-out                             ; 115      ;
-; Total fan-out                               ; 1335     ;
-; Average fan-out                             ; 2.00     ;
+; Maximum fan-out                             ; 373      ;
+; Total fan-out                               ; 4104     ;
+; Average fan-out                             ; 2.69     ;
 +---------------------------------------------+----------+
 
 
@@ -227,8 +255,9 @@ agreement for further details.
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                          ; Library Name ;
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |DE0_NANO                                 ; 311 (48)          ; 115 (27)     ; 0           ; 0            ; 0       ; 0         ; 87   ; 0            ; |DE0_NANO                                                                                                                    ; work         ;
-;    |MAZE_MAPPER:comb_3|                   ; 210 (72)          ; 40 (40)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3                                                                                                 ; work         ;
+; |DE0_NANO                                 ; 912 (48)          ; 373 (27)     ; 0           ; 0            ; 0       ; 0         ; 87   ; 0            ; |DE0_NANO                                                                                                                    ; work         ;
+;    |MAZE_MAPPER:comb_3|                   ; 799 (168)         ; 298 (121)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3                                                                                                 ; work         ;
+;       |AUDIO:audio|                       ; 483 (483)         ; 177 (177)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|AUDIO:audio                                                                                     ; work         ;
 ;       |lpm_divide:Div0|                   ; 69 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div0                                                                                 ; work         ;
 ;          |lpm_divide_vim:auto_generated|  ; 69 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div0|lpm_divide_vim:auto_generated                                                   ; work         ;
 ;             |sign_div_unsign_nlh:divider| ; 69 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div0|lpm_divide_vim:auto_generated|sign_div_unsign_nlh:divider                       ; work         ;
@@ -237,139 +266,44 @@ agreement for further details.
 ;          |lpm_divide_vim:auto_generated|  ; 69 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div1|lpm_divide_vim:auto_generated                                                   ; work         ;
 ;             |sign_div_unsign_nlh:divider| ; 69 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div1|lpm_divide_vim:auto_generated|sign_div_unsign_nlh:divider                       ; work         ;
 ;                |alt_u_div_27f:divider|    ; 69 (69)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_divide:Div1|lpm_divide_vim:auto_generated|sign_div_unsign_nlh:divider|alt_u_div_27f:divider ; work         ;
+;       |lpm_mult:Mult0|                    ; 5 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_mult:Mult0                                                                                  ; work         ;
+;          |multcore:mult_core|             ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_mult:Mult0|multcore:mult_core                                                               ; work         ;
+;       |lpm_mult:Mult1|                    ; 5 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_mult:Mult1                                                                                  ; work         ;
+;          |multcore:mult_core|             ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|MAZE_MAPPER:comb_3|lpm_mult:Mult1|multcore:mult_core                                                               ; work         ;
 ;    |SPI_SLAVE:comb_4|                     ; 15 (15)           ; 28 (28)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|SPI_SLAVE:comb_4                                                                                                   ; work         ;
-;    |VGA_DRIVER:driver|                    ; 38 (38)           ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|VGA_DRIVER:driver                                                                                                  ; work         ;
+;    |VGA_DRIVER:driver|                    ; 50 (50)           ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE0_NANO|VGA_DRIVER:driver                                                                                                  ; work         ;
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+--------------------------------------------------------------+
-; Registers Removed During Synthesis                           ;
-+-----------------------------------------+--------------------+
-; Register name                           ; Reason for Removal ;
-+-----------------------------------------+--------------------+
-; MAZE_MAPPER:comb_3|grid_array~0         ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~3         ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~4         ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~5         ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~6         ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~7         ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~8         ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~11        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~12        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~13        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~14        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~15        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~16        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~19        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~20        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~21        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~22        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~23        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~24        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~27        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~28        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~29        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~30        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~31        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~32        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~35        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~36        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~37        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~38        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~39        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~40        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~43        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~44        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~45        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~46        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~47        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~48        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~51        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~52        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~53        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~54        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~55        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~56        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~59        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~60        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~61        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~62        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~63        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~64        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~67        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~68        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~69        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~70        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~71        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~72        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~75        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~76        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~77        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~78        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~79        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~80        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~83        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~84        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~85        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~86        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~87        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~88        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~91        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~92        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~93        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~94        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~95        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~96        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~99        ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~100       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~101       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~102       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~103       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~104       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~107       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~108       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~109       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~110       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~111       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~112       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~115       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~116       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~117       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~118       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~119       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~120       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~123       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~124       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~125       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~126       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~127       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~128       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~131       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~132       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~133       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~134       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~135       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~136       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~139       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~140       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~141       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~142       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~143       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~144       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~147       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~148       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~149       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~150       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~151       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~152       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~155       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~156       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~157       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~158       ; Lost fanout        ;
-; MAZE_MAPPER:comb_3|grid_array~159       ; Lost fanout        ;
-; Total Number of Removed Registers = 120 ;                    ;
-+-----------------------------------------+--------------------+
++-------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                  ;
++--------------------------------------------+----------------------------------------+
+; Register name                              ; Reason for Removal                     ;
++--------------------------------------------+----------------------------------------+
+; MAZE_MAPPER:comb_3|AUDIO:audio|data_out[7] ; Stuck at GND due to stuck port data_in ;
+; MAZE_MAPPER:comb_3|AUDIO:audio|i[10..31]   ; Lost fanout                            ;
+; Total Number of Removed Registers = 23     ;                                        ;
++--------------------------------------------+----------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                             ;
++--------------------------------------+--------------------+-----------------------------------------------------------------------------+
+; Register name                        ; Reason for Removal ; Registers Removed due to This Register                                      ;
++--------------------------------------+--------------------+-----------------------------------------------------------------------------+
+; MAZE_MAPPER:comb_3|AUDIO:audio|i[31] ; Lost Fanouts       ; MAZE_MAPPER:comb_3|AUDIO:audio|i[30], MAZE_MAPPER:comb_3|AUDIO:audio|i[29], ;
+;                                      ;                    ; MAZE_MAPPER:comb_3|AUDIO:audio|i[28], MAZE_MAPPER:comb_3|AUDIO:audio|i[27], ;
+;                                      ;                    ; MAZE_MAPPER:comb_3|AUDIO:audio|i[26], MAZE_MAPPER:comb_3|AUDIO:audio|i[25], ;
+;                                      ;                    ; MAZE_MAPPER:comb_3|AUDIO:audio|i[24], MAZE_MAPPER:comb_3|AUDIO:audio|i[23], ;
+;                                      ;                    ; MAZE_MAPPER:comb_3|AUDIO:audio|i[22], MAZE_MAPPER:comb_3|AUDIO:audio|i[21], ;
+;                                      ;                    ; MAZE_MAPPER:comb_3|AUDIO:audio|i[20], MAZE_MAPPER:comb_3|AUDIO:audio|i[19], ;
+;                                      ;                    ; MAZE_MAPPER:comb_3|AUDIO:audio|i[18], MAZE_MAPPER:comb_3|AUDIO:audio|i[17], ;
+;                                      ;                    ; MAZE_MAPPER:comb_3|AUDIO:audio|i[16], MAZE_MAPPER:comb_3|AUDIO:audio|i[15], ;
+;                                      ;                    ; MAZE_MAPPER:comb_3|AUDIO:audio|i[14], MAZE_MAPPER:comb_3|AUDIO:audio|i[13], ;
+;                                      ;                    ; MAZE_MAPPER:comb_3|AUDIO:audio|i[12], MAZE_MAPPER:comb_3|AUDIO:audio|i[11], ;
+;                                      ;                    ; MAZE_MAPPER:comb_3|AUDIO:audio|i[10]                                        ;
++--------------------------------------+--------------------+-----------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -377,25 +311,30 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 115   ;
-; Number of registers using Synchronous Clear  ; 20    ;
+; Total registers                              ; 373   ;
+; Number of registers using Synchronous Clear  ; 84    ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 66    ;
+; Number of registers using Clock Enable       ; 323   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                               ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                     ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |DE0_NANO|VGA_DRIVER:driver|pixel_count[9]     ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |DE0_NANO|VGA_DRIVER:driver|line_count[9]      ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |DE0_NANO|VGA_DRIVER:driver|PIXEL_COLOR_OUT[2] ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |DE0_NANO|VGA_DRIVER:driver|pixel_count[0]                ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |DE0_NANO|VGA_DRIVER:driver|line_count[7]                 ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |DE0_NANO|MAZE_MAPPER:comb_3|AUDIO:audio|tone_counter[16] ;
+; 9:1                ; 7 bits    ; 42 LEs        ; 0 LEs                ; 42 LEs                 ; Yes        ; |DE0_NANO|MAZE_MAPPER:comb_3|AUDIO:audio|data_out[5]      ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |DE0_NANO|MAZE_MAPPER:comb_3|AUDIO:audio|i[14]            ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |DE0_NANO|VGA_DRIVER:driver|PIXEL_COLOR_OUT[0]            ;
+; 12:1               ; 2 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; No         ; |DE0_NANO|VGA_DRIVER:driver|PIXEL_COLOR_OUT[4]            ;
+; 20:1               ; 6 bits    ; 78 LEs        ; 78 LEs               ; 0 LEs                  ; No         ; |DE0_NANO|MAZE_MAPPER:comb_3|Mux9                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------+
@@ -444,31 +383,141 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: MAZE_MAPPER:comb_3|lpm_mult:Mult1  ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 4            ; Untyped             ;
+; LPM_WIDTHB                                     ; 7            ; Untyped             ;
+; LPM_WIDTHP                                     ; 11           ; Untyped             ;
+; LPM_WIDTHR                                     ; 11           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; YES          ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: MAZE_MAPPER:comb_3|lpm_mult:Mult0  ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 5            ; Untyped             ;
+; LPM_WIDTHB                                     ; 7            ; Untyped             ;
+; LPM_WIDTHP                                     ; 12           ; Untyped             ;
+; LPM_WIDTHR                                     ; 12           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; YES          ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------+
+; lpm_mult Parameter Settings by Entity Instance                            ;
++---------------------------------------+-----------------------------------+
+; Name                                  ; Value                             ;
++---------------------------------------+-----------------------------------+
+; Number of entity instances            ; 2                                 ;
+; Entity Instance                       ; MAZE_MAPPER:comb_3|lpm_mult:Mult1 ;
+;     -- LPM_WIDTHA                     ; 4                                 ;
+;     -- LPM_WIDTHB                     ; 7                                 ;
+;     -- LPM_WIDTHP                     ; 11                                ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                          ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                               ;
+;     -- USE_EAB                        ; OFF                               ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                              ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                ;
+; Entity Instance                       ; MAZE_MAPPER:comb_3|lpm_mult:Mult0 ;
+;     -- LPM_WIDTHA                     ; 5                                 ;
+;     -- LPM_WIDTHB                     ; 7                                 ;
+;     -- LPM_WIDTHP                     ; 12                                ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                          ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                               ;
+;     -- USE_EAB                        ; OFF                               ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                              ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                ;
++---------------------------------------+-----------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "MAZE_MAPPER:comb_3|AUDIO:audio"                                                                                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                                                                                 ;
++----------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; GPIO_1_D ; Output ; Warning  ; Output or bidir port (8 bits) is smaller than the port expression (34 bits) it drives.  The 26 most-significant bit(s) in the port expression will be connected to GND. ;
++----------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 87                          ;
-; cycloneiii_ff         ; 115                         ;
-;     ENA               ; 56                          ;
-;     ENA SCLR          ; 10                          ;
+; cycloneiii_ff         ; 373                         ;
+;     ENA               ; 249                         ;
+;     ENA SCLR          ; 74                          ;
 ;     SCLR              ; 10                          ;
-;     plain             ; 39                          ;
+;     plain             ; 40                          ;
 ; cycloneiii_io_obuf    ; 68                          ;
-; cycloneiii_lcell_comb ; 312                         ;
-;     arith             ; 102                         ;
-;         2 data inputs ; 56                          ;
-;         3 data inputs ; 46                          ;
-;     normal            ; 210                         ;
-;         0 data inputs ; 10                          ;
-;         1 data inputs ; 7                           ;
-;         2 data inputs ; 81                          ;
-;         3 data inputs ; 14                          ;
-;         4 data inputs ; 98                          ;
+; cycloneiii_lcell_comb ; 913                         ;
+;     arith             ; 294                         ;
+;         2 data inputs ; 229                         ;
+;         3 data inputs ; 65                          ;
+;     normal            ; 619                         ;
+;         0 data inputs ; 9                           ;
+;         1 data inputs ; 13                          ;
+;         2 data inputs ; 108                         ;
+;         3 data inputs ; 60                          ;
+;         4 data inputs ; 429                         ;
 ;                       ;                             ;
-; Max LUT depth         ; 17.40                       ;
-; Average LUT depth     ; 8.20                        ;
+; Max LUT depth         ; 18.30                       ;
+; Average LUT depth     ; 6.83                        ;
 +-----------------------+-----------------------------+
 
 
@@ -477,7 +526,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:04     ;
 +----------------+--------------+
 
 
@@ -487,7 +536,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 15.0.0 Build 145 04/22/2015 SJ Web Edition
-    Info: Processing started: Thu Oct 19 21:18:21 2017
+    Info: Processing started: Thu Nov 16 22:18:09 2017
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE0_NANO -c DE0_NANO
 Warning (125092): Tcl Script File DE_NANO_SOPC.qip not found
     Info (125063): set_global_assignment -name QIP_FILE DE_NANO_SOPC.qip
@@ -497,25 +546,35 @@ Info (12021): Found 1 design units, including 1 entities, in source file vga_dri
 Warning (10238): Verilog Module Declaration warning at DE0_NANO.v(32): ignored anonymous port(s) indicated by duplicate or dangling comma(s) in the port list for module "DE0_NANO"
 Info (12021): Found 1 design units, including 1 entities, in source file de0_nano.v
     Info (12023): Found entity 1: DE0_NANO
+Warning (10275): Verilog HDL Module Instantiation warning at MAZE_MAPPER.v(87): ignored dangling comma in List of Port Connections
 Info (12021): Found 1 design units, including 1 entities, in source file maze_mapper.v
     Info (12023): Found entity 1: MAZE_MAPPER
 Info (12021): Found 1 design units, including 1 entities, in source file spi_slave.v
     Info (12023): Found entity 1: SPI_SLAVE
-Critical Warning (10846): Verilog HDL Instantiation warning at DE0_NANO.v(102): instance has no name
-Critical Warning (10846): Verilog HDL Instantiation warning at DE0_NANO.v(112): instance has no name
+Info (12021): Found 1 design units, including 1 entities, in source file audio.v
+    Info (12023): Found entity 1: AUDIO
+Critical Warning (10846): Verilog HDL Instantiation warning at DE0_NANO.v(105): instance has no name
+Critical Warning (10846): Verilog HDL Instantiation warning at DE0_NANO.v(115): instance has no name
 Info (12127): Elaborating entity "DE0_NANO" for the top level hierarchy
 Warning (10034): Output port "LED[7..1]" at DE0_NANO.v(48) has no driver
 Info (12128): Elaborating entity "VGA_DRIVER" for hierarchy "VGA_DRIVER:driver"
 Warning (10230): Verilog HDL assignment warning at VGA_DRIVER.v(71): truncated value with size 32 to match size of target (10)
 Warning (10230): Verilog HDL assignment warning at VGA_DRIVER.v(75): truncated value with size 32 to match size of target (10)
 Info (12128): Elaborating entity "MAZE_MAPPER" for hierarchy "MAZE_MAPPER:comb_3"
+Warning (10230): Verilog HDL assignment warning at MAZE_MAPPER.v(33): truncated value with size 10 to match size of target (5)
+Warning (10230): Verilog HDL assignment warning at MAZE_MAPPER.v(34): truncated value with size 10 to match size of target (4)
+Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "grid_array" into its bus
+Info (12128): Elaborating entity "AUDIO" for hierarchy "MAZE_MAPPER:comb_3|AUDIO:audio"
+Warning (10030): Net "sin_table.data_a" at AUDIO.v(14) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "sin_table.waddr_a" at AUDIO.v(14) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "sin_table.we_a" at AUDIO.v(14) has no driver or initial value, using a default initial value '0'
 Info (12128): Elaborating entity "SPI_SLAVE" for hierarchy "SPI_SLAVE:comb_4"
 Warning (10230): Verilog HDL assignment warning at SPI_SLAVE.v(44): truncated value with size 32 to match size of target (5)
-Info (276014): Found 1 instances of uninferred RAM logic
-    Info (276007): RAM logic "MAZE_MAPPER:comb_3|grid_array" is uninferred due to asynchronous read logic
-Info (278001): Inferred 2 megafunctions from design logic
+Info (278001): Inferred 4 megafunctions from design logic
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "MAZE_MAPPER:comb_3|Div1"
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "MAZE_MAPPER:comb_3|Div0"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "MAZE_MAPPER:comb_3|Mult1"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "MAZE_MAPPER:comb_3|Mult0"
 Info (12130): Elaborated megafunction instantiation "MAZE_MAPPER:comb_3|lpm_divide:Div1"
 Info (12133): Instantiated megafunction "MAZE_MAPPER:comb_3|lpm_divide:Div1" with the following parameter:
     Info (12134): Parameter "LPM_WIDTHN" = "10"
@@ -532,6 +591,44 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/add_
     Info (12023): Found entity 1: add_sub_7pc
 Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_8pc.tdf
     Info (12023): Found entity 1: add_sub_8pc
+Info (12130): Elaborated megafunction instantiation "MAZE_MAPPER:comb_3|lpm_divide:Div0"
+Info (12133): Instantiated megafunction "MAZE_MAPPER:comb_3|lpm_divide:Div0" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHN" = "10"
+    Info (12134): Parameter "LPM_WIDTHD" = "7"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12130): Elaborated megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult1"
+Info (12133): Instantiated megafunction "MAZE_MAPPER:comb_3|lpm_mult:Mult1" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHA" = "4"
+    Info (12134): Parameter "LPM_WIDTHB" = "7"
+    Info (12134): Parameter "LPM_WIDTHP" = "11"
+    Info (12134): Parameter "LPM_WIDTHR" = "11"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "YES"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
+Info (12131): Elaborated megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult1|multcore:mult_core", which is child of megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult1"
+Info (12131): Elaborated megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult1"
+Info (12131): Elaborated megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult1|altshift:external_latency_ffs", which is child of megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult1"
+Info (12130): Elaborated megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult0"
+Info (12133): Instantiated megafunction "MAZE_MAPPER:comb_3|lpm_mult:Mult0" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHA" = "5"
+    Info (12134): Parameter "LPM_WIDTHB" = "7"
+    Info (12134): Parameter "LPM_WIDTHP" = "12"
+    Info (12134): Parameter "LPM_WIDTHR" = "12"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "YES"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
+Info (12131): Elaborated megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult0|multcore:mult_core", which is child of megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult0"
+Info (12131): Elaborated megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult0"
+Info (12131): Elaborated megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]", which is child of megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult0"
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_kgh.tdf
+    Info (12023): Found entity 1: add_sub_kgh
+Info (12131): Elaborated megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult0|altshift:external_latency_ffs", which is child of megafunction instantiation "MAZE_MAPPER:comb_3|lpm_mult:Mult0"
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13034): The following nodes have both tri-state and non-tri-state drivers
     Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[5]" and its non-tri-state driver.
     Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[7]" and its non-tri-state driver.
@@ -543,6 +640,13 @@ Warning (13034): The following nodes have both tri-state and non-tri-state drive
     Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[19]" and its non-tri-state driver.
     Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[21]" and its non-tri-state driver.
     Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_0_D[23]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_1_D[0]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_1_D[1]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_1_D[2]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_1_D[3]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_1_D[4]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_1_D[5]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "GPIO_1_D[6]" and its non-tri-state driver.
 Warning (13039): The following bidirectional pins have no drivers
     Warning (13040): bidirectional pin "GPIO_0_D[0]" has no driver
     Warning (13040): bidirectional pin "GPIO_0_D[1]" has no driver
@@ -568,40 +672,34 @@ Warning (13039): The following bidirectional pins have no drivers
     Warning (13040): bidirectional pin "GPIO_0_D[31]" has no driver
     Warning (13040): bidirectional pin "GPIO_0_D[32]" has no driver
     Warning (13040): bidirectional pin "GPIO_0_D[33]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[0]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[1]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[2]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[3]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[4]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[5]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[6]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[7]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[8]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[9]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[10]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[11]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[12]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[13]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[14]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[15]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[16]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[17]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[18]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[19]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[20]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[21]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[22]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[23]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[24]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[25]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[26]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[27]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[28]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[29]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[30]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[31]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[32]" has no driver
-    Warning (13040): bidirectional pin "GPIO_1_D[33]" has no driver
+Warning (13032): The following tri-state nodes are fed by constants
+    Warning (13033): The pin "GPIO_1_D[7]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[8]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[9]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[10]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[11]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[12]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[13]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[14]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[15]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[16]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[17]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[18]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[19]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[20]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[21]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[22]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[23]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[24]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[25]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[26]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[27]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[28]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[29]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[30]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[31]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[32]" is fed by GND
+    Warning (13033): The pin "GPIO_1_D[33]" is fed by GND
 Warning (13009): TRI or OPNDRN buffers permanently enabled
     Warning (13010): Node "GPIO_0_D[5]~synth"
     Warning (13010): Node "GPIO_0_D[7]~synth"
@@ -613,6 +711,13 @@ Warning (13009): TRI or OPNDRN buffers permanently enabled
     Warning (13010): Node "GPIO_0_D[19]~synth"
     Warning (13010): Node "GPIO_0_D[21]~synth"
     Warning (13010): Node "GPIO_0_D[23]~synth"
+    Warning (13010): Node "GPIO_1_D[0]~synth"
+    Warning (13010): Node "GPIO_1_D[1]~synth"
+    Warning (13010): Node "GPIO_1_D[2]~synth"
+    Warning (13010): Node "GPIO_1_D[3]~synth"
+    Warning (13010): Node "GPIO_1_D[4]~synth"
+    Warning (13010): Node "GPIO_1_D[5]~synth"
+    Warning (13010): Node "GPIO_1_D[6]~synth"
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "LED[1]" is stuck at GND
     Warning (13410): Pin "LED[2]" is stuck at GND
@@ -622,7 +727,7 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "LED[6]" is stuck at GND
     Warning (13410): Pin "LED[7]" is stuck at GND
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 120 registers lost all their fanouts during netlist optimizations.
+Info (17049): 22 registers lost all their fanouts during netlist optimizations.
 Info (144001): Generated suppressed messages file C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/vga_team/DE0_NANO.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
@@ -633,16 +738,16 @@ Warning (21074): Design contains 6 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "SW[2]"
     Warning (15610): No output dependent on input pin "SW[3]"
     Warning (15610): No output dependent on input pin "GPIO_0_IN[1]"
-Info (21057): Implemented 460 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1141 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 11 input pins
     Info (21059): Implemented 8 output pins
     Info (21060): Implemented 68 bidirectional pins
-    Info (21061): Implemented 373 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 104 warnings
-    Info: Peak virtual memory: 701 megabytes
-    Info: Processing ended: Thu Oct 19 21:18:35 2017
-    Info: Elapsed time: 00:00:14
-    Info: Total CPU time (on all processors): 00:00:32
+    Info (21061): Implemented 1054 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 119 warnings
+    Info: Peak virtual memory: 747 megabytes
+    Info: Processing ended: Thu Nov 16 22:18:27 2017
+    Info: Elapsed time: 00:00:18
+    Info: Total CPU time (on all processors): 00:00:36
 
 
 +------------------------------------------+

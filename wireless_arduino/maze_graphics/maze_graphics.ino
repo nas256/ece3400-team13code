@@ -21,6 +21,8 @@ int current_x = 0;
 int current_y = 0;
 int turn = 0;
 
+int done = 0;
+
 void spi_communicate(){
      //current best at 1 MHz
   SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE0)); //10MHz
@@ -31,6 +33,11 @@ void spi_communicate(){
       result |= (((x& 0x7) << 13)) | ((y& 0x3) << 11); // Write coords
       result |= array_grid[x][y].traversed << 2;
       result |= array_grid[x][y].current_location << 1;
+      result |= 1 << 6; // north wall
+      result |= 1 << 5; // north wall
+      result |= 1 << 4; // north wall
+      result |= 1 << 3; // north wall
+      result |= done; // sound
        
       // Write result out
       digitalWrite(7, LOW);
@@ -55,6 +62,8 @@ void loop() {
 
   array_grid[current_x][current_y].current_location = 0;
   array_grid[current_x][current_y].traversed = 1;
+
+  if (done == 1) return;
   
   if (turn == 0) current_x++;
   if (turn == 1) current_x--;
@@ -69,7 +78,11 @@ void loop() {
     current_x++;
   }
 
-  if (current_y > 3) current_y = 0;
+  if (current_y > 3){
+    current_y = 0;
+    done = 1;
+  }
+  if (done == 1) return;
   array_grid[current_x][current_y].current_location = 1;
   
   

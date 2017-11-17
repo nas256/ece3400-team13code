@@ -96,6 +96,9 @@ module DE0_NANO(
 		.PIXEL_Y    (PIXEL_COORD_Y),
 		.COLOR_OUT  (PIXEL_COLOR),
 		
+		// For the audio
+		.GPIO_1_D(GPIO_1_D),
+		
 		// SPI data input
 		.DATA_IN    (input_shiftreg),
 		.DATA_VAL   (done)
