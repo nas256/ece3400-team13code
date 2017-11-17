@@ -23,16 +23,15 @@ void init_mapper(){
   // Reset maze tiles
   for (int x = 0; x < GRID_SIZE_X; x++){
     for (int y = 0; y < GRID_SIZE_Y; y++){
-       tile_array[x][y].traversed = 0;
-       tile_array[x][y].walls = 0;
+       tile_array[x][y].data = (x << 13) | (y << 11);
     }
   }
 
   // Init DFS stacks
   s_init(&missed_op);
   missed_op.top = -1;
-      Serial.print("M S: ");
-    Serial.println(missed_op.top+1);
+  //Serial.print("M S: ");
+  //Serial.println(missed_op.top+1);
   s_init(&visited);
   s_push(&visited, pos);
 }
@@ -80,11 +79,11 @@ struct xy_pair translate(char robot_direction, char input_robot, struct xy_pair 
 // get orientation of [end] relative to [start]
 // ASSUMES ONLY ONE TILE APART
 uint8_t get_orientation(struct xy_pair xy_start, struct xy_pair xy_end){
-  Serial.print("Orienting from ");
+  //Serial.print("Orienting from ");
   print_xy(xy_start);
-  Serial.print("  to  ");
+  //Serial.print("  to  ");
   print_xy(xy_end);
-  Serial.println(" ");
+  //Serial.println(" ");
   
   if (xy_end.x > xy_start.x) return EAST;
   if (xy_end.x < xy_start.x) return WEST;
@@ -102,21 +101,21 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
   xy_pair right = translate(cur_orientation, EAST, pos);
   xy_pair behind = translate(cur_orientation, SOUTH, pos);
 
-    Serial.print("M B: ");
-    Serial.println(missed_op.top+1);
+    //Serial.print("M B: ");
+    //Serial.println(missed_op.top+1);
   
   if ( !wall_left  && !s_contains(&visited, left) && !s_contains(&missed_op, left) ){
-    Serial.println("Add left");
+    //Serial.println("Add left");
     s_push( &missed_op, left ); 
   }
 
   if ( !wall_right && !s_contains(&visited, right) && !s_contains(&missed_op, right) ){
-    Serial.println("Add right");
+    //Serial.println("Add right");
     s_push( &missed_op, right ); 
   }
   
   if ( !wall_front && !s_contains(&visited, front) && !s_contains(&missed_op, front) ){
-    Serial.println("Add front");
+    //Serial.println("Add front");
     s_push( &missed_op, front);  
   }
   
@@ -127,15 +126,15 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
     && (wall_right || s_contains(&visited, right)) ){
       if (s_isEmpty(&missed_op)) return 255;
     target = s_pop(&path);
-    Serial.print("P S: ");
-    Serial.println(path.top+1);
+    //Serial.print("P S: ");
+    //Serial.println(path.top+1);
   }else{
     // Not surrounded
     if (s_isEmpty(&missed_op)) return 255;
     target = s_pop(&missed_op);
     s_push(&visited, target);
-    Serial.print("M S: ");
-    Serial.println(missed_op.top+1);
+    //Serial.print("M S: ");
+    //Serial.println(missed_op.top+1);
     s_push(&path, pos);
   }
   
@@ -145,16 +144,21 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
   char true_wall_right = true_direction(cur_orientation, EAST);
   char true_wall_behind = true_direction(cur_orientation, SOUTH);
   char walls = wall_front << true_wall_front | wall_left << true_wall_left | wall_right << true_wall_right;
-  new_data = target.x << 13 | target.y << 11 | walls << 3 | 1 << 2 | 1 << 1;
+
+  tile_set_traversed( target );
+  tile_set_walls( target, walls );
+  tile_transmit( target );
+  
+  /*new_data = target.x << 13 | target.y << 11 | walls << 3 | 1 << 2 | 1 << 1;
   tile_array[target.x][target.y].walls = walls;
   tile_array[target.x][target.y].traversed = 1;
   
   wireless_send(&new_data, sizeof(unsigned int));
-  //need to clear previous current position bit
+  //need to clear previous current position bit*/
     
   // Find orientation of target relative to pos
   uint8_t orientation = get_orientation(pos, target);
-  if (orientation > WEST) {Serial.print("PROBLEM: "); Serial.println(orientation); }
+  //if (orientation > WEST) {Serial.print("PROBLEM: "); Serial.println(orientation); }
   uint8_t robot_orientation = (orientation - cur_orientation);  
   if (robot_orientation > 3) robot_orientation += 4;
 
@@ -181,32 +185,43 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
       break;
   }
 
-  Serial.print("Moving true: ");
-  Serial.println(orientation);
+  //Serial.print("Moving true: ");
+  //Serial.println(orientation);
 
-  Serial.print("Moving robot: ");
-  Serial.print(cur_orientation);
-  Serial.print("; ");
-  Serial.println(robot_orientation);
+  //Serial.print("Moving robot: ");
+  //Serial.print(cur_orientation);
+  //Serial.print("; ");
+  //Serial.println(robot_orientation);
 
   return robot_orientation;
 }
 
 void move_to(char x, char y){
-  tile_array[pos.x][pos.y].traversed = 1;
   pos.x = x;
   pos.y = y;
+  tile_set_traversed(pos);
 }
 
-uint16_t serialize_tile(struct tile& tile){
-  return 0; // TODO: Implement
+///// UTILITY FUNCTIONS FOR UPDATING TILES ////
+
+void tile_set_traversed(xy_pair xy){
+  tile_array[xy.x][xy.y].data |= 1 << 2;
 }
 
-void add_IR(char freq, xy_pair xy){
-  tile_array[xy.x][xy.y].freq = freq;
-  uint16_t newdata = tile_array[xy.x][xy.y].freq << 9;
-  wireless_send(&newdata, sizeof(uint8_t));
+void tile_set_walls(xy_pair xy, char walls){
+  tile_array[xy.x][xy.y].data |= (walls & 0x7) << 3;
 }
+
+void tile_set_ir(xy_pair xy, char freq){
+  tile_array[xy.x][xy.y].data |= (freq & 0x3) << 9;
+}
+
+void tile_transmit(xy_pair xy){
+  uint16_t data = 0;
+  wireless_send ( tile_array[xy.x][xy.y].data, sizeof( uint16_t ) );
+}
+
+///////////////////////////////////////////////
 
 
 

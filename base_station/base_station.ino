@@ -2,15 +2,7 @@
 #include "nRF24L01.h"
 #include "RF24.h"
 #include "printf.h"
-#include "wireless.h"
-
-//
-// Hardware configuration
-//
-
-// Set up nRF24L01 radio on SPI bus plus pins 9 & 10
-
-RF24 radio(9,10);
+#include "wireless1.h"
 
 #define X_SIZE 5
 #define Y_SIZE 4
@@ -65,7 +57,7 @@ void loop(void)
   
     // Spew it
     // Print the received data as a decimal
-    printf("Got payload %u...",got_data);
+    printf("Got payload %u...", got_data);
   
     // Delay just a little bit to let the other unit
     // make the transition to receiver
@@ -92,8 +84,8 @@ void loop(void)
 
     SPI.endTransaction();
     // Send the final one back.
-    radio.write( &got_data, sizeof(got_data) );
-    printf("Sent response.\n\r");
+    //radio.write( &got_data, sizeof(got_data) );
+    //printf("Sent response.\n\r");
 
     // Now, resume listening so we catch the next packets.
     radio.startListening();
