@@ -1,3 +1,10 @@
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+#include <RF24_config.h>
+#include "wireless1.h"
+#include "IR.h"
+
 // Line following code
 // ECE 3400 - Group 13
 
@@ -62,7 +69,7 @@ char state = FOLLOW_LINE;
 
 void setup() {
   Serial.begin(115200); // Begin UART Communication
-
+  SPI.begin();
   // Initialize servo variables
   servo_left.attach(P_SERVO_LEFT);
   servo_right.attach(P_SERVO_RIGHT);
@@ -79,6 +86,8 @@ void setup() {
   digitalWrite(RIGHT_LED,LOW);
   digitalWrite(FRONT_LED,LOW);
 
+  wireless_setup(1);
+  IR_init();
   init_mapper();
 
   // Initialize the analog mux
@@ -167,17 +176,6 @@ void loop() {
       // intersection reached
 
       if ( millis() - last_turn_start > 1000 ){
-         
-        /* if ( poll_condition(D_WALL_FRONT, FRONT_WALL_POLL_THRESHOLD)){
-            last_turn_start = millis();
-            if (poll_condition(D_WALL_RIGHT, SIDE_WALL_POLL_THRESHOLD)){ 
-              state = TURN_LEFT; 
-              if (poll_condition(D_WALL_LEFT, SIDE_WALL_POLL_THRESHOLD)) state = TURN_180;
-            }
-            else state = TURN_RIGHT;
-        } */
-
-       
        uint8_t to_turn = at_intersection( poll_condition(D_WALL_FRONT, FRONT_WALL_POLL_THRESHOLD), 
                                           poll_condition(D_WALL_LEFT, SIDE_WALL_POLL_THRESHOLD),
                                           poll_condition(D_WALL_RIGHT, SIDE_WALL_POLL_THRESHOLD) );

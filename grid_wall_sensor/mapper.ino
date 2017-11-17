@@ -1,4 +1,7 @@
 #include "mapper.h"
+#include "nRF24L01.h"
+#include "RF24.h"
+#include "wireless1.h"
 
 xy_pair pos;
 uint8_t cur_orientation;
@@ -32,6 +35,12 @@ void init_mapper(){
     Serial.println(missed_op.top+1);
   s_init(&visited);
   s_push(&visited, pos);
+}
+
+uint8_t true_direction(char wall_direction, char input_robot) {
+  uint8_t true_wall_dir = wall_direction + input_robot;
+  if (true_wall_dir > 3) true_wall_dir -=4;
+  return true_wall_dir;
 }
 
 // given robot orientation [robot_direction], will move [start] according to [input_robot]
@@ -86,6 +95,49 @@ uint8_t get_orientation(struct xy_pair xy_start, struct xy_pair xy_end){
   return 255;
 }
 
+void send_data(unsigned int new_data) {
+  printf("Now sending new map data\n");
+  bool ok = radio.write( &new_data, sizeof(new_data) );
+  
+  radio.startListening();
+
+  if (ok)
+    printf("ok...");
+  else
+    printf("failed.\n\r");
+
+  unsigned long started_waiting_at = millis();
+  bool timeout = false;
+  while ( ! radio.available() && ! timeout )
+    if (millis() - started_waiting_at > 200 )
+      timeout = true;
+
+  // Describe the results
+  if ( timeout )
+  {
+    printf("Failed, response timed out.\n\r");
+  }
+  else
+  {
+    // Grab the response, compare, and send to debugging spew
+    unsigned int got_data;
+    bool done = false;
+    while (!done)
+    {
+      // Fetch the payload, and see if this was the last one.
+      done = radio.read( &got_data, sizeof(got_data) );
+    
+      // Spew it
+      // Print the received data as a decimal
+      printf("Got payload %u...",got_data);
+    
+      // Delay just a little bit to let the other unit
+      // make the transition to receiver
+      delay(20);
+    }
+  }
+}
+
 uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_right){
   // Need to convert from "Front" to XY
   xy_pair front = translate(cur_orientation, NORTH, pos);
@@ -112,7 +164,6 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
   }
   
   xy_pair target;
-
   // Check if we're surrounded by walls or visited
   if ( (wall_front || s_contains(&visited, front)) 
     && (wall_left  || s_contains(&visited,left))
@@ -130,7 +181,18 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
     Serial.println(missed_op.top+1);
     s_push(&path, pos);
   }
-
+  
+  unsigned int new_data;
+  unsigned int true_wall_front = true_direction(cur_orientation, NORTH);
+  unsigned int true_wall_left =  true_direction(cur_orientation, WEST);
+  unsigned int true_wall_right = true_direction(cur_orientation, EAST);
+  unsigned int true_wall_behind = true_direction(cur_orientation, SOUTH);
+  unsigned int walls = wall_front << true_wall_front | wall_left << true_wall_left | wall_right << true_wall_right;
+  unsigned int current = 1;
+  unsigned int traverse = 1;
+  new_data = target.x << 13 | target.y << 11 | walls << 3 | traverse << 2 | current << 1;
+  send_data(new_data);
+    
   // Find orientation of target relative to pos
   uint8_t orientation = get_orientation(pos, target);
   if (orientation > WEST) {Serial.print("PROBLEM: "); Serial.println(orientation); }
