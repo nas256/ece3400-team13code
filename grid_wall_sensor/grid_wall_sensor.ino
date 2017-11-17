@@ -66,6 +66,7 @@ unsigned long last_turn_start = 0;
 Servo servo_left, servo_right;
 int line_left_value = 0, line_right_value = 0;
 char state = FOLLOW_LINE;
+char freq = 0;
 
 void setup() {
   Serial.begin(115200); // Begin UART Communication
@@ -171,6 +172,15 @@ void loop() {
       slowdown_right = map(line_right_value-line_left_value, 0, BLACK_VALUE-WHITE_VALUE, 0, 20);
     }
 
+//TODO
+  //IR polling during certain time period
+   //call poll certain amount of times
+   //freq = IR_poll();
+   //debounce
+   //add IR frequency to that tile
+   //mapper.add_IR(freq, xy_pair xy);
+  
+  
    if ( poll_condition(D_INTERSECT_1, DEBOUNCE_MAXVAL)
           && poll_condition(D_INTERSECT_2, DEBOUNCE_MAXVAL) ){
       // intersection reached

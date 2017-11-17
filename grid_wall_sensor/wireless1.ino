@@ -37,14 +37,14 @@ void wireless_setup(uint8_t wr){
   radio.startListening();
 }
 
-bool wireless_send(uint8_t * buf, uint8_t buf_size){
+bool wireless_send(uint16_t * buf, uint16_t buf_size){
 
   radio.stopListening();
   
   return radio.write(buf, buf_size);
 }
 
-bool wireless_read(uint8_t * buf, uint8_t rd_length){
+bool wireless_read(uint16_t * buf, uint16_t rd_length){
   radio.startListening();
   
   uint8_t timeout = false;

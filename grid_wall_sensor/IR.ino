@@ -8,11 +8,11 @@
 void IR_init(){
   TIMSK0 = 0; // turn off timer0 for lower jitter
   ADCSRA = 0xe5; // set the adc to free running mode
-  ADMUX = 0x40; // use adc0
+  ADMUX = 0x44; // use adc4 with mux
   DIDR0 = 0x01; // turn off the digital input for adc0
 }
 
-int IR_poll(){
+char IR_poll(){
   
     cli();  // UDRE interrupt slows this way down on arduino1.0
     
@@ -40,11 +40,11 @@ int IR_poll(){
     }*/
     
      if ( fft_log_out[47] > 100 )
-      return 7;
+      return 1;
     else if ( fft_log_out[81] > 100 )
-      return 12;
+      return 2;
     else if (fft_log_out[114] > 95 )
-      return 17;
+      return 3;
     else return 0;
 
 

@@ -146,7 +146,11 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
   char true_wall_behind = true_direction(cur_orientation, SOUTH);
   char walls = wall_front << true_wall_front | wall_left << true_wall_left | wall_right << true_wall_right;
   new_data = target.x << 13 | target.y << 11 | walls << 3 | 1 << 2 | 1 << 1;
+  tile_array[target.x][target.y].walls = walls;
+  tile_array[target.x][target.y].traversed = 1;
+  
   wireless_send(&new_data, sizeof(unsigned int));
+  //need to clear previous current position bit
     
   // Find orientation of target relative to pos
   uint8_t orientation = get_orientation(pos, target);
@@ -197,5 +201,12 @@ void move_to(char x, char y){
 uint16_t serialize_tile(struct tile& tile){
   return 0; // TODO: Implement
 }
+
+void add_IR(char freq, xy_pair xy){
+  tile_array[xy.x][xy.y].freq = freq;
+  uint16_t newdata = tile_array[xy.x][xy.y].freq << 9;
+  wireless_send(&newdata, sizeof(uint8_t));
+}
+
 
 

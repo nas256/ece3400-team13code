@@ -25,6 +25,7 @@ struct tile{
      xy_pair xy_pair;
      char traversed;
      char walls; // LSB 4 bits (WEST, EAST, NORTH, SOUTH)
+     char freq;
 };
 typedef struct tile tile;
 
@@ -38,6 +39,8 @@ extern xy_pair pos;
 void init_mapper();
 void move_to(char x, char y);
 uint16_t serialize_tile(tile& tile);
+void add_IR(char freq, xy_pair xy);
+
 
 #endif
 

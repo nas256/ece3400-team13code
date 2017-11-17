@@ -87,7 +87,7 @@ void acoustic() {
 
 void optical() {
   while(1) { // reduces jitter
-    currtime = millis();
+    currtime = micros();
     Serial.println(currtime-prevtime);
     prevtime = currtime;
     cli();  // UDRE interrupt slows this way down on arduino1.0
