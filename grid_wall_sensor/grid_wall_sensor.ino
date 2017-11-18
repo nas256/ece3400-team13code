@@ -54,9 +54,9 @@
 #define WALL_THRESHOLD_SIDE    235
 #define WALL_THRESHOLD_FRONT   150 //170
 
-#define LEFT_LED 8
-#define RIGHT_LED 10
-#define FRONT_LED 9
+//#define LEFT_LED 8
+//#define RIGHT_LED 10
+//#define FRONT_LED 9
 
 #define FRONT_WALL_POLL_THRESHOLD 20
 #define SIDE_WALL_POLL_THRESHOLD  20
@@ -80,15 +80,15 @@ void setup() {
   pinMode(INPUT, P_LINE_SENSOR_2);
   pinMode(INPUT, P_INTERSECT_SENSOR_1);
   pinMode(INPUT, P_INTERSECT_SENSOR_2);
-  pinMode(OUTPUT, LEFT_LED);
+/*  pinMode(OUTPUT, LEFT_LED);
   pinMode(OUTPUT, RIGHT_LED);
   pinMode(OUTPUT, FRONT_LED);
   digitalWrite(LEFT_LED,LOW);
   digitalWrite(RIGHT_LED,LOW);
-  digitalWrite(FRONT_LED,LOW);
+  digitalWrite(FRONT_LED,LOW);*/
 
   wireless_setup(1);
-  IR_init();
+  //IR_init();
   init_mapper();
 
   // Initialize the analog mux
@@ -190,11 +190,14 @@ void loop() {
                                           poll_condition(D_WALL_LEFT, SIDE_WALL_POLL_THRESHOLD),
                                           poll_condition(D_WALL_RIGHT, SIDE_WALL_POLL_THRESHOLD) );
        if (to_turn == 255) {
+        mapper_done();
+        tile_transmit( pos );
         while(1) {
-          digitalWrite(FRONT_LED, HIGH);
+          /*digitalWrite(FRONT_LED, HIGH);
           digitalWrite(LEFT_LED, HIGH);
-          digitalWrite(RIGHT_LED, HIGH);
+          digitalWrite(RIGHT_LED, HIGH);*/
           drive(LEFT_ZERO, RIGHT_ZERO);
+          
         }
        }
        switch(to_turn){
@@ -244,14 +247,14 @@ void loop() {
   // Print out readings
   uint8_t walls = 0;
 
-  if (poll_condition(D_WALL_FRONT, 10)) digitalWrite(FRONT_LED, HIGH);
+  /*if (poll_condition(D_WALL_FRONT, 10)) digitalWrite(FRONT_LED, HIGH);
   else digitalWrite(FRONT_LED, LOW);
 
   if (poll_condition(D_WALL_LEFT, 10)) digitalWrite(LEFT_LED, HIGH);
   else digitalWrite(LEFT_LED, LOW);
 
   if (poll_condition(D_WALL_RIGHT, 10)) digitalWrite(RIGHT_LED, HIGH);
-  else digitalWrite(RIGHT_LED, LOW);
+  else digitalWrite(RIGHT_LED, LOW);*/
   
   // Serial.print(poll_condition(D_WALL_FRONT, 10)? "F: Y " : "F; N ");
   // Serial.print(state);

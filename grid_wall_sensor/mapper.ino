@@ -5,6 +5,7 @@
 
 xy_pair pos;
 uint8_t cur_orientation;
+uint8_t mapper_done_flag = 0;
 
 void print_xy(struct xy_pair xy){
   Serial.print(xy.x);
@@ -118,6 +119,17 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
     //Serial.println("Add front");
     s_push( &missed_op, front);  
   }
+
+  unsigned int new_data;
+  char true_wall_front = true_direction(cur_orientation, NORTH);
+  char true_wall_left =  true_direction(cur_orientation, WEST);
+  char true_wall_right = true_direction(cur_orientation, EAST);
+  char true_wall_behind = true_direction(cur_orientation, SOUTH);
+  char walls = wall_front << true_wall_front | wall_left << true_wall_left | wall_right << true_wall_right;
+
+  tile_set_traversed( pos );
+  tile_set_walls( pos, walls );
+  tile_transmit( pos );
   
   xy_pair target;
   // Check if we're surrounded by walls or visited
@@ -137,17 +149,6 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
     //Serial.println(missed_op.top+1);
     s_push(&path, pos);
   }
-  
-  unsigned int new_data;
-  char true_wall_front = true_direction(cur_orientation, NORTH);
-  char true_wall_left =  true_direction(cur_orientation, WEST);
-  char true_wall_right = true_direction(cur_orientation, EAST);
-  char true_wall_behind = true_direction(cur_orientation, SOUTH);
-  char walls = wall_front << true_wall_front | wall_left << true_wall_left | wall_right << true_wall_right;
-
-  tile_set_traversed( target );
-  tile_set_walls( target, walls );
-  tile_transmit( target );
   
   /*new_data = target.x << 13 | target.y << 11 | walls << 3 | 1 << 2 | 1 << 1;
   tile_array[target.x][target.y].walls = walls;
@@ -217,8 +218,14 @@ void tile_set_ir(xy_pair xy, char freq){
 }
 
 void tile_transmit(xy_pair xy){
-  uint16_t data = 0;
-  wireless_send ( tile_array[xy.x][xy.y].data, sizeof( uint16_t ) );
+  uint16_t to_send = tile_array[xy.x][xy.y].data | mapper_done_flag;
+  wireless_send ( &to_send, sizeof( uint16_t ) );
+  Serial.print("Sent Data: ");
+  Serial.println(tile_array[xy.x][xy.y].data);
+}
+
+void mapper_done(){
+  mapper_done_flag = 1;
 }
 
 ///////////////////////////////////////////////

@@ -1,11 +1,11 @@
 `define WALL_THICKNESS 9'd3
 
-module MAZE_MAPPER(CLK, PIXEL_X, PIXEL_Y, COLOR_OUT, DATA_IN, DATA_VAL, GPIO_1_D);
+module MAZE_MAPPER(CLK, PIXEL_X, PIXEL_Y_IN, COLOR_OUT, DATA_IN, DATA_VAL, GPIO_1_D);
 
 input        CLK;
 
 input [9:0]  PIXEL_X;
-input [9:0]  PIXEL_Y;
+input [9:0]  PIXEL_Y_IN;
 input [15:0] DATA_IN;
 input        DATA_VAL;
 
@@ -15,6 +15,9 @@ output reg [7:0] COLOR_OUT;
 
 reg [7:0] grid_array [3:0][4:0];
 
+reg [9:0] PIXEL_Y;
+
+ 
 reg play_sound;
 
 always @ (posedge CLK) begin
@@ -30,6 +33,8 @@ reg [9:0] tilex_pixel;
 reg [9:0] tiley_pixel;
 
 always @ (*) begin   
+  PIXEL_Y = 10'd480 - PIXEL_Y_IN;
+
   tilex       = PIXEL_X / 9'd100;
   tiley       = PIXEL_Y / 9'd100;
   tilex_pixel = tilex   * 9'd100;

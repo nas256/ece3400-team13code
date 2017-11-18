@@ -93,7 +93,7 @@ module DE0_NANO(
 		.CLK         (CLOCK_25),
 		
 		.PIXEL_X    (PIXEL_COORD_X),
-		.PIXEL_Y    (PIXEL_COORD_Y),
+		.PIXEL_Y_IN (PIXEL_COORD_Y),
 		.COLOR_OUT  (PIXEL_COLOR),
 		
 		// For the audio
