@@ -45,6 +45,7 @@ void tile_set_traversed(xy_pair xy);
 void tile_set_walls(xy_pair xy, char walls);
 void tile_set_ir(xy_pair xy, char freq);
 void tile_transmit(xy_pair xy);
+void mapper_done();
 
 
 #endif
