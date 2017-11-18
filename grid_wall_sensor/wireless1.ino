@@ -1,9 +1,9 @@
 #include "wireless1.h"
 
 // Radio pipe addresses for the 2 nodes to communicate.
-const uint64_t pipes[2] = { 0x000000002cLL, 0x000000003cLL };
+const uint64_t pipes[2] = { 0x000000002cLL, 0x000000002dLL };
 
-RF24 radio(10, 9);
+RF24 radio(9, 10);
 
 void wireless_setup(uint8_t wr){
   radio.begin();
@@ -21,7 +21,7 @@ void wireless_setup(uint8_t wr){
 
   // optionally, reduce the payload size.  seems to
   // improve reliability
-  radio.setPayloadSize(8);
+  // radio.setPayloadSize(8);
 
   if ( wr )
   {

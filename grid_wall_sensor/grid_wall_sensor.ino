@@ -88,7 +88,7 @@ void setup() {
   digitalWrite(FRONT_LED,LOW);
 
   wireless_setup(1);
-  IR_init();
+  //IR_init();
   init_mapper();
 
   // Initialize the analog mux
@@ -127,6 +127,8 @@ void sense_walls(){
 }
 
 void loop() { 
+
+  Serial.println("Hello");
   
   // Update readings from line sensors
   line_left_value = analogRead(P_LINE_SENSOR_1);  // 0-1023
