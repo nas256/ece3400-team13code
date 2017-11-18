@@ -21,6 +21,8 @@ unsigned char y_coord = 0;
 int turn = 0;
 unsigned int maze [5][4];
 
+uint8_t done = 0;
+
 void setup(void)
 {
 
@@ -38,32 +40,50 @@ void setup(void)
   printf_begin();
   pinMode(7,OUTPUT);
   SPI.begin();
+  wireless_setup(0);
+
+  SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE0)); //10MHz
+
+    for (uint16_t x = 0; x < X_SIZE; x++){
+      for (uint16_t y = 0; y < Y_SIZE; y++){
+        digitalWrite(7, LOW);
+        SPI.transfer16(maze[x][y]);
+        digitalWrite(7, HIGH);
+      }
+    }
+
+    SPI.endTransaction();
 }
 
 
 void loop(void)
 {
   // if there is data ready
-  if ( radio.available() )
-  {
+  //if ( radio.available() )
+  //{
+    Serial.println("Available!");
     // Dump the payloads until we've gotten everything
-  unsigned int got_data;
-  bool done = false;
-  while (!done)
+  uint16_t got_data;
+  bool timeout = true;
+  while (timeout)
   {
     // Fetch the payload, and see if this was the last one.
-    done = wireless_read( &got_data, sizeof(got_data) ); // 200ms timeout
+    timeout = wireless_read( &got_data, sizeof(uint16_t) ); // 200ms timeout
     //done = radio.read( &got_data, sizeof(got_data) );
   
     // Spew it
     // Print the received data as a decimal
+    if (timeout) continue;
     printf("Got payload %u...", got_data);
+    printf("\n");
   
     // Delay just a little bit to let the other unit
     // make the transition to receiver
-    delay(20);
+    // delay(20);
   
   } 
+
+    if (got_data & 0x1) done = 1;
 
     // First, stop listening so we can talk over SPI
     radio.stopListening();
@@ -77,7 +97,7 @@ void loop(void)
       for (uint16_t y = 0; y < Y_SIZE; y++){
         if ((x != got_x) || (y != got_y)) maze[x][y] = maze[x][y] & 0xfffd;
         digitalWrite(7, LOW);
-        SPI.transfer16(maze[x][y]);
+        SPI.transfer16(maze[x][y] | done);
         digitalWrite(7, HIGH);
       }
     }
@@ -89,5 +109,5 @@ void loop(void)
 
     // Now, resume listening so we catch the next packets.
     radio.startListening();
-  }
+  //}
 }
