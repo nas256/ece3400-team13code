@@ -1,5 +1,5 @@
 Fitter report for DE0_NANO
-Sat Nov 18 12:19:10 2017
+Sat Nov 18 19:22:22 2017
 Quartus II 64-Bit Version 15.0.0 Build 145 04/22/2015 SJ Web Edition
 
 
@@ -68,7 +68,7 @@ agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Fitter Summary                                                                  ;
 +------------------------------------+--------------------------------------------+
-; Fitter Status                      ; Successful - Sat Nov 18 12:19:10 2017      ;
+; Fitter Status                      ; Successful - Sat Nov 18 19:22:21 2017      ;
 ; Quartus II 64-Bit Version          ; 15.0.0 Build 145 04/22/2015 SJ Web Edition ;
 ; Revision Name                      ; DE0_NANO                                   ;
 ; Top-level Entity Name              ; DE0_NANO                                   ;
@@ -154,12 +154,12 @@ agreement for further details.
 ; Number detected on machine ; 4           ;
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
-; Average used               ; 1.08        ;
+; Average used               ; 1.00        ;
 ; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   7.7%      ;
+;     Processor 2            ; < 0.1%      ;
 ;     Processors 3-4         ;   0.0%      ;
 +----------------------------+-------------+
 
@@ -1699,21 +1699,21 @@ Warning (15705): Ignored locations or region assignments to the following nodes
     Warning (15706): Node "G_SENSOR_INT" is assigned to location or region, but does not exist in design
     Warning (15706): Node "I2C_SCLK" is assigned to location or region, but does not exist in design
     Warning (15706): Node "I2C_SDAT" is assigned to location or region, but does not exist in design
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:02
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info (170191): Fitter placement operations beginning
 Info (170137): Fitter placement was successful
-Info (170192): Fitter placement operations ending: elapsed time is 00:00:01
+Info (170192): Fitter placement operations ending: elapsed time is 00:00:00
 Info (170193): Fitter routing operations beginning
 Info (170195): Router estimated average interconnect usage is 0% of the available device resources
     Info (170196): Router estimated peak interconnect usage is 3% of the available device resources in the region that extends from location X32_Y11 to location X42_Y22
-Info (170194): Fitter routing operations ending: elapsed time is 00:00:01
+Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
-Info (11888): Total time spent on timing analysis during the Fitter is 0.32 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.20 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
@@ -1871,10 +1871,10 @@ Warning (169064): Following 68 pins have no output enable or a GND or VCC output
     Info (169065): Pin GPIO_1_D[33] has a permanently enabled output enable
 Info (144001): Generated suppressed messages file C:/Users/gcfla/OneDrive/_ECE 3400/code/verilog/vga_team/DE0_NANO.fit.smsg
 Info: Quartus II 64-Bit Fitter was successful. 0 errors, 75 warnings
-    Info: Peak virtual memory: 1312 megabytes
-    Info: Processing ended: Sat Nov 18 12:19:11 2017
-    Info: Elapsed time: 00:00:16
-    Info: Total CPU time (on all processors): 00:00:14
+    Info: Peak virtual memory: 1317 megabytes
+    Info: Processing ended: Sat Nov 18 19:22:22 2017
+    Info: Elapsed time: 00:00:09
+    Info: Total CPU time (on all processors): 00:00:11
 
 
 +----------------------------+

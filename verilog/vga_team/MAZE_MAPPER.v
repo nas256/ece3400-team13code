@@ -20,6 +20,8 @@ reg [9:0] PIXEL_Y;
  
 reg play_sound;
 
+// TODO: ACTUALLY CUTS OFF TREASURE BITS :0
+
 always @ (posedge CLK) begin
 	if (DATA_VAL) begin
 		grid_array[ 2'h3 & (DATA_IN >> 11) ][ 3'h7 & (DATA_IN >> 13) ] <= DATA_IN[7:0];
@@ -34,6 +36,7 @@ reg [9:0] tiley_pixel;
 
 always @ (*) begin   
   PIXEL_Y = 10'd480 - PIXEL_Y_IN;
+  //PIXEL_Y = PIXEL_Y_IN;
 
   tilex       = PIXEL_X / 9'd100;
   tiley       = PIXEL_Y / 9'd100;
@@ -68,11 +71,11 @@ always @ (*) begin
 			COLOR_OUT = 8'b101_00_000; // walls are pink
 		 end
 	  end else if ( PIXEL_Y <= tiley_pixel + `WALL_THICKNESS ) begin // top wall
-		 if ( grid_array[tiley][tilex] & (16'd1 << 3) ) begin
+		 if ( grid_array[tiley][tilex] & (16'd1 << 5) ) begin
 			COLOR_OUT = 8'b101_00_000; // walls are pink
 		 end
 	  end else if ( PIXEL_Y >= tiley_pixel + 9'd100 - `WALL_THICKNESS ) begin // bottom wall
-		  if ( grid_array[tiley][tilex] & (16'd1 << 5) ) begin
+		  if ( grid_array[tiley][tilex] & (16'd1 << 3) ) begin
 			COLOR_OUT = 8'b101_00_000; // walls are pink
 		 end
 	  end
