@@ -2,8 +2,11 @@
 #include "nRF24L01.h"
 #include "RF24.h"
 #include "wireless1.h"
+#include "printf.h"
+
 
 xy_pair pos;
+xy_pair prev_pos;
 uint8_t cur_orientation;
 uint8_t mapper_done_flag = 0;
 
@@ -81,9 +84,9 @@ struct xy_pair translate(char robot_direction, char input_robot, struct xy_pair 
 // ASSUMES ONLY ONE TILE APART
 uint8_t get_orientation(struct xy_pair xy_start, struct xy_pair xy_end){
   //Serial.print("Orienting from ");
-  print_xy(xy_start);
+  // print_xy(xy_start);
   //Serial.print("  to  ");
-  print_xy(xy_end);
+  // print_xy(xy_end);
   //Serial.println(" ");
   
   if (xy_end.x > xy_start.x) return EAST;
@@ -124,12 +127,15 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
   char true_wall_front = true_direction(cur_orientation, NORTH);
   char true_wall_left =  true_direction(cur_orientation, WEST);
   char true_wall_right = true_direction(cur_orientation, EAST);
-  char true_wall_behind = true_direction(cur_orientation, SOUTH);
   char walls = wall_front << true_wall_front | wall_left << true_wall_left | wall_right << true_wall_right;
 
   tile_set_traversed( pos );
   tile_set_walls( pos, walls );
-  tile_transmit( pos );
+
+  // Serial.print("Sent Data: ");
+  // Serial.println(tile_array[pos.x][pos.y].data);
+  
+  //tile_transmit( pos );
   
   xy_pair target;
   // Check if we're surrounded by walls or visited
@@ -164,7 +170,7 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
   if (robot_orientation > 3) robot_orientation += 4;
 
   cur_orientation = orientation;
-
+  prev_pos = pos;
   switch(robot_orientation){
     case NORTH:
       pos.x = front.x;
@@ -197,12 +203,6 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
   return robot_orientation;
 }
 
-void move_to(char x, char y){
-  pos.x = x;
-  pos.y = y;
-  tile_set_traversed(pos);
-}
-
 ///// UTILITY FUNCTIONS FOR UPDATING TILES ////
 
 void tile_set_traversed(xy_pair xy){
@@ -210,7 +210,7 @@ void tile_set_traversed(xy_pair xy){
 }
 
 void tile_set_walls(xy_pair xy, char walls){
-  tile_array[xy.x][xy.y].data |= (walls & 0x7) << 3;
+  tile_array[xy.x][xy.y].data |= (walls & 0xf) << 3;
 }
 
 void tile_set_ir(xy_pair xy, char freq){
@@ -218,10 +218,11 @@ void tile_set_ir(xy_pair xy, char freq){
 }
 
 void tile_transmit(xy_pair xy){
-  uint16_t to_send = tile_array[xy.x][xy.y].data | mapper_done_flag;
+  uint16_t to_send = tile_array[xy.x][xy.y].data | mapper_done_flag | 1<< 2;
   wireless_send ( &to_send, sizeof( uint16_t ) );
   Serial.print("Sent Data: ");
   Serial.println(tile_array[xy.x][xy.y].data);
+  //printf("%#04x", tile_array[xy.x][xy.y].data);
 }
 
 void mapper_done(){

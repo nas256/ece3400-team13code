@@ -60,13 +60,18 @@
 
 #define FRONT_WALL_POLL_THRESHOLD 20
 #define SIDE_WALL_POLL_THRESHOLD  20
+#define SEND_TIMER 1000
 
 unsigned long last_turn_start = 0;
+unsigned long last_send_time = 0;
+char send_flag;
+
 
 Servo servo_left, servo_right;
 int line_left_value = 0, line_right_value = 0;
 char state = FOLLOW_LINE;
 char freq = 0;
+int timer = 0;
 
 void setup() {
   Serial.begin(115200); // Begin UART Communication
@@ -127,6 +132,11 @@ void sense_walls(){
 }
 
 void loop() { 
+  /* int i = 0;
+  while (1) {
+    wireless_send(&i, sizeof(int));
+    i++;
+  } */
   
   // Update readings from line sensors
   line_left_value = analogRead(P_LINE_SENSOR_1);  // 0-1023
@@ -189,6 +199,8 @@ void loop() {
        uint8_t to_turn = at_intersection( poll_condition(D_WALL_FRONT, FRONT_WALL_POLL_THRESHOLD), 
                                           poll_condition(D_WALL_LEFT, SIDE_WALL_POLL_THRESHOLD),
                                           poll_condition(D_WALL_RIGHT, SIDE_WALL_POLL_THRESHOLD) );
+       
+       
        if (to_turn == 255) {
         mapper_done();
         tile_transmit( pos );
@@ -208,6 +220,10 @@ void loop() {
          // case STAY:  state = TURN_180;    break;
        } 
        last_turn_start = millis();
+       
+       last_send_time = millis();
+       send_flag = 1;
+
        //Serial.print("WANT TO TURN "); Serial.println(to_turn);
        
        
@@ -244,6 +260,16 @@ void loop() {
   // Update the drive speeds
   drive(LEFT_ZERO+7-slowdown_left, RIGHT_ZERO+7-slowdown_right);
   
+  if (send_flag && (millis() - last_send_time > SEND_TIMER)) {
+    send_flag = 0;
+    //i++;
+    //wireless_send(&i, sizeof(int));
+    //Serial.println(i);
+    Serial.print("Sending pos: ");
+    Serial.print(prev_pos.x);
+    Serial.print(prev_pos.y);
+    tile_transmit(prev_pos);
+  }
   // Print out readings
   uint8_t walls = 0;
 

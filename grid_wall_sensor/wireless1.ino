@@ -15,7 +15,7 @@ void wireless_setup(uint8_t wr){
   radio.setChannel(0x50);
   // set the power
   // RF24_PA_MIN=-18dBm, RF24_PA_LOW=-12dBm, RF24_PA_MED=-6dBM, and RF24_PA_HIGH=0dBm.
-  radio.setPALevel(RF24_PA_MIN);
+  radio.setPALevel(RF24_PA_HIGH);
   //RF24_250KBPS for 250kbs, RF24_1MBPS for 1Mbps, or RF24_2MBPS for 2Mbps
   radio.setDataRate(RF24_250KBPS);
 
@@ -37,7 +37,7 @@ void wireless_setup(uint8_t wr){
   radio.startListening();
 }
 
-bool wireless_send(uint16_t * buf, uint16_t buf_size){
+bool wireless_send(void* buf, uint16_t buf_size){
 
   radio.stopListening();
   
@@ -48,7 +48,7 @@ bool wireless_send(uint16_t * buf, uint16_t buf_size){
   return sent;
 }
 
-bool wireless_read(uint16_t * buf, uint16_t rd_length){
+bool wireless_read(void * buf, uint16_t rd_length){
   radio.startListening();
   
   uint8_t timeout = false;
