@@ -73,15 +73,17 @@ void loop(void)
   
     // Spew it
     // Print the received data as a decimal
-    if (timeout) continue;
-    printf("Got payload %u...", got_data);
-    printf("\n");
+    //if (timeout) continue;
+ 
   
     // Delay just a little bit to let the other unit
     // make the transition to receiver
     // delay(20);
   
   } 
+
+     printf("Got payload %#04x (%u)", got_data, got_data);
+    printf("\n");
 
     if (got_data & 0x1) done = 1;
 
@@ -95,9 +97,15 @@ void loop(void)
     maze[got_x][got_y] = got_data;
     for (uint16_t x = 0; x < X_SIZE; x++){
       for (uint16_t y = 0; y < Y_SIZE; y++){
+        if (maze[x][y] == 0) continue;
+        printf("x: %d, y: %d, %#04x ", x, y, maze[x][y]);
+        printf("\n");
         if ((x != got_x) || (y != got_y)) maze[x][y] = maze[x][y] & 0xfffd;
+        else                               maze[x][y] = maze[x][y]  | 1 << 1;
         digitalWrite(7, LOW);
+        delay(1);
         SPI.transfer16(maze[x][y] | done);
+        //SPI.transfer16(0x46);
         digitalWrite(7, HIGH);
       }
     }

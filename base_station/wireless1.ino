@@ -50,7 +50,7 @@ bool wireless_read(void * buf, uint16_t rd_length){
   uint8_t timeout = false;
   unsigned long started_waiting_at = millis();
   while ( ! radio.available() && ! timeout )
-      if (millis() - started_waiting_at > 200 )
+      if (millis() - started_waiting_at > 10 )
         timeout = true;
 
   if (!timeout){
