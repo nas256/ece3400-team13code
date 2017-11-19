@@ -22,7 +22,7 @@ typedef struct xy_pair xy_pair;
 #include "stack.h"
 
 struct tile{
-     xy_pair xy_pair;
+     //xy_pair xy_pair;
      /*char traversed;
      char walls; // LSB 4 bits (WEST, EAST, NORTH, SOUTH)
      char freq;*/
@@ -35,6 +35,7 @@ tile tile_array[GRID_SIZE_X][GRID_SIZE_Y];
 extern uint8_t cur_orientation;
 
 extern xy_pair pos;
+extern xy_pair prev_pos;
 
 // Methods
 void init_mapper();
