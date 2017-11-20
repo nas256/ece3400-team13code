@@ -17,7 +17,7 @@ void print_xy(struct xy_pair xy){
 }
 
 void init_mapper(){
-  // Start in bottom left corner
+  // Start in bottom right corner
   pos.x = 0;
   pos.y = 0;
 

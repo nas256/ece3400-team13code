@@ -11,16 +11,21 @@ port at 115.2kb.
 #define FFT_N 256 // set to 256 point fft
 
 #include <FFT.h> // include the library
+#include "amux.h"
 
 void setup() {
   Serial.begin(115200); // use the serial port
-  TIMSK0 = 0; // turn off timer0 for lower jitter
+  //TIMSK0 = 0; // turn off timer0 for lower jitter
   ADCSRA = 0xe5; // set the adc to free running mode
-  ADMUX = 0x40; // use adc0
-  DIDR0 = 0x01; // turn off the digital input for adc0
+  ADMUX = 0x44; // use adc4
+  //DIDR0 = 0x01; // turn off the digital input for adc0
+
+  amux_init();
 }
 
 void loop() {
+  amux_select(AMUX_TREASURE_1);
+  delay(1);
   while(1) { // reduces jitter
     
     cli();  // UDRE interrupt slows this way down on arduino1.0
@@ -48,10 +53,12 @@ void loop() {
       Serial.println(fft_log_out[i]); // send out the data
     }*/
     
-    if ( fft_log_out[47] > 100 )
+    if ( fft_log_out[47] > 120 )
       Serial.println("7kHz beacon dectected!");
-    else if ( fft_log_out[81] > 100 )
+    if ( fft_log_out[81] > 120 )
       Serial.println("12kHz beacon dectected!");
+    if ( fft_log_out[114] > 120 )
+      Serial.println("17kHz beacon dectected!");
     
   }
 }

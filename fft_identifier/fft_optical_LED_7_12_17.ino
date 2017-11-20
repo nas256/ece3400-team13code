@@ -7,6 +7,7 @@ with the fft. the data is sent out over the serial
 port at 115.2kb.
 */
 
+/*
 #define LOG_OUT 1 // use the log output function
 #define FFT_N 256 // set to 256 point fft
 
@@ -53,6 +54,7 @@ void loop() {
       Serial.print(":");
       Serial.println(fft_log_out[i]); // send out the data
     } */
+    /*
     delay(200); 
     
     if ( fft_log_out[47] > 100 ){
@@ -79,4 +81,4 @@ void loop() {
       digitalWrite(LED3,LOW);
     }
   }
-}
+}*/

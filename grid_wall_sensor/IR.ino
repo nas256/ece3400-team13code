@@ -4,16 +4,19 @@
 #define FFT_N 256 // set to 256 point fft
 
 #include <FFT.h> // include the library
+#include "amux.h"
 
 void IR_init(){
-  TIMSK0 = 0; // turn off timer0 for lower jitter
+  //TIMSK0 = 0; // turn off timer0 for lower jitter
   ADCSRA = 0xe5; // set the adc to free running mode
   ADMUX = 0x44; // use adc4 with mux
   DIDR0 = 0x01; // turn off the digital input for adc0
 }
 
-char IR_poll(){
-  
+char IR_poll(uint8_t sensor){
+    amux_select(sensor);
+    delayMicroseconds(10);
+    
     cli();  // UDRE interrupt slows this way down on arduino1.0
     
     for (int i = 0 ; i < 512 ; i += 2) { // save 256 samples
