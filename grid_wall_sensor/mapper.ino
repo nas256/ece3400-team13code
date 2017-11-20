@@ -27,7 +27,7 @@ void init_mapper(){
   // Reset maze tiles
   for (int x = 0; x < GRID_SIZE_X; x++){
     for (int y = 0; y < GRID_SIZE_Y; y++){
-       tile_array[x][y].data = (x << 13) | (y << 11);
+       tile_array[x][y].data = (x << 14) | (y << 11);
     }
   }
 

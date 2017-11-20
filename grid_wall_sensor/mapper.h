@@ -10,8 +10,8 @@
 #define DONE 5
 
 // Define grid sizes
-#define GRID_SIZE_X 5
-#define GRID_SIZE_Y 4
+#define GRID_SIZE_X 4
+#define GRID_SIZE_Y 5
 
 struct xy_pair{
   uint8_t x;

@@ -3,8 +3,8 @@
 //pin 11 is MOSI
 //pin 10 is ~SS
 
-#define X_SIZE 5
-#define Y_SIZE 4
+#define X_SIZE 4
+#define Y_SIZE 5
 
 //same x and y bits
 //2nd: current location
@@ -15,7 +15,7 @@ struct grid{
 };
 typedef struct grid grid;
 
-grid array_grid[5][4];
+grid array_grid[X_SIZE][Y_SIZE];
 
 int current_x = 0;
 int current_y = 0;
@@ -30,7 +30,7 @@ void spi_communicate(){
   for (uint16_t x = 0; x < X_SIZE; x++){
     for (uint16_t y = 0; y < Y_SIZE; y++){
       uint16_t result = 0;
-      result |= (((x& 0x7) << 13)) | ((y& 0x3) << 11); // Write coords
+      result |= (((x & 0x3) << 14)) | ((y& 0x7) << 11); // Write coords
       result |= array_grid[x][y].traversed << 2;
       result |= array_grid[x][y].current_location << 1;
       result |= 1 << 6; // north wall
@@ -38,7 +38,7 @@ void spi_communicate(){
       result |= 1 << 4; // north wall
       result |= 1 << 3; // north wall
 
-      result |= 3 << 9; // treasure
+      result |= ( random(0, 4) & 0x3) << 9; // treasure
       
       result |= done; // sound
        
@@ -70,7 +70,7 @@ void loop() {
   
   if (turn == 0) current_x++;
   if (turn == 1) current_x--;
-  if (current_x > 4){ 
+  if (current_x > 3){ 
     turn = 1;
     current_y++;
     current_x--;
@@ -81,7 +81,7 @@ void loop() {
     current_x++;
   }
 
-  if (current_y > 3){
+  if (current_y > 4){
     current_y = 0;
     done = 1;
   }
