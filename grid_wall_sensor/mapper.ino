@@ -18,7 +18,7 @@ void print_xy(struct xy_pair xy){
 
 void init_mapper(){
   // Start in bottom right corner
-  pos.x = 0;
+  pos.x = 4;
   pos.y = 0;
 
   // Start facing NORTH
@@ -83,11 +83,11 @@ struct xy_pair translate(char robot_direction, char input_robot, struct xy_pair 
 // get orientation of [end] relative to [start]
 // ASSUMES ONLY ONE TILE APART
 uint8_t get_orientation(struct xy_pair xy_start, struct xy_pair xy_end){
-  //Serial.print("Orienting from ");
-  // print_xy(xy_start);
-  //Serial.print("  to  ");
-  // print_xy(xy_end);
-  //Serial.println(" ");
+  Serial.print("Orienting from ");
+   print_xy(xy_start);
+  Serial.print("  to  ");
+   print_xy(xy_end);
+  Serial.println(" ");
   
   if (xy_end.x > xy_start.x) return EAST;
   if (xy_end.x < xy_start.x) return WEST;
@@ -220,8 +220,8 @@ void tile_set_ir(xy_pair xy, char freq){
 void tile_transmit(xy_pair xy){
   uint16_t to_send = tile_array[xy.x][xy.y].data | mapper_done_flag | 1<< 2;
   wireless_send ( &to_send, sizeof( uint16_t ) );
-  Serial.print("Sent Data: ");
-  Serial.println(tile_array[xy.x][xy.y].data);
+  //Serial.print("Sent Data: ");
+  //Serial.println(tile_array[xy.x][xy.y].data);
   //printf("%#04x", tile_array[xy.x][xy.y].data);
 }
 
