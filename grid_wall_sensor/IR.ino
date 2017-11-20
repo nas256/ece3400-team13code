@@ -6,14 +6,21 @@
 #include <FFT.h> // include the library
 #include "amux.h"
 
+uint8_t old_ADCSRA;
+
 void IR_init(){
   //TIMSK0 = 0; // turn off timer0 for lower jitter
-  ADCSRA = 0xe5; // set the adc to free running mode
+  //ADCSRA = 0xe5; // set the adc to free running mode
   ADMUX = 0x44; // use adc4 with mux
-  DIDR0 = 0x01; // turn off the digital input for adc0
+  //DIDR0 = 0x01; // turn off the digital input for adc0
 }
 
 char IR_poll(uint8_t sensor){
+
+    old_ADCSRA = ADCSRA;
+    ADCSRA = 0xe5; // free running mode
+    ADMUX = 0x44; // use adc4 with mux
+  
     amux_select(sensor);
     delayMicroseconds(10);
     
@@ -41,6 +48,8 @@ char IR_poll(uint8_t sensor){
     for (byte i = 0 ; i < FFT_N/2 ; i++) { 
       Serial.println(fft_log_out[i]); // send out the data
     }*/
+
+    ADCSRA = old_ADCSRA;
     
      if ( fft_log_out[47] > 100 )
       return 1;

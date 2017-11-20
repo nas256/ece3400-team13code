@@ -1,4 +1,17 @@
-`define WALL_THICKNESS 9'd3
+`define WALL_THICKNESS 10'd3
+`define TILE_SIZE      10'd100
+`define IR_BUFFER      10'd40
+
+// Define colors
+`define COLOR_7kHz        8'b111_000_00 // red
+`define COLOR_12kHz       8'b000_111_00 // green
+`define COLOR_17kHz       8'b000_000_11 // blue
+
+`define COLOR_EXPLORED    8'b111_111_11 // white
+`define COLOR_UNEXPLORED  8'b010_010_01 // grey
+`define COLOR_CURRENT     8'b111_100_00 // yellow
+
+`define COLOR_WALLS       8'b101_00_000 // red
 
 module MAZE_MAPPER(CLK, PIXEL_X, PIXEL_Y_IN, COLOR_OUT, DATA_IN, DATA_VAL, GPIO_1_D);
 
@@ -13,10 +26,9 @@ output [33:0] GPIO_1_D;
 
 output reg [7:0] COLOR_OUT;
 
-reg [7:0] grid_array [3:0][4:0];
+reg [11:0] grid_array [3:0][4:0];
 
 reg [9:0] PIXEL_Y;
-
  
 reg play_sound;
 
@@ -24,7 +36,7 @@ reg play_sound;
 
 always @ (posedge CLK) begin
 	if (DATA_VAL) begin
-		grid_array[ 2'h3 & (DATA_IN >> 11) ][ 3'h7 & (DATA_IN >> 13) ] <= DATA_IN[7:0];
+		grid_array[ 2'h3 & (DATA_IN >> 11) ][ 3'h7 & (DATA_IN >> 13) ] <= DATA_IN[11:0];
 		play_sound <= DATA_IN[0];
 	end
 end
@@ -50,11 +62,11 @@ always @ (*) begin
 	 
 	 // Draw the tiles themselves
 	 if (grid_array[PIXEL_Y / 9'd100][PIXEL_X / 9'd100] & (16'd1 << 1)) begin
-		COLOR_OUT = 8'b111_100_00; // yellow
+		COLOR_OUT = `COLOR_CURRENT;
 	 end else if (grid_array[PIXEL_Y / 9'd100][PIXEL_X / 9'd100] & (16'd1 << 2)) begin
-		COLOR_OUT = 8'b111_111_11; // white -> previously explored
+		COLOR_OUT = `COLOR_EXPLORED;
 	 end else begin
-		COLOR_OUT = 8'b010_010_01; //grey -> unexplored
+		COLOR_OUT = `COLOR_UNEXPLORED;
 	 end
   end
   
@@ -64,22 +76,38 @@ always @ (*) begin
   if ( PIXEL_X <= 9'd500 && PIXEL_Y <= 9'd400 ) begin
 	  if ( PIXEL_X <= tilex_pixel + `WALL_THICKNESS ) begin // left wall
 		 if ( grid_array[tiley][tilex] & (16'd1 << 6) ) begin
-			COLOR_OUT = 8'b101_00_000; // walls are pink
+			COLOR_OUT = `COLOR_WALLS; // walls are pink
 		 end
 	  end else if ( PIXEL_X >= tilex_pixel + 9'd100 - `WALL_THICKNESS ) begin // right wall
 		 if ( grid_array[tiley][tilex] & (16'd1 << 4) ) begin
-			COLOR_OUT = 8'b101_00_000; // walls are pink
+			COLOR_OUT = `COLOR_WALLS; // walls are pink
 		 end
 	  end else if ( PIXEL_Y <= tiley_pixel + `WALL_THICKNESS ) begin // top wall
 		 if ( grid_array[tiley][tilex] & (16'd1 << 5) ) begin
-			COLOR_OUT = 8'b101_00_000; // walls are pink
+			COLOR_OUT = `COLOR_WALLS; // walls are pink
 		 end
 	  end else if ( PIXEL_Y >= tiley_pixel + 9'd100 - `WALL_THICKNESS ) begin // bottom wall
 		  if ( grid_array[tiley][tilex] & (16'd1 << 3) ) begin
-			COLOR_OUT = 8'b101_00_000; // walls are pink
+			COLOR_OUT = `COLOR_WALLS; // walls are pink
 		 end
 	  end
   end
+  
+  // Draw the IR beacons
+  if ( PIXEL_X <= 9'd500 && PIXEL_Y <= 9'd400 ) begin
+    if ( PIXEL_X >= tilex_pixel + `IR_BUFFER && PIXEL_X <= tilex_pixel + `TILE_SIZE - `IR_BUFFER ) begin
+	   if ( PIXEL_Y >= tiley_pixel + `IR_BUFFER && PIXEL_Y <= tiley_pixel + `TILE_SIZE - `IR_BUFFER  ) begin
+		  // In the draw zone for IR, choose color based on IR reading
+		  case ( (grid_array[tiley][tilex] >> 9 ) & 2'd3 )
+		    2'b01:   COLOR_OUT = `COLOR_7kHz;
+		    2'b10:   COLOR_OUT = `COLOR_12kHz;
+			 2'b11:   COLOR_OUT = `COLOR_17kHz;
+			 default: COLOR_OUT =  COLOR_OUT;
+		  endcase
+		end
+	 end
+  end
+  
   
   // Draw the done signal if done
   if (PIXEL_X >= 10'd550 && PIXEL_X <= 10'd600) begin

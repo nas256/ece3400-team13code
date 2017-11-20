@@ -64,6 +64,8 @@
 
 unsigned long last_turn_start = 0;
 unsigned long last_send_time = 0;
+unsigned long last_IR_time = 0;
+
 char send_flag;
 
 
@@ -93,7 +95,7 @@ void setup() {
   digitalWrite(FRONT_LED,LOW);*/
 
   wireless_setup(1);
-  //IR_init();
+  IR_init();
   init_mapper();
 
   // Initialize the analog mux
@@ -166,6 +168,15 @@ void loop() {
 
   // Read wall values
   sense_walls();
+
+
+  if (millis() - last_IR_time > 500){
+    uint8_t ir = IR_poll(AMUX_TREASURE_2);
+    Serial.print("IR: ");
+    Serial.println( ir );
+    last_IR_time = millis();
+    tile_set_ir(pos, ir);
+  }
   
   if (state == FOLLOW_LINE){ 
     // Line following adjustments

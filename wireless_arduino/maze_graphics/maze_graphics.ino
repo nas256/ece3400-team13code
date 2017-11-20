@@ -37,6 +37,9 @@ void spi_communicate(){
       result |= 1 << 5; // north wall
       result |= 1 << 4; // north wall
       result |= 1 << 3; // north wall
+
+      result |= 3 << 9; // treasure
+      
       result |= done; // sound
        
       // Write result out

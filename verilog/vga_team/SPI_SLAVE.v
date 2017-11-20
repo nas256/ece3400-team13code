@@ -38,8 +38,6 @@ always @(posedge clk) begin
 		current_state <= 1; // start listening
 		
 	end else if (current_state == 1'b1 && sck_record[2:1] == 2'b01) begin
-		//input_shiftreg = input_shiftreg << 1;
-	   //input_shiftreg[0] = mosi;
 		input_shiftreg = { input_shiftreg[14:0], mosi };
 		bitcounter <= bitcounter + 1;
 		if (bitcounter == 16)

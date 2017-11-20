@@ -214,6 +214,7 @@ void tile_set_walls(xy_pair xy, char walls){
 }
 
 void tile_set_ir(xy_pair xy, char freq){
+  if (freq != 0){  Serial.print("Found IR: "); Serial.println(freq); }
   tile_array[xy.x][xy.y].data |= (freq & 0x3) << 9;
 }
 
