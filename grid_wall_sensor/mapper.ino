@@ -18,7 +18,7 @@ void print_xy(struct xy_pair xy){
 
 void init_mapper(){
   // Start in bottom right corner
-  pos.x = 4;
+  pos.x = 3;
   pos.y = 0;
 
   // Start facing NORTH
@@ -214,8 +214,10 @@ void tile_set_walls(xy_pair xy, char walls){
 }
 
 void tile_set_ir(xy_pair xy, char freq){
-  if (freq != 0){  Serial.print("Found IR: "); Serial.println(freq); }
-  tile_array[xy.x][xy.y].data |= (freq & 0x3) << 9;
+  if (freq != 0){  
+    Serial.print("Found IR: "); Serial.println(freq);
+    tile_array[xy.x][xy.y].data |= (freq & 0x3) << 9;
+  }
 }
 
 void tile_transmit(xy_pair xy){

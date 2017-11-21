@@ -4,8 +4,8 @@
 #include "printf.h"
 #include "wireless1.h"
 
-#define X_SIZE 5
-#define Y_SIZE 4
+#define X_SIZE 4
+#define Y_SIZE 5
 
 //same x and y bits
 //2nd: current location
@@ -19,40 +19,52 @@ typedef struct grid grid;
 unsigned char x_coord = 0;
 unsigned char y_coord = 0;
 int turn = 0;
-unsigned int maze [5][4];
+unsigned int maze [4][5];
 
 uint8_t done = 0;
 
 void setup(void)
 {
 
-  // Initialize maze
-  
-  int i = 0;
-  int j = 0;
-  for (; i < 5; i++) {
-    for (; j < 4; j++) {
-      maze[i][j] = i << 13 | j << 11;
-    }
-  }
-  
   Serial.begin(57600);
+
+  
   printf_begin();
   pinMode(7,OUTPUT);
   SPI.begin();
   wireless_setup(0);
 
-  SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE0)); //10MHz
-
-    for (uint16_t x = 0; x < X_SIZE; x++){
-      for (uint16_t y = 0; y < Y_SIZE; y++){
-        digitalWrite(7, LOW);
-        SPI.transfer16(maze[x][y]);
-        digitalWrite(7, HIGH);
-      }
+  // Initialize maze
+  for (int i = 0; i < X_SIZE; i++) {
+    for (int j = 0; j < Y_SIZE; j++) {
+      maze[i][j] = 0;
+      maze[i][j] |= ((i&3) << 14) | ((j&7) << 11);
+      Serial.println(maze[i][j]);
     }
+  }
 
-    SPI.endTransaction();
+  radio.stopListening();
+
+  SPI.beginTransaction(SPISettings(100000, MSBFIRST, SPI_MODE0)); //10MHz
+
+  for (uint16_t x = 0; x < X_SIZE; x++){
+    for (uint16_t y = 0; y < Y_SIZE; y++){
+      digitalWrite(7, LOW);
+      delay(1);
+      SPI.transfer16(maze[x][y]);
+      digitalWrite(7, HIGH);
+    }
+  }
+  // need to rewrite 0 for some reason
+  digitalWrite(7, LOW);
+  delay(1);
+  SPI.transfer16(0);
+  digitalWrite(7, HIGH);
+
+  SPI.endTransaction();
+
+
+  radio.startListening();
 }
 
 
@@ -92,15 +104,15 @@ void loop(void)
     
     SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE0)); //10MHz
 
-    unsigned char got_x = got_data >> 13;
-    unsigned char got_y = (got_data >> 11) & 3;
+    unsigned char got_x = got_data >> 14;
+    unsigned char got_y = (got_data >> 11) & 7;
     maze[got_x][got_y] = got_data;
     for (uint16_t x = 0; x < X_SIZE; x++){
       for (uint16_t y = 0; y < Y_SIZE; y++){
         if (maze[x][y] == 0) continue;
         printf("x: %d, y: %d, %#04x ", x, y, maze[x][y]);
         printf("\n");
-        if ((x != got_x) || (y != got_y)) maze[x][y] = maze[x][y] & 0xfffd;
+        if ((x != got_x) || (y != got_y))  maze[x][y] = maze[x][y] & 0xfffd;
         else                               maze[x][y] = maze[x][y]  | 1 << 1;
         digitalWrite(7, LOW);
         delay(1);

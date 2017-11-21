@@ -58,15 +58,16 @@
 //#define RIGHT_LED 10
 //#define FRONT_LED 9
 
-#define FRONT_WALL_POLL_THRESHOLD 20
-#define SIDE_WALL_POLL_THRESHOLD  20
+#define FRONT_WALL_POLL_THRESHOLD 30
+#define SIDE_WALL_POLL_THRESHOLD  30
 #define SEND_TIMER 1000
 
 unsigned long last_turn_start = 0;
 unsigned long last_send_time = 0;
 unsigned long last_IR_time = 0;
 
-char send_flag;
+char send_flag = 0;
+char ir_flag = 0;
 
 
 Servo servo_left, servo_right;
@@ -113,14 +114,14 @@ int slowdown_left = 0, slowdown_right = 0;
 
 void sense_walls(){
   amux_select(WALL_SENSOR_RIGHT);
-  delayMicroseconds(10);
+  delayMicroseconds(15);
   if ( analogRead(P_AMUX) > WALL_THRESHOLD_SIDE)
      signal_condition(D_WALL_RIGHT);
   else
      clear_condition(D_WALL_RIGHT);
 
   amux_select(WALL_SENSOR_LEFT);
-  delayMicroseconds(10);
+  delayMicroseconds(15);
   if ( analogRead(P_AMUX) > WALL_THRESHOLD_SIDE)
      signal_condition(D_WALL_LEFT);
   else
@@ -170,12 +171,15 @@ void loop() {
   sense_walls();
 
 
-  if (millis() - last_IR_time > 500){
-    uint8_t ir = IR_poll(AMUX_TREASURE_2);
+  if (/*!ir_flag &&*/ millis() - last_IR_time > 250){
+    uint8_t ir = IR_poll(AMUX_TREASURE_1);
     Serial.print("IR: ");
     Serial.println( ir );
-    last_IR_time = millis();
+    
     tile_set_ir(pos, ir);
+
+    last_IR_time = millis();
+    ir_flag = 1;
   }
   
   if (state == FOLLOW_LINE){ 
@@ -192,14 +196,6 @@ void loop() {
       slowdown_left = 0;
       slowdown_right = map(line_right_value-line_left_value, 0, BLACK_VALUE-WHITE_VALUE, 0, 20);
     }
-
-//TODO
-  //IR polling during certain time period
-   //call poll certain amount of times
-   //freq = IR_poll();
-   //debounce
-   //add IR frequency to that tile
-   //mapper.add_IR(freq, xy_pair xy);
   
   
    if ( poll_condition(D_INTERSECT_1, DEBOUNCE_MAXVAL)
@@ -255,8 +251,11 @@ void loop() {
     slowdown_left = 0;
     slowdown_right = 7;
 
-    if ( millis() - last_turn_start > 1450 )
+    if ( millis() - last_turn_start > 1450 ){
       state = FOLLOW_LINE;
+      last_IR_time = millis();
+      ir_flag = 0;
+    }
          
   } else if (state == TURN_LEFT){
     
@@ -264,8 +263,11 @@ void loop() {
     slowdown_left = 7;
     slowdown_right = 0;
 
-    if ( millis() - last_turn_start > 1150 )
+    if ( millis() - last_turn_start > 1150 ){
       state = FOLLOW_LINE;
+      last_IR_time = millis();
+      ir_flag = 0;
+    }
   }
   
   // Update the drive speeds

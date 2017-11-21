@@ -11,7 +11,7 @@ uint8_t old_ADCSRA;
 void IR_init(){
   //TIMSK0 = 0; // turn off timer0 for lower jitter
   //ADCSRA = 0xe5; // set the adc to free running mode
-  ADMUX = 0x44; // use adc4 with mux
+  //ADMUX = 0x44; // use adc4 with mux
   //DIDR0 = 0x01; // turn off the digital input for adc0
 }
 
@@ -51,11 +51,11 @@ char IR_poll(uint8_t sensor){
 
     ADCSRA = old_ADCSRA;
     
-     if ( fft_log_out[47] > 100 )
+     if ( fft_log_out[47] > 120 )
       return 1;
-    else if ( fft_log_out[81] > 100 )
+    else if ( fft_log_out[81] > 110 )
       return 2;
-    else if (fft_log_out[114] > 95 )
+    else if (fft_log_out[114] > 100 )
       return 3;
     else return 0;
 
