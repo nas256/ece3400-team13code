@@ -3,6 +3,8 @@
 #include "RF24.h"
 #include "wireless1.h"
 #include "printf.h"
+#include "amux.h"
+#include "IR.h"
 
 
 xy_pair pos;
@@ -123,15 +125,22 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
     s_push( &missed_op, front);  
   }
 
+  // set wall data
   unsigned int new_data;
   char true_wall_front = true_direction(cur_orientation, NORTH);
   char true_wall_left =  true_direction(cur_orientation, WEST);
   char true_wall_right = true_direction(cur_orientation, EAST);
   char walls = wall_front << true_wall_front | wall_left << true_wall_left | wall_right << true_wall_right;
 
+  // set ir data
+  uint8_t ir = IR_poll(AMUX_TREASURE_2);
   tile_set_traversed( pos );
+  
   tile_set_walls( pos, walls );
-
+  Serial.println("IR: ");
+  Serial.println( ir );
+  tile_set_ir(pos, ir);
+  
   // Serial.print("Sent Data: ");
   // Serial.println(tile_array[pos.x][pos.y].data);
   

@@ -67,7 +67,7 @@ unsigned long last_send_time = 0;
 unsigned long last_IR_time = 0;
 
 char send_flag = 0;
-char ir_flag = 0;
+// char ir_flag = 0;
 
 
 Servo servo_left, servo_right;
@@ -171,7 +171,7 @@ void loop() {
   sense_walls();
 
 
-  if (/*!ir_flag &&*/ millis() - last_IR_time > 250){
+  /* if (millis() - last_IR_time > 250){
     uint8_t ir = IR_poll(AMUX_TREASURE_1);
     Serial.print("IR: ");
     Serial.println( ir );
@@ -180,7 +180,7 @@ void loop() {
 
     last_IR_time = millis();
     ir_flag = 1;
-  }
+  } */
   
   if (state == FOLLOW_LINE){ 
     // Line following adjustments
@@ -224,7 +224,6 @@ void loop() {
          case SOUTH: state = TURN_180;    break;
          case WEST:  state = TURN_LEFT;   break;
          case EAST:  state = TURN_RIGHT;  break;
-         // case STAY:  state = TURN_180;    break;
        } 
        last_turn_start = millis();
        
@@ -232,7 +231,7 @@ void loop() {
        send_flag = 1;
 
        //Serial.print("WANT TO TURN "); Serial.println(to_turn);
-       
+
        
         
       }
@@ -250,11 +249,8 @@ void loop() {
     // Turn right until right intersection sensor sees white
     slowdown_left = 0;
     slowdown_right = 7;
-
     if ( millis() - last_turn_start > 1450 ){
-      state = FOLLOW_LINE;
-      last_IR_time = millis();
-      ir_flag = 0;
+      state = FOLLOW_LINE;=
     }
          
   } else if (state == TURN_LEFT){
@@ -263,10 +259,8 @@ void loop() {
     slowdown_left = 7;
     slowdown_right = 0;
 
-    if ( millis() - last_turn_start > 1150 ){
+    if ( millis() - last_turn_start > 1350 ){
       state = FOLLOW_LINE;
-      last_IR_time = millis();
-      ir_flag = 0;
     }
   }
   
