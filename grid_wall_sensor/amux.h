@@ -18,14 +18,14 @@
 // Replace these with the pin numbers connected to
 // pins A, B, and C on your mux!
 #define AMUX_A  2
-#define AMUX_B  3
-#define AMUX_C  4
+#define AMUX_B  4
+#define AMUX_C  7
 
-#define AMUX_TREASURE_1        0
-#define AMUX_TREASURE_2        1
-#define WALL_SENSOR_LEFT       3
+#define AMUX_TREASURE_1        3
+#define AMUX_TREASURE_2        4
+#define WALL_SENSOR_LEFT       0
 #define WALL_SENSOR_FRONT      2
-#define WALL_SENSOR_RIGHT      4
+#define WALL_SENSOR_RIGHT      1
 
 /*
  * Initialize the pins needed to control the analog mux

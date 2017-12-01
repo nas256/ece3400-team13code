@@ -20,12 +20,12 @@
 #include "amux.h"
 
 // Pin Definitions
-#define P_LINE_SENSOR_1        A1 // Left
-#define P_LINE_SENSOR_2        A0 // Right
+#define P_LINE_SENSOR_1        A0 // Left
+#define P_LINE_SENSOR_2        A1 // Right
 #define P_INTERSECT_SENSOR_1   A2 // Left
 #define P_INTERSECT_SENSOR_2   A3 // Right
-#define P_AMUX                 A4
-#define P_WALL_FRONT           A5
+#define P_AMUX                 A5 //FIX THIS AND WALL FRONT SENSOR
+//#define P_WALL_FRONT           A5
 
 #define P_SERVO_LEFT           5
 #define P_SERVO_RIGHT          6
@@ -38,8 +38,8 @@
 // Define servo tuning parameters
 #define LEFT_MAX               180
 #define RIGHT_MAX              180
-#define LEFT_ZERO              94
-#define RIGHT_ZERO             86
+#define LEFT_ZERO              92
+#define RIGHT_ZERO             87
 
 // Define operating states
 #define FOLLOW_LINE            0
@@ -51,7 +51,7 @@
 #define LEFT                   0
 #define RIGHT                  1
 
-#define WALL_THRESHOLD_SIDE    235
+#define WALL_THRESHOLD_SIDE    200
 #define WALL_THRESHOLD_FRONT   150 //170
 
 //#define LEFT_LED 8
@@ -128,7 +128,9 @@ void sense_walls(){
      clear_condition(D_WALL_LEFT);
   //Serial.println(analogRead(P_AMUX));
 
-  if ( analogRead(P_WALL_FRONT) > WALL_THRESHOLD_FRONT)
+  amux_select(WALL_SENSOR_FRONT);
+  delayMicroseconds(15);
+  if ( analogRead(P_AMUX) > WALL_THRESHOLD_FRONT)
      signal_condition(D_WALL_FRONT);
   else
      clear_condition(D_WALL_FRONT); 
@@ -141,7 +143,7 @@ void loop() {
     i++;
   } */
   
-  // Update readings from line sensors
+  // Update readingss from line sensors
   line_left_value = analogRead(P_LINE_SENSOR_1);  // 0-1023
   line_right_value = analogRead(P_LINE_SENSOR_2); // 0-1023
 
@@ -210,7 +212,7 @@ void loop() {
        
        if (to_turn == 255) {
         mapper_done();
-        tile_transmit( pos );
+        //tile_transmit( pos );
         while(1) {
           /*digitalWrite(FRONT_LED, HIGH);
           digitalWrite(LEFT_LED, HIGH);
@@ -241,7 +243,7 @@ void loop() {
     slowdown_left = 0;
     slowdown_right = 14;
 
-    if ( millis() - last_turn_start > 1500 )
+    if ( millis() - last_turn_start > 1250 )
       state = FOLLOW_LINE;
          
   
@@ -249,8 +251,8 @@ void loop() {
     // Turn right until right intersection sensor sees white
     slowdown_left = 0;
     slowdown_right = 7;
-    if ( millis() - last_turn_start > 1450 ){
-      state = FOLLOW_LINE;=
+    if ( millis() - last_turn_start > 1250 ){
+      state = FOLLOW_LINE;
     }
          
   } else if (state == TURN_LEFT){
@@ -259,13 +261,14 @@ void loop() {
     slowdown_left = 7;
     slowdown_right = 0;
 
-    if ( millis() - last_turn_start > 1350 ){
+    if ( millis() - last_turn_start > 1300 ){
       state = FOLLOW_LINE;
     }
   }
   
   // Update the drive speeds
   drive(LEFT_ZERO+7-slowdown_left, RIGHT_ZERO+7-slowdown_right);
+  //drive (170, 170);
   
   if (send_flag && (millis() - last_send_time > SEND_TIMER)) {
     send_flag = 0;
@@ -275,7 +278,7 @@ void loop() {
     Serial.print("Sending pos: ");
     Serial.print(prev_pos.x);
     Serial.print(prev_pos.y);
-    tile_transmit(prev_pos);
+    //tile_transmit(prev_pos);
   }
   // Print out readings
   uint8_t walls = 0;
@@ -289,10 +292,9 @@ void loop() {
   if (poll_condition(D_WALL_RIGHT, 10)) digitalWrite(RIGHT_LED, HIGH);
   else digitalWrite(RIGHT_LED, LOW);*/
   
-  // Serial.print(poll_condition(D_WALL_FRONT, 10)? "F: Y " : "F; N ");
-  // Serial.print(state);
-  // Serial.print(poll_condition(D_WALL_RIGHT, 10)? "R: Y " : "R: N ");
-  // Serial.println(poll_condition(D_WALL_LEFT, 10)? "L: Y " : "L: N ");
+  /*Serial.print(poll_condition(D_WALL_FRONT, 10)? "F: Y " : "F; N ");
+  Serial.print(poll_condition(D_WALL_RIGHT, 10)? "R: Y " : "R: N ");
+  Serial.println(poll_condition(D_WALL_LEFT, 10)? "L: Y " : "L: N ");*/
   /*Serial.print("L: ");
   Serial.print(analogRead(P_INTERSECT_SENSOR_1));
   Serial.print("  R: ");
