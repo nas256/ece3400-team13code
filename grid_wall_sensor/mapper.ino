@@ -109,19 +109,21 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
 
     //Serial.print("M B: ");
     //Serial.println(missed_op.top+1);
+
+  
   
   if ( !wall_left  && !s_contains(&visited, left) && !s_contains(&missed_op, left) ){
-    //Serial.println("Add left");
+    Serial.println("Add left");
     s_push( &missed_op, left ); 
   }
 
   if ( !wall_right && !s_contains(&visited, right) && !s_contains(&missed_op, right) ){
-    //Serial.println("Add right");
+    Serial.println("Add right");
     s_push( &missed_op, right ); 
   }
   
   if ( !wall_front && !s_contains(&visited, front) && !s_contains(&missed_op, front) ){
-    //Serial.println("Add front");
+    Serial.println("Add front");
     s_push( &missed_op, front);  
   }
 
@@ -133,13 +135,13 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
   char walls = wall_front << true_wall_front | wall_left << true_wall_left | wall_right << true_wall_right;
 
   // set ir data
-  uint8_t ir = IR_poll(AMUX_TREASURE_2);
+  //uint8_t ir = IR_poll(AMUX_TREASURE_2);
   tile_set_traversed( pos );
   
   tile_set_walls( pos, walls );
-  Serial.println("IR: ");
-  Serial.println( ir );
-  tile_set_ir(pos, ir);
+  //Serial.println("IR: ");
+  //Serial.println( ir );
+  //tile_set_ir(pos, ir);
   
   // Serial.print("Sent Data: ");
   // Serial.println(tile_array[pos.x][pos.y].data);
@@ -148,20 +150,20 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
   
   xy_pair target;
   // Check if we're surrounded by walls or visited
-  if ( (wall_front || s_contains(&visited, front)) 
-    && (wall_left  || s_contains(&visited,left))
-    && (wall_right || s_contains(&visited, right)) ){
+  if ( (wall_front || s_contains(&visited, front) || s_contains(&missed_op, front)) 
+    && (wall_left  || s_contains(&visited,left) || s_contains(&missed_op, left))
+    && (wall_right || s_contains(&visited, right) || s_contains(&missed_op, right) ) ){
       if (s_isEmpty(&missed_op)) return 255;
     target = s_pop(&path);
-    //Serial.print("P S: ");
-    //Serial.println(path.top+1);
+    Serial.print("P S: ");
+    Serial.println(path.top+1);
   }else{
     // Not surrounded
     if (s_isEmpty(&missed_op)) return 255;
     target = s_pop(&missed_op);
     s_push(&visited, target);
-    //Serial.print("M S: ");
-    //Serial.println(missed_op.top+1);
+    Serial.print("M S: ");
+    Serial.println(missed_op.top+1);
     s_push(&path, pos);
   }
   
@@ -174,7 +176,7 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
     
   // Find orientation of target relative to pos
   uint8_t orientation = get_orientation(pos, target);
-  //if (orientation > WEST) {Serial.print("PROBLEM: "); Serial.println(orientation); }
+  if (orientation > WEST) {Serial.print("PROBLEM: "); Serial.println(orientation); }
   uint8_t robot_orientation = (orientation - cur_orientation);  
   if (robot_orientation > 3) robot_orientation += 4;
 

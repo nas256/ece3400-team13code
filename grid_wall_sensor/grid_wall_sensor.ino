@@ -30,6 +30,8 @@
 #define P_SERVO_LEFT           5
 #define P_SERVO_RIGHT          6
 
+#define P_START_BUTTON         3
+
 // Light Level Parameters
 #define WHITE_VALUE            538  // 700
 #define BLACK_VALUE            850
@@ -88,6 +90,7 @@ void setup() {
   pinMode(INPUT, P_LINE_SENSOR_2);
   pinMode(INPUT, P_INTERSECT_SENSOR_1);
   pinMode(INPUT, P_INTERSECT_SENSOR_2);
+  pinMode(INPUT_PULLUP, P_START_BUTTON);
 /*  pinMode(OUTPUT, LEFT_LED);
   pinMode(OUTPUT, RIGHT_LED);
   pinMode(OUTPUT, FRONT_LED);
@@ -108,6 +111,7 @@ void setup() {
   Serial.println("start");
 
   delay(2000);
+  //wait_start();
 }
 
 int slowdown_left = 0, slowdown_right = 0;
@@ -136,13 +140,18 @@ void sense_walls(){
      clear_condition(D_WALL_FRONT); 
 }
 
+void wait_start(){
+  while (digitalRead(P_START_BUTTON)) {}
+}
+
 void loop() { 
   /* int i = 0;
   while (1) {
     wireless_send(&i, sizeof(int));
     i++;
   } */
-  
+
+
   // Update readingss from line sensors
   line_left_value = analogRead(P_LINE_SENSOR_1);  // 0-1023
   line_right_value = analogRead(P_LINE_SENSOR_2); // 0-1023
@@ -212,7 +221,7 @@ void loop() {
        
        if (to_turn == 255) {
         mapper_done();
-        //tile_transmit( pos );
+        tile_transmit( pos );
         while(1) {
           /*digitalWrite(FRONT_LED, HIGH);
           digitalWrite(LEFT_LED, HIGH);
@@ -243,7 +252,7 @@ void loop() {
     slowdown_left = 0;
     slowdown_right = 14;
 
-    if ( millis() - last_turn_start > 1250 )
+    if ( millis() - last_turn_start > 1350 )
       state = FOLLOW_LINE;
          
   
@@ -277,8 +286,8 @@ void loop() {
     //Serial.println(i);
     Serial.print("Sending pos: ");
     Serial.print(prev_pos.x);
-    Serial.print(prev_pos.y);
-    //tile_transmit(prev_pos);
+    Serial.println(prev_pos.y);
+    tile_transmit(prev_pos);
   }
   // Print out readings
   uint8_t walls = 0;
