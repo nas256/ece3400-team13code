@@ -44,6 +44,15 @@ struct xy_pair s_pop (struct stack* s)
     return xy_pair;
 }
 
+struct xy_pair s_peek (struct stack* s){
+  struct xy_pair n;
+  n.x = -1;
+  n.y = -1;
+
+  if (s->top < 0) return n;
+  else return s->stk[s->top];
+}
+
 uint8_t s_contains(struct stack* s, xy_pair xy_pair){
   if ( s->top == -1) return 0;
   for (int8_t i = s->top; i > -1; i--){

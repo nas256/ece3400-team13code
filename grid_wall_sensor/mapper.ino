@@ -110,21 +110,29 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
     //Serial.print("M B: ");
     //Serial.println(missed_op.top+1);
 
-  
-  
+    xy_pair recent_missed_op = s_peek(&missed_op);
+    uint8_t front_is_missed = ( front.x == recent_missed_op.x && front.y == recent_missed_op.y );
+    uint8_t left_is_missed = ( left.x == recent_missed_op.x && left.y == recent_missed_op.y );
+    uint8_t right_is_missed = ( right.x == recent_missed_op.x && right.y == recent_missed_op.y );
+
+    uint8_t none_added = 1;
+
   if ( !wall_left  && !s_contains(&visited, left) && !s_contains(&missed_op, left) ){
     Serial.println("Add left");
-    s_push( &missed_op, left ); 
+    s_push( &missed_op, left );
+    none_added = 0;
   }
 
   if ( !wall_right && !s_contains(&visited, right) && !s_contains(&missed_op, right) ){
     Serial.println("Add right");
     s_push( &missed_op, right ); 
+    none_added =0 ;
   }
   
   if ( !wall_front && !s_contains(&visited, front) && !s_contains(&missed_op, front) ){
     Serial.println("Add front");
-    s_push( &missed_op, front);  
+    s_push( &missed_op, front); 
+    none_added = 0; 
   }
 
   // set wall data
@@ -150,9 +158,9 @@ uint8_t at_intersection(uint8_t wall_front, uint8_t wall_left, uint8_t wall_righ
   
   xy_pair target;
   // Check if we're surrounded by walls or visited
-  if ( (wall_front || s_contains(&visited, front) || s_contains(&missed_op, front)) 
-    && (wall_left  || s_contains(&visited,left) || s_contains(&missed_op, left))
-    && (wall_right || s_contains(&visited, right) || s_contains(&missed_op, right) ) ){
+  if ( none_added && ((wall_front || !front_is_missed) && (wall_left || !left_is_missed) && (wall_right || !right_is_missed)) /*( (wall_front && !front_is_missed) || s_contains(&visited, front)) 
+    && (wall_left  || s_contains(&visited,left) || !left_is_missed)
+    && (wall_right || s_contains(&visited, right) || !right_is_missed)*/ ){
       if (s_isEmpty(&missed_op)) return 255;
     target = s_pop(&path);
     Serial.print("P S: ");
