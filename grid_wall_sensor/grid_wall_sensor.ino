@@ -30,7 +30,7 @@
 #define P_SERVO_LEFT           5
 #define P_SERVO_RIGHT          6
 
-#define P_START_BUTTON         3
+#define P_START_BUTTON         3 
 
 // Light Level Parameters
 #define WHITE_VALUE            538  // 700
@@ -69,7 +69,7 @@ unsigned long last_send_time = 0;
 unsigned long last_IR_time = 0;
 
 char send_flag = 0;
-// char ir_flag = 0;
+char ir_flag = 0;
 
 
 Servo servo_left, servo_right;
@@ -91,6 +91,7 @@ void setup() {
   pinMode(INPUT, P_INTERSECT_SENSOR_1);
   pinMode(INPUT, P_INTERSECT_SENSOR_2);
   pinMode(INPUT_PULLUP, P_START_BUTTON);
+  digitalWrite(P_START_BUTTON, HIGH);
 /*  pinMode(OUTPUT, LEFT_LED);
   pinMode(OUTPUT, RIGHT_LED);
   pinMode(OUTPUT, FRONT_LED);
@@ -108,10 +109,11 @@ void setup() {
   drive(LEFT_ZERO, RIGHT_ZERO);
 
   for (uint8_t i = 0; i < 50; i++) Serial.println(" ");
+
+  delay(100);
+  wait_start();
   Serial.println("start");
 
-  delay(2000);
-  //wait_start();
 }
 
 int slowdown_left = 0, slowdown_right = 0;
@@ -141,7 +143,28 @@ void sense_walls(){
 }
 
 void wait_start(){
+  Serial.println(digitalRead(P_START_BUTTON));
   while (digitalRead(P_START_BUTTON)) {}
+}
+
+void sense_ir(){
+  uint8_t ir1 = IR_poll(AMUX_TREASURE_1);
+  uint8_t ir2 = IR_poll(AMUX_TREASURE_2);
+  Serial.print("IR: ");
+  Serial.print( ir1 );
+  Serial.print(" | ");
+  Serial.println(ir2);
+  
+  tile_set_ir(pos, ir1);
+  tile_set_ir(pos, ir2);
+}
+
+void do_ir(){
+  if (millis() - last_IR_time > 250){
+    sense_ir();
+    last_IR_time = millis();
+    ir_flag = 1;
+  } 
 }
 
 void loop() { 
@@ -150,7 +173,6 @@ void loop() {
     wireless_send(&i, sizeof(int));
     i++;
   } */
-
 
   // Update readingss from line sensors
   line_left_value = analogRead(P_LINE_SENSOR_1);  // 0-1023
@@ -181,17 +203,6 @@ void loop() {
   // Read wall values
   sense_walls();
 
-
-  /* if (millis() - last_IR_time > 250){
-    uint8_t ir = IR_poll(AMUX_TREASURE_1);
-    Serial.print("IR: ");
-    Serial.println( ir );
-    
-    tile_set_ir(pos, ir);
-
-    last_IR_time = millis();
-    ir_flag = 1;
-  } */
   
   if (state == FOLLOW_LINE){ 
     // Line following adjustments
@@ -263,7 +274,7 @@ void loop() {
     if ( millis() - last_turn_start > 1250 ){
       state = FOLLOW_LINE;
     }
-         
+    do_ir();     
   } else if (state == TURN_LEFT){
     
     // Turn left until right intersection sensor sees white
@@ -273,6 +284,7 @@ void loop() {
     if ( millis() - last_turn_start > 1300 ){
       state = FOLLOW_LINE;
     }
+    do_ir();
   }
   
   // Update the drive speeds
