@@ -70,7 +70,7 @@ unsigned long last_IR_time = 0;
 
 char send_flag = 0;
 char ir_flag = 0;
-
+char ir_done = 0;
 
 Servo servo_left, servo_right;
 int line_left_value = 0, line_right_value = 0;
@@ -150,20 +150,19 @@ void wait_start(){
 void sense_ir(){
   uint8_t ir1 = IR_poll(AMUX_TREASURE_1);
   uint8_t ir2 = IR_poll(AMUX_TREASURE_2);
-  Serial.print("IR: ");
+  /*Serial.print("IR: ");
   Serial.print( ir1 );
   Serial.print(" | ");
-  Serial.println(ir2);
+  Serial.println(ir2);*/
   
-  tile_set_ir(pos, ir1);
-  tile_set_ir(pos, ir2);
+  tile_set_ir(prev_pos, ir1);
+  tile_set_ir(prev_pos, ir2);
 }
 
 void do_ir(){
-  if (millis() - last_IR_time > 250){
+  if (millis() - last_IR_time > 300){
     sense_ir();
     last_IR_time = millis();
-    ir_flag = 1;
   } 
 }
 
@@ -173,6 +172,12 @@ void loop() {
     wireless_send(&i, sizeof(int));
     i++;
   } */
+
+  if ( millis() - last_turn_start > 15 && ir_flag < 1){
+    sense_ir();
+    ir_flag++;
+    if (ir_flag >= 1) ir_done = 1;
+  }
 
   // Update readingss from line sensors
   line_left_value = analogRead(P_LINE_SENSOR_1);  // 0-1023
@@ -201,8 +206,7 @@ void loop() {
      clear_condition(D_INTERSECT_2_W);
 
   // Read wall values
-  sense_walls();
-
+  sense_walls();  
   
   if (state == FOLLOW_LINE){ 
     // Line following adjustments
@@ -248,6 +252,7 @@ void loop() {
          case EAST:  state = TURN_RIGHT;  break;
        } 
        last_turn_start = millis();
+       ir_flag = 0;
        
        last_send_time = millis();
        send_flag = 1;
@@ -274,7 +279,7 @@ void loop() {
     if ( millis() - last_turn_start > 1250 ){
       state = FOLLOW_LINE;
     }
-    do_ir();     
+    //do_ir();
   } else if (state == TURN_LEFT){
     
     // Turn left until right intersection sensor sees white
@@ -284,15 +289,16 @@ void loop() {
     if ( millis() - last_turn_start > 1300 ){
       state = FOLLOW_LINE;
     }
-    do_ir();
+    //do_ir();
   }
   
   // Update the drive speeds
   drive(LEFT_ZERO+7-slowdown_left, RIGHT_ZERO+7-slowdown_right);
   //drive (170, 170);
   
-  if (send_flag && (millis() - last_send_time > SEND_TIMER)) {
+  if (send_flag && ir_done == 1 && (millis() - last_send_time > SEND_TIMER)) {
     send_flag = 0;
+    ir_done = 1;
     //i++;
     //wireless_send(&i, sizeof(int));
     //Serial.println(i);

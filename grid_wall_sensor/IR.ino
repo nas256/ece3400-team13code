@@ -51,19 +51,19 @@ char IR_poll(uint8_t sensor){
 
     ADCSRA = old_ADCSRA;
 
-    for (int i = 110; i < 120; i++){
+    /*for (int i = 110; i < 120; i++){
       Serial.print(i);
       Serial.print(": ");
       Serial.print( fft_log_out[i] );
       Serial.print(", ");
     }
-    Serial.println(" ");
+    Serial.println(" ");*/
     
     if ( fft_log_out[49] > 90 ) //120
       return 1;
     else if ( fft_log_out[80] > 70 ) //110
       return 2;
-    else if (fft_log_out[114] > 50 ) //100
+    else if (fft_log_out[114] > 65 ) //100
       return 3;
     else return 0;
 
